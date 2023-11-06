@@ -30,6 +30,9 @@ import EditGolonganDarah from "../pages/Setting/GolonganDarah/EditGolonganDarah"
 import Group from "../pages/Setting/Group/Group";
 import CreateGroup from "../pages/Setting/Group/CreateGroup";
 import EditGroup from "../pages/Setting/Group/EditGroup";
+import Gander from "../pages/Setting/Gander/Gander";
+import CreateGander from "../pages/Setting/Gander/CreateGander";
+import EditGander from "../pages/Setting/Gander/EditGander";
 
 function Router() {
   const routes = [
@@ -150,6 +153,19 @@ function Router() {
         {
           path: "/editGroup/:uuid",
           element: <EditGroup />
+        },
+        //contact emergency
+        {
+          path: "/gander",
+          element: <Gander />
+        },
+        {
+          path: "/createGander",
+          element: <CreateGander />
+        },
+        {
+          path: "/editGander/:uuid",
+          element: <EditGander />
         },
       ],
     },

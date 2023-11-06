@@ -77,6 +77,11 @@ const initialState: SideMenuState = {
           pathname: "/group",
           title: "Group",
         },
+        {
+          icon: "UserCheck",
+          pathname: "/gander",
+          title: "Gander",
+        },
       ],
     }
   ],

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import AttributTable from '../../../components/Table/AttributTable';
 import { getGolonganDarahsTable, resetGolonganDarahs } from '../../../stores/features/golonganDarahSlice';
+
 const GolonganDarah = () => {
     const dispatch = useDispatch();
     const [datas, setDatas] = useState([]);
