@@ -72,6 +72,11 @@ const initialState: SideMenuState = {
           pathname: "/golonganDarah",
           title: "Golongan Darah",
         },
+        {
+          icon: "UserCheck",
+          pathname: "/group",
+          title: "Group",
+        },
       ],
     }
   ],

@@ -27,6 +27,9 @@ import EditContactEmergency from "../pages/Setting/ContactEmergency/EditContactE
 import GolonganDarah from "../pages/Setting/GolonganDarah/GolonganDarah";
 import CreateGolonganDarah from "../pages/Setting/GolonganDarah/CreateGolonganDarah";
 import EditGolonganDarah from "../pages/Setting/GolonganDarah/EditGolonganDarah";
+import Group from "../pages/Setting/Group/Group";
+import CreateGroup from "../pages/Setting/Group/CreateGroup";
+import EditGroup from "../pages/Setting/Group/EditGroup";
 
 function Router() {
   const routes = [
@@ -134,6 +137,19 @@ function Router() {
         {
           path: "/editGolonganDarah/:uuid",
           element: <EditGolonganDarah />
+        },
+        //contact emergency
+        {
+          path: "/group",
+          element: <Group />
+        },
+        {
+          path: "/createGroup",
+          element: <CreateGroup />
+        },
+        {
+          path: "/editGroup/:uuid",
+          element: <EditGroup />
         },
       ],
     },
