@@ -52,6 +52,21 @@ const initialState: SideMenuState = {
           pathname: "/pendidikan",
           title: "Pendidikan",
         },
+        {
+          icon: "UserCheck",
+          pathname: "/bank",
+          title: "Bank",
+        },
+        {
+          icon: "UserCheck",
+          pathname: "/statusPerkawinan",
+          title: "Status Perkawinan",
+        },
+        {
+          icon: "UserCheck",
+          pathname: "/contactEmergency",
+          title: "Contact Emergency",
+        },
       ],
     }
   ],

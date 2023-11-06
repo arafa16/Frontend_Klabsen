@@ -15,6 +15,15 @@ import CreatePenempatan from "../pages/Setting/Penempatan/CreatePenempatan";
 import { Pendidikan } from "../pages/Setting/Pendidikan/Pendidikan";
 import CreatePendidikan from "../pages/Setting/Pendidikan/CreatePendidikan";
 import EditPendidikan from "../pages/Setting/Pendidikan/EditPendidikan";
+import Bank from "../pages/Setting/Bank/Bank";
+import CreateBank from "../pages/Setting/Bank/CreateBank";
+import EditBank from "../pages/Setting/Bank/EditBank";
+import StatusPerkawinan from "../pages/Setting/StatusPerkawinan/StatusPerkawinan";
+import CreateStatusPerkawinan from "../pages/Setting/StatusPerkawinan/CreateStatusPerkawinan";
+import EditStatusPerkawinan from "../pages/Setting/StatusPerkawinan/EditStatusPerkawinan";
+import ContactEmergency from "../pages/Setting/ContactEmergency/ContactEmergency";
+import CreateContactEmergency from "../pages/Setting/ContactEmergency/CreateContactEmergency";
+import EditContactEmergency from "../pages/Setting/ContactEmergency/EditContactEmergency";
 
 function Router() {
   const routes = [
@@ -70,7 +79,46 @@ function Router() {
         {
           path: "/createPendidikan",
           element: <CreatePendidikan />
-        }
+        },
+        //Bank
+        {
+          path: "/bank",
+          element: <Bank />
+        },
+        {
+          path: "/editBank/:uuid",
+          element: <EditBank />
+        },
+        {
+          path: "/createBank",
+          element: <CreateBank />
+        },
+        //Status Perkawinan
+        {
+          path: "/statusPerkawinan",
+          element: <StatusPerkawinan />
+        },
+        {
+          path: "/editStatusPerkawinan/:uuid",
+          element: <EditStatusPerkawinan />
+        },
+        {
+          path: "/createStatusPerkawinan",
+          element: <CreateStatusPerkawinan />
+        },
+         //contact emergency
+         {
+          path: "/contactEmergency",
+          element: <ContactEmergency />
+        },
+        {
+          path: "/createContactEmergency",
+          element: <CreateContactEmergency />
+        },
+        {
+          path: "/editContactEmergency/:uuid",
+          element: <EditContactEmergency />
+        },
       ],
     },
     {
