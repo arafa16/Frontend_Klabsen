@@ -24,6 +24,9 @@ import EditStatusPerkawinan from "../pages/Setting/StatusPerkawinan/EditStatusPe
 import ContactEmergency from "../pages/Setting/ContactEmergency/ContactEmergency";
 import CreateContactEmergency from "../pages/Setting/ContactEmergency/CreateContactEmergency";
 import EditContactEmergency from "../pages/Setting/ContactEmergency/EditContactEmergency";
+import GolonganDarah from "../pages/Setting/GolonganDarah/GolonganDarah";
+import CreateGolonganDarah from "../pages/Setting/GolonganDarah/CreateGolonganDarah";
+import EditGolonganDarah from "../pages/Setting/GolonganDarah/EditGolonganDarah";
 
 function Router() {
   const routes = [
@@ -106,8 +109,8 @@ function Router() {
           path: "/createStatusPerkawinan",
           element: <CreateStatusPerkawinan />
         },
-         //contact emergency
-         {
+        //contact emergency
+        {
           path: "/contactEmergency",
           element: <ContactEmergency />
         },
@@ -118,6 +121,19 @@ function Router() {
         {
           path: "/editContactEmergency/:uuid",
           element: <EditContactEmergency />
+        },
+        //contact emergency
+        {
+          path: "/golonganDarah",
+          element: <GolonganDarah />
+        },
+        {
+          path: "/createGolonganDarah",
+          element: <CreateGolonganDarah />
+        },
+        {
+          path: "/editGolonganDarah/:uuid",
+          element: <EditGolonganDarah />
         },
       ],
     },

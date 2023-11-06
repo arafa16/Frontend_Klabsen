@@ -40,7 +40,7 @@ const Jabatan = () => {
                 linkView="/editJabatan"
                 linkCreate="/createJabatan"
             />
-      </div>
+        </div>
     )
 }
 
