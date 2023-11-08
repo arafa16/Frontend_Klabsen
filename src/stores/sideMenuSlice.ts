@@ -43,44 +43,74 @@ const initialState: SideMenuState = {
           title: "Penempatan",
         },
         {
-          icon: "UserCheck",
+          icon: "Award",
           pathname: "/jabatan",
           title: "Jabatan",
         },
         {
-          icon: "UserCheck",
+          icon: "Bookmark",
           pathname: "/pendidikan",
           title: "Pendidikan",
         },
         {
-          icon: "UserCheck",
+          icon: "DollarSign",
           pathname: "/bank",
           title: "Bank",
         },
         {
-          icon: "UserCheck",
+          icon: "Users",
           pathname: "/statusPerkawinan",
           title: "Status Perkawinan",
         },
         {
-          icon: "UserCheck",
+          icon: "PhoneOutgoing",
           pathname: "/contactEmergency",
           title: "Contact Emergency",
         },
         {
-          icon: "UserCheck",
+          icon: "Droplet",
           pathname: "/golonganDarah",
           title: "Golongan Darah",
         },
         {
-          icon: "UserCheck",
+          icon: "Users",
           pathname: "/group",
           title: "Group",
         },
         {
-          icon: "UserCheck",
+          icon: "User",
           pathname: "/gander",
           title: "Gander",
+        },
+        {
+          icon: "Key",
+          pathname: "/status",
+          title: "Status",
+        },
+        {
+          icon: "Key",
+          pathname: "/tipeNotification",
+          title: "Tipe Notification",
+        },
+        {
+          icon: "Key",
+          pathname: "/tipeAbsen",
+          title: "Tipe Absen",
+        },
+        {
+          icon: "Key",
+          pathname: "/pelanggaran",
+          title: "Pelanggaran",
+        },
+        {
+          icon: "Key",
+          pathname: "/statusKoreksi",
+          title: "Status Koreksi",
+        },
+        {
+          icon: "Key",
+          pathname: "/tipePendapatan",
+          title: "Tipe Pendapatan",
         },
       ],
     }

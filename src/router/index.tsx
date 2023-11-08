@@ -33,6 +33,24 @@ import EditGroup from "../pages/Setting/Group/EditGroup";
 import Gander from "../pages/Setting/Gander/Gander";
 import CreateGander from "../pages/Setting/Gander/CreateGander";
 import EditGander from "../pages/Setting/Gander/EditGander";
+import Status from "../pages/Setting/Status/Status";
+import CreateStatus from "../pages/Setting/Status/CreateStatus";
+import EditStatus from "../pages/Setting/Status/EditStatus";
+import TipeNotification from "../pages/Setting/TipeNotification/TipeNotification";
+import CreateTipeNotification from "../pages/Setting/TipeNotification/CreateTipeNotification";
+import EditTipeNotification from "../pages/Setting/TipeNotification/EditTipeNotification";
+import TipeAbsen from "../pages/Setting/TipeAbsen/TipeAbsen";
+import CreateTipeAbsen from "../pages/Setting/TipeAbsen/CreateTipeAbsen";
+import EditTipeAbsen from "../pages/Setting/TipeAbsen/EditTipeAbsen";
+import { Pelanggaran } from "../pages/Setting/Pelanggaran/Pelanggaran";
+import CreatePelanggaran from "../pages/Setting/Pelanggaran/CreatePelanggaran";
+import EditPelanggaran from "../pages/Setting/Pelanggaran/EditPelanggaran";
+import StatusKoreksi from "../pages/Setting/StatusKoreksi/StatusKoreksi";
+import CreateStatusKoreksi from "../pages/Setting/StatusKoreksi/CreateStatusKoreksi";
+import EditStatusKoreksi from "../pages/Setting/StatusKoreksi/EditStatusKoreksi";
+import TipePendapatan from "../pages/Setting/TipePendapatan/TipePendapatan";
+import CreateTipePendapatan from "../pages/Setting/TipePendapatan/CreateTipePendapatan";
+import EditTipePendapatan from "../pages/Setting/TipePendapatan/EditTipePendapatan";
 
 function Router() {
   const routes = [
@@ -166,6 +184,84 @@ function Router() {
         {
           path: "/editGander/:uuid",
           element: <EditGander />
+        },
+        //status
+        {
+          path: "/status",
+          element: <Status />
+        },
+        {
+          path: "/createStatus",
+          element: <CreateStatus />
+        },
+        {
+          path: "/editStatus/:uuid",
+          element: <EditStatus />
+        },
+        //Tipe Notification
+        {
+          path: "/tipeNotification",
+          element: <TipeNotification />
+        },
+        {
+          path: "/createTipeNotification",
+          element: <CreateTipeNotification />
+        },
+        {
+          path: "/editTipeNotification/:uuid",
+          element: <EditTipeNotification />
+        },
+        //Tipe Absen
+        {
+          path: "/tipeAbsen",
+          element: <TipeAbsen />
+        },
+        {
+          path: "/createTipeAbsen",
+          element: <CreateTipeAbsen />
+        },
+        {
+          path: "/editTipeAbsen/:uuid",
+          element: <EditTipeAbsen />
+        },
+        //Pelanggaran
+        {
+          path: "/pelanggaran",
+          element: <Pelanggaran />
+        },
+        {
+          path: "/createPelanggaran",
+          element: <CreatePelanggaran />
+        },
+        {
+          path: "/editPelanggaran/:uuid",
+          element: <EditPelanggaran />
+        },
+        //Status Koreksi
+        {
+          path: "/statusKoreksi",
+          element: <StatusKoreksi />
+        },
+        {
+          path: "/createStatusKoreksi",
+          element: <CreateStatusKoreksi />
+        },
+        {
+          path: "/editStatusKoreksi/:uuid",
+          element: <EditStatusKoreksi />
+        },
+        //Status Koreksi
+        {
+          path: "/tipePendapatan",
+          element: <TipePendapatan />
+        },
+        {
+          path: "/createTipePendapatan",
+          element: <CreateTipePendapatan />
+        },
+        {
+          path: "/editTipePendapatan/:uuid",
+          element: <EditTipePendapatan />
         },
       ],
     },

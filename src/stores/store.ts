@@ -16,6 +16,12 @@ import atasansSlice from "./features/atasansSlice";
 import authSlice from "./features/authSlice";
 import meSlice from "./features/meSlice";
 import usersSlice from "./features/usersSlice";
+import statusSlice from "./features/statusSlice";
+import tipeNotificationsSlice from "./features/tipeNotificationSlice";
+import tipeAbsensSlice from "./features/tipeAbsenSlice";
+import pelanggaransSlice from "./features/pelanggaransSlice";
+import statusKoreksiSlice from "./features/statusKoreksiSlice";
+import tipePendapatansSlice from "./features/tipePendapatanSlice";
 
 export const store = configureStore({
   reducer: {
@@ -35,7 +41,13 @@ export const store = configureStore({
     atasansReducer : atasansSlice,
     authReducer : authSlice,
     meReducer : meSlice,
-    usersReducer : usersSlice
+    usersReducer : usersSlice,
+    statusReducer : statusSlice,
+    tipeNotificationsReducer : tipeNotificationsSlice,
+    tipeAbsensReducer : tipeAbsensSlice,
+    pelanggaransReducer : pelanggaransSlice,
+    statusKoreksiReducer : statusKoreksiSlice,
+    tipePendapatansReducer : tipePendapatansSlice
   },
 });
 
