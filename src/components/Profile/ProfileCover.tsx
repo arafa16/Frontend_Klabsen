@@ -31,11 +31,11 @@ const ProfileCover = (props : any) => {
                 </h2>
                     <div className="flex items-center justify-center mt-2 text-slate-500 2xl:justify-start">
                         <Lucide icon="Briefcase" className="w-4 h-4 mr-2" />
-                        {users && users.jabatan.name}
+                        {users.jabatan && users.jabatan.name}
                     </div>
                     <div className="flex items-center justify-center mt-2 text-slate-500 2xl:justify-start">
                         <Lucide icon="MapPin" className="w-4 h-4 mr-2" />
-                        {users && users.penempatan.name}
+                        {users.penempatan && users.penempatan.name}
                     </div>
                 </div>
             <div className="grid h-20 grid-cols-2 2xl:grid-cols-2 px-10 mx-auto mt-5 mb-6 border-dashed gap-y-2 md:gap-y-0 gap-x-5 2xl:border-l border-slate-200 2xl:mb-0">

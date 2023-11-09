@@ -11,16 +11,24 @@ import FriendsUser from "../../components/Profile/FriendsUser";
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../stores/features/usersSlice";
-import { useEffect } from "react";
+import { getUserById, resetUsers } from "../../stores/features/usersSlice";
+import { useEffect, useState } from "react";
 
 const UserProfile = () => {
   const {id} = useParams();
+  const [datas, setDatas] = useState([]);
   const dispatch = useDispatch()
 
-  const {users} = useSelector(
+  const {users, isUsersSuccess} = useSelector(
     (state : any) => state.usersReducer
   )
+
+  useEffect(()=>{
+    if(isUsersSuccess && users){
+      setDatas(users);
+      dispatch(resetUsers());
+    }
+  },[users, isUsersSuccess])
 
   useEffect(()=>{
     getDataUser();
@@ -34,12 +42,12 @@ const UserProfile = () => {
       <UpdateProfileButton />
       <div className="grid grid-cols-12 gap-5 mt-5">
         <ProfileCover 
-          users={users}
+          users={datas}
         />
         {/* BEGIN: Profile Content */}
         <div className="col-span-12 xl:col-span-8">
           <DataUser 
-            users={users}
+            users={datas}
           />
           {/* <ExperienceUser /> */}
           <SkillUser />

@@ -59,7 +59,7 @@ const DataUser = (props : any) => {
                                     Jenis Kelamin
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.gander.name}
+                                    {users.gander && users.gander.name}
                                 </div>
                             </div>
                             <div>
@@ -83,7 +83,7 @@ const DataUser = (props : any) => {
                                     Status Perkawinan
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.status_perkawinan.name}
+                                    {users.status_perkawinan && users.status_perkawinan.name}
                                 </div>
                             </div>
                             <div>
@@ -116,7 +116,7 @@ const DataUser = (props : any) => {
                                     Pendidikan Terakhir
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.pendidikan.name}
+                                    {users.pendidikan && users.pendidikan.name}
                                 </div>
                             </div>
                             <div>
@@ -197,7 +197,7 @@ const DataUser = (props : any) => {
                                     Bank
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.bank.name}
+                                    {users.bank && users.bank.name}
                                 </div>
                             </div>
                             <div>
@@ -246,7 +246,7 @@ const DataUser = (props : any) => {
                                     Contact Emergency
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.contact_emergency.name}
+                                    {users.contact_emergency && users.contact_emergency.name}
                                 </div>
                             </div>
                             <div>
@@ -278,7 +278,7 @@ const DataUser = (props : any) => {
                                     Golongan Darah
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.golongan_darah.name}
+                                    {users.golongan_darah && users.golongan_darah.name}
                                 </div>
                             </div>
                         </div>
@@ -295,7 +295,7 @@ const DataUser = (props : any) => {
                                     Penempatan 
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.penempatan.name }
+                                    {users.penempatan && users.penempatan.name }
                                 </div>
                             </div>
                             <div>
@@ -303,7 +303,7 @@ const DataUser = (props : any) => {
                                     Jabatan
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.jabatan.name}
+                                    {users.jabatan && users.jabatan.name}
                                 </div>
                             </div>
                             <div>
@@ -311,7 +311,7 @@ const DataUser = (props : any) => {
                                     Atasan
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.atasan[0] ? users.atasan[0].name : 'belum di setting'}
+                                    {users.atasan && users.atasan[0] ? users.atasan[0].name : 'belum di setting'}
                                 </div>
                             </div>
                             <div>
@@ -319,7 +319,7 @@ const DataUser = (props : any) => {
                                     Jam Operasional
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.jam_operasional.name}
+                                    {users.jam_operasional && users.jam_operasional.name}
                                 </div>
                             </div>
                             <div>
@@ -327,7 +327,7 @@ const DataUser = (props : any) => {
                                     Group/Devisi 
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.group.name }
+                                    {users.group && users.group.name }
                                 </div>
                             </div>
                             <div>

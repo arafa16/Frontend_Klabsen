@@ -83,34 +83,44 @@ const initialState: SideMenuState = {
           title: "Gander",
         },
         {
-          icon: "Key",
+          icon: "Award",
           pathname: "/status",
           title: "Status",
         },
         {
-          icon: "Key",
+          icon: "Shuffle",
+          pathname: "/statusInout",
+          title: "Status In Out",
+        },
+        {
+          icon: "MessageSquare",
           pathname: "/tipeNotification",
           title: "Tipe Notification",
         },
         {
-          icon: "Key",
+          icon: "Award",
           pathname: "/tipeAbsen",
           title: "Tipe Absen",
         },
         {
-          icon: "Key",
+          icon: "Award",
           pathname: "/pelanggaran",
           title: "Pelanggaran",
         },
         {
-          icon: "Key",
+          icon: "Award",
           pathname: "/statusKoreksi",
           title: "Status Koreksi",
         },
         {
-          icon: "Key",
+          icon: "DollarSign",
           pathname: "/tipePendapatan",
           title: "Tipe Pendapatan",
+        },
+        {
+          icon: "Watch",
+          pathname: "/jamOperasional",
+          title: "Jam Operasional",
         },
       ],
     }

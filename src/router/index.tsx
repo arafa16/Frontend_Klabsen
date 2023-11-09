@@ -51,6 +51,12 @@ import EditStatusKoreksi from "../pages/Setting/StatusKoreksi/EditStatusKoreksi"
 import TipePendapatan from "../pages/Setting/TipePendapatan/TipePendapatan";
 import CreateTipePendapatan from "../pages/Setting/TipePendapatan/CreateTipePendapatan";
 import EditTipePendapatan from "../pages/Setting/TipePendapatan/EditTipePendapatan";
+import JamOperasional from "../pages/Setting/JamOperasional/JamOperasional";
+import CreateJamOperasional from "../pages/Setting/JamOperasional/CreateJamOperasional";
+import EditJamOperasional from "../pages/Setting/JamOperasional/EditJamOperasional";
+import StatusInout from "../pages/Setting/StatusInOut/StatusInOut";
+import CreateStatusInout from "../pages/Setting/StatusInOut/CreateStatusInout";
+import EditStatusInout from "../pages/Setting/StatusInOut/EditStatusInout";
 
 function Router() {
   const routes = [
@@ -198,6 +204,19 @@ function Router() {
           path: "/editStatus/:uuid",
           element: <EditStatus />
         },
+        //statusInout
+        {
+          path: "/statusInout",
+          element: <StatusInout />
+        },
+        {
+          path: "/createStatusInout",
+          element: <CreateStatusInout />
+        },
+        {
+          path: "/editStatusInout/:uuid",
+          element: <EditStatusInout />
+        },
         //Tipe Notification
         {
           path: "/tipeNotification",
@@ -262,6 +281,19 @@ function Router() {
         {
           path: "/editTipePendapatan/:uuid",
           element: <EditTipePendapatan />
+        },
+        //Jam Operasional
+        {
+          path: "/jamOperasional",
+          element: <JamOperasional />
+        },
+        {
+          path: "/createJamOperasional",
+          element: <CreateJamOperasional />
+        },
+        {
+          path: "/editJamOperasional/:uuid",
+          element: <EditJamOperasional />
         },
       ],
     },
