@@ -22,7 +22,7 @@ import tipeAbsensSlice from "./features/tipeAbsenSlice";
 import pelanggaransSlice from "./features/pelanggaransSlice";
 import statusKoreksiSlice from "./features/statusKoreksiSlice";
 import tipePendapatansSlice from "./features/tipePendapatanSlice";
-import statusInoutSlice from "./features/statusInOutSlice";
+import statusInOutSlice from "./features/statusInoutSlice";
 
 export const store = configureStore({
   reducer: {
@@ -44,7 +44,7 @@ export const store = configureStore({
     meReducer : meSlice,
     usersReducer : usersSlice,
     statusReducer : statusSlice,
-    statusInoutReducer : statusInoutSlice,
+    statusInoutReducer : statusInOutSlice,
     tipeNotificationsReducer : tipeNotificationsSlice,
     tipeAbsensReducer : tipeAbsensSlice,
     pelanggaransReducer : pelanggaransSlice,

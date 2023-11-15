@@ -54,6 +54,75 @@ export const getUserById : any = createAsyncThunk("users/getUserById", async(use
     }
 });
 
+export const getUsersTable : any = createAsyncThunk("users/getUsersTable", async(users : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/users/${users.limit}&${users.page}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const CreateUser  : any = createAsyncThunk("users/CreateUser", async(users : any, thunkAPI) => {
+    try {
+        const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/users', {
+            nik:users.nik,
+            absenId:users.absenId,
+            name:users.name, 
+            ganderId:users.ganderId, 
+            email:users.email,
+            password:users.password,
+            extention:users.extention,
+            nomorHp:users.nomorHp,
+            penempatanId:users.penempatanId,
+            jabatanId:users.jabatanId,
+            atasanId:users.atasanId,
+            nomorKtp:users.nomorKtp,
+            alamatKtp:users.alamatKtp,
+            alamatDomisili:users.alamatDomisili,
+            tempatLahir:users.tempatLahir,
+            tanggalLahir:users.tanggalLahir,
+            nomorNpwp:users.nomorNpwp,
+            statusPerkawinanId:users.statusPerkawinanId,
+            jumlahAnak:users.jumlahAnak,
+            namaIbu:users.namaIbu,
+            pendidikanId:users.pendidikanId,
+            namaSekolah:users.namaSekolah,
+            jurusanSekolah:users.jurusanSekolah,
+            tahunLulus:users.tahunLulus,
+            ipk:users.ipk,
+            nomorBpjsKesehatan:users.nomorBpjsKesehatan,
+            nomorBpjsKetenagakerjaan:users.nomorBpjsKetenagakerjaan,
+            contactEmergencyId:users.contactEmergencyId,
+            emergencyNumber:users.emergencyNumber,
+            emergencyAddress:users.emergencyAddress,
+            nomorSim:users.nomorSim,
+            golonganDarahId:users.golonganDarahId,
+            bankId:users.bankId,
+            nomorRekening:users.nomorRekening,
+            jamOperasionalId:users.jamOperasionalId,
+            groupId:users.groupsId,
+            quote:users.quote,
+            statusId:users.statusId,
+            isActive:users.isActive
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const usersSlice = createSlice({
     name: "users",
     initialState,
@@ -87,6 +156,36 @@ export const usersSlice = createSlice({
             state.users = action.payload;
         });
         builder.addCase(getUserById.rejected, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersError = true;
+            state.messageUsers = action.payload;
+        });
+
+        //get users table
+        builder.addCase(getUsersTable.pending, (state) => {
+            state.isUsersLoading = true;
+        });
+        builder.addCase(getUsersTable.fulfilled, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersSuccess = true;
+            state.users = action.payload;
+        });
+        builder.addCase(getUsersTable.rejected, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersError = true;
+            state.messageUsers = action.payload;
+        });
+
+        //create users
+        builder.addCase(CreateUser.pending, (state) => {
+            state.isUsersLoading = true;
+        });
+        builder.addCase(CreateUser.fulfilled, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersSuccess = true;
+            state.messageUsers = action.payload;
+        });
+        builder.addCase(CreateUser.rejected, (state, action) => {
             state.isUsersLoading = false;
             state.isUsersError = true;
             state.messageUsers = action.payload;

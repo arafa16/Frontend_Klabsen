@@ -2,8 +2,8 @@ import React from 'react'
 import Button from '../../base-components/Button'
 import LoadingIcon from '../../base-components/LoadingIcon';
 
-const SaveRegister = (props : any) => {
-    const {clickBack, active, isAuthLoading} = props;
+const Save = (props : any) => {
+    const {clickBack, active, isLoading} = props;
     return (
         <div className={`flex items-center justify-center col-span-12 mt-10 mx-10 intro-y sm:justify-end`}>
             <Button
@@ -15,7 +15,7 @@ const SaveRegister = (props : any) => {
                 >
                 Cancel
             </Button>
-            {isAuthLoading ? 
+            {isLoading ? 
                 <LoadingIcon icon="tail-spin" color='blue' className="w-4 h-4" /> 
                 : 
                 <Button
@@ -24,11 +24,11 @@ const SaveRegister = (props : any) => {
                     size='sm'
                     type='submit'
                     >
-                    Send Register
+                    Save
                 </Button>
             }
         </div>
     )
 }
 
-export default SaveRegister
+export default Save

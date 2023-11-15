@@ -2,7 +2,6 @@ import React from 'react'
 import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { Menu } from '../../base-components/Headless'
-import fakerData from '../../utils/faker'
 import clsx from 'clsx'
 import { FormCheck, FormInput } from '../../base-components/Form'
 import { useNavigate } from 'react-router-dom'
@@ -19,7 +18,7 @@ const AttributTable = (props : any) => {
             <div className="col-span-12 xl:col-span-12 2xl:col-span-12">
                 <div className="flex flex-col-reverse px-5 py-4 border-b sm:flex-row text-slate-500 border-slate-200/60">
                     <div className="flex items-center justify-end sm:ml-auto">
-                        <div className="">{datas && datas.count}</div>
+                        {/* <div className="">{datas && datas.count}</div> */}
                         {/* <a
                             href="#"
                             className="flex items-center justify-center w-5 h-5 ml-5"

@@ -4,15 +4,14 @@ import { Disclosure } from '../../base-components/Headless'
 import dayjs from 'dayjs'
 
 const DataUser = (props : any) => {
-    const {users} = props;
+    const {users, title} = props;
 
     console.log(users && users, 'users');
 
     return (
         <div className="p-5 box intro-y">
             <div className="flex items-center pb-5 mb-5 border-b border-slate-200/60 dark:border-darkmode-400">
-                <div className="text-base font-medium truncate">Profile</div>
-                <Lucide icon="Edit" className="w-4 h-4 ml-auto text-slate-500" />
+                <div className="text-base font-medium truncate">{title}</div>
             </div>
             <div className="leading-relaxed">
             <Disclosure.Group variant="boxed">
@@ -327,7 +326,7 @@ const DataUser = (props : any) => {
                                     Group/Devisi 
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users.group && users.group.name }
+                                    {users.group && users.group.name}
                                 </div>
                             </div>
                             <div>

@@ -54,9 +54,13 @@ import EditTipePendapatan from "../pages/Setting/TipePendapatan/EditTipePendapat
 import JamOperasional from "../pages/Setting/JamOperasional/JamOperasional";
 import CreateJamOperasional from "../pages/Setting/JamOperasional/CreateJamOperasional";
 import EditJamOperasional from "../pages/Setting/JamOperasional/EditJamOperasional";
-import StatusInout from "../pages/Setting/StatusInOut/StatusInOut";
+import StatusInout from "../pages/Setting/StatusInOut/StatusInout";
 import CreateStatusInout from "../pages/Setting/StatusInOut/CreateStatusInout";
 import EditStatusInout from "../pages/Setting/StatusInOut/EditStatusInout";
+import DataUser from "../components/Profile/DataUser";
+import DataEmploye from "../pages/Employe/DataEmploye";
+import CreateEmploye from "../pages/Employe/CreateEmploye";
+import ViewEmploye from "../pages/Employe/ViewEmploye";
 
 function Router() {
   const routes = [
@@ -294,6 +298,19 @@ function Router() {
         {
           path: "/editJamOperasional/:uuid",
           element: <EditJamOperasional />
+        },
+        //employe
+        {
+          path: "/dataEmploye",
+          element: <DataEmploye />
+        },
+        {
+          path: "/createEmploye",
+          element: <CreateEmploye />
+        },
+        {
+          path: "/viewEmploye/:id",
+          element: <ViewEmploye />
         },
       ],
     },

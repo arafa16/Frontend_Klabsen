@@ -1,5 +1,5 @@
 import _ from "lodash";
-
+import { useEffect, useState } from "react";
 import UpdateProfileButton from "../../components/Button/UpdateProfileButton";
 import ProfileCover from "../../components/Profile/ProfileCover";
 
@@ -12,7 +12,7 @@ import FriendsUser from "../../components/Profile/FriendsUser";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById, resetUsers } from "../../stores/features/usersSlice";
-import { useEffect, useState } from "react";
+
 
 const UserProfile = () => {
   const {id} = useParams();
@@ -48,6 +48,7 @@ const UserProfile = () => {
         <div className="col-span-12 xl:col-span-8">
           <DataUser 
             users={datas}
+            title={`Profile`}
           />
           {/* <ExperienceUser /> */}
           <SkillUser />

@@ -1,19 +1,15 @@
 import { useEffect, useState, useRef } from "react";
-import FormDataDiri from "../../components/Form/User/FormDataDiri";
-import Status from "../../components/Indicator/Status";
-import RegisterLayout from "../../layouts/Auth/RegisterLayout";
-import NextRegister from "../../components/Button/NextRegister";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+
+import StatusEmploye from "../../components/Indicator/StatusEmploye";
+import FormDataDiri from '../../components/Form/User/FormDataDiri';
 import FormPendidikan from "../../components/Form/User/FormPendidikan";
 import FormDataPendukung from "../../components/Form/User/FormDataPendukung";
 import FormDataKesehatan from "../../components/Form/User/FormDataKesehatan";
 import FormDataOperasionalKantor from "../../components/Form/User/FormDataOperasionalKantor";
-import SaveRegister from "../../components/Button/SaveRegister";
-import { useNavigate } from "react-router-dom";
+import NextRegister from '../../components/Button/NextRegister'
 
-import Notification from "../../base-components/Notification";
-import { NotificationElement } from "../../base-components/Notification";
-
-import { useDispatch, useSelector } from 'react-redux';
 import { getGanders } from "../../stores/features/ganderSlice";
 import { getStatusPerkawinans } from "../../stores/features/statusPerkawinansSlice";
 import { getPendidikans } from "../../stores/features/pendidikansSlice";
@@ -25,16 +21,21 @@ import { getJabatans } from "../../stores/features/jabatansSlice";
 import { getJamOperasionals } from "../../stores/features/jamOperasionalsSlice";
 import { getGroups } from "../../stores/features/groupsSlice";
 import { getAtasans } from "../../stores/features/atasansSlice";
-import { RegisterUser, resetAuth } from "../../stores/features/authSlice";
+import { getStatus } from "../../stores/features/statusSlice";
+import { CreateUser, resetUsers } from "../../stores/features/usersSlice";
 
-const Register = () => {
+import FormKelengkapanData from "../../components/Form/User/FormKelengkapanData";
+import Save from "../../components/Button/Save";
+
+import Notification from "../../base-components/Notification";
+import { NotificationElement } from "../../base-components/Notification";
+
+
+const CreateEmploye = () => {
   const [statusNumber, setStatusNumber] = useState(1);
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  //show button
-  const [statusButton, setStatusButton] = useState(false);
 
   //value data pribadi
   const [absenId, setAbsenId] = useState('');
@@ -83,6 +84,11 @@ const Register = () => {
   const [extention, setExtention] = useState('');
   const [quote, setQuote] = useState('');
 
+  //value kelengkapan data
+  const [statusId, setStatusId] = useState('');
+  const [isActive, setIsActive] = useState('');
+
+  //data select
   const {ganders} = useSelector(
     (state : any) => state.ganderReducer
   );
@@ -109,15 +115,15 @@ const Register = () => {
 
   const {penempatans} = useSelector(
     (state : any) => state.penempatansReducer 
-  )
+  );
 
   const {jabatans} = useSelector(
     (state : any) => state.jabatansReducer
-  )
+  );
 
   const {jamOperasionals} = useSelector(
     (state : any) => state.jamOperasionalsReducer
-  )
+  );
 
   const {groups} = useSelector(
     (state: any) => state.groupsReducer
@@ -125,30 +131,11 @@ const Register = () => {
 
   const {atasans} = useSelector(
     (state : any) => state.atasansReducer
-  )
-
-  const {isAuthError, isAuthSuccess, isAuthLoading, messageAuth} = useSelector(
-    (state : any) => state.authReducer
   );
 
-  const NotificationRegister = useRef<NotificationElement>();
-
-  useEffect(()=>{
-    if(isAuthSuccess && messageAuth){
-      setMsg(messageAuth.msg);
-      NotificationRegister.current?.showToast();
-      navigate('/login');
-      dispatch(resetAuth());
-    }
-  },[isAuthSuccess, messageAuth]);
-
-  useEffect(()=>{
-    if(isAuthError && messageAuth){
-      setMsg(messageAuth.msg);
-      NotificationRegister.current?.showToast();
-      dispatch(resetAuth());
-    }
-  },[isAuthError, messageAuth]);
+  const {status} = useSelector(
+    (state : any) => state.statusReducer
+  )
 
   useEffect(()=>{
     dispatch(getGanders());
@@ -162,17 +149,10 @@ const Register = () => {
     dispatch(getJamOperasionals());
     dispatch(getGroups());
     dispatch(getAtasans());
+    dispatch(getStatus());
   },[])
 
-  useEffect(()=>{
-    if(statusNumber === 5){
-      setStatusButton(true);
-    }
-    else{
-    setStatusButton(false);
-    }
-  },[statusNumber]);
-
+  //next or prev
   const clickPrevious = () => {
     if(statusNumber > 1){
       const response = statusNumber - 1;
@@ -181,19 +161,36 @@ const Register = () => {
   }
   
   const clickNext = () => {
-    if(statusNumber < 5){
+    if(statusNumber < 6){
       setStatusNumber(statusNumber + 1);
     }
   }
 
   const clickBack = () => {
-    navigate('/login');
+    navigate('/dataEmploye');
   }
+
+  //user create
+
+  const {users, isUsersSuccess, messageUsers} = useSelector(
+    (state : any) => state.usersReducer
+  )
+
+  useEffect(()=>{
+    if(isUsersSuccess && messageUsers){
+      setMsg(messageUsers.msg);
+      NotificationRegister.current?.showToast();
+      navigate('/dataEmploye');
+      dispatch(resetUsers());
+    }
+  },[isUsersSuccess, messageUsers]);
 
   const infoError = () => {
     setMsg("Mohon lengkapi data anda terlebih dahulu.");
     NotificationRegister.current?.showToast();
   }
+
+  const NotificationRegister = useRef<NotificationElement>();
 
   const submitRegister = (e : any) => {
     e.preventDefault();
@@ -234,9 +231,11 @@ const Register = () => {
       && groupsId
       && extention
       && quote
+      && statusId
+      && isActive
       ) === '') return infoError();
 
-      dispatch(RegisterUser({
+      dispatch(CreateUser({
       absenId, 
       nik, 
       name, 
@@ -273,36 +272,47 @@ const Register = () => {
       jamOperasionalId,
       groupsId,
       extention,
-      quote
+      quote,
+      statusId,
+      isActive
       }));
   }
 
+  navigator.geolocation.getCurrentPosition(function(position) {
+    console.log("Latitude is :", position.coords);
+    // console.log("Longitude is :", position.coords.longitude);
+  });
+
   return (
-      <RegisterLayout>
-        <Notification
-          getRef={(el) => {
-            NotificationRegister.current = el;
-          }}
-          options={{
-            duration: 3000,
-          }}
-          className="flex flex-col sm:flex-row"
-        >
-          <div className="font-medium normal-case">
-            {msg}
-          </div>
-        </Notification>
-        <Status 
+    <div className="w-full mt-5 box py-5">
+      <Notification
+        getRef={(el) => {
+          NotificationRegister.current = el;
+        }}
+        options={{
+          duration: 3000,
+        }}
+        className="flex flex-col sm:flex-row"
+      >
+        <div className="font-medium normal-case">
+          {msg}
+        </div>
+      </Notification>
+      <div className='my-10'>
+        <StatusEmploye 
           statusNumber={statusNumber}
         />
-        <form onSubmit={submitRegister}>
-          <SaveRegister 
+      </div>
+      <form onSubmit={submitRegister}>
+        <div>
+          <Save
             clickBack={clickBack}
-            active={statusButton}
-            isAuthLoading={isAuthLoading}
+            active={true}
+            isLoading=""
           />
-          <div className="px-5 pt-10 mt-2 border-t sm:px-20 border-slate-200/60 dark:border-darkmode-400">
-            <FormDataDiri
+        </div>
+        <div className="px-5 pt-10 mt-2 border-t sm:px-10 border-slate-200/60 dark:border-darkmode-400">
+          <FormDataDiri 
               statusNumber={statusNumber}
               absenId={absenId}
               setAbsenId={setAbsenId}
@@ -329,94 +339,101 @@ const Register = () => {
               //data select
               ganders={ganders}
               statusPerkawinans={statusPerkawinans}
-              
-            />
-            <FormPendidikan 
-              statusNumber={statusNumber}
-              pendidikanId={pendidikanId}
-              setPendidikanId={setPendidikanId}
-              namaSekolah={namaSekolah}
-              setNamaSekolah={setNamaSekolah}
-              jurusanSekolah={jurusanSekolah}
-              setJurusanSekolah={setJurusanSekolah}
-              tahunLulus={tahunLulus}
-              setTahunLulus={setTahunLulus}
-              ipk={ipk}
-              setIpk={setIpk}
-              //data select
-              pendidikans={pendidikans}
-            />
-            <FormDataPendukung
-              statusNumber={statusNumber}
-              nomorHp={nomorHp}
-              setNomorHp={setNomorHp}
-              nomorKtp={nomorKtp}
-              setNomorKtp={setNomorKtp}
-              alamatKtp={alamatKtp}
-              setAlamatKtp={setAlamatKtp}
-              alamatDomisili={alamatDomisili}
-              setAlamatDomisili={setAlamatDomisili}
-              bankId={bankId}
-              setBankId={setBankId}
-              nomorRekening={nomorRekening}
-              setNomorRekening={setNomorRekening}
-              nomorNpwp={nomorNpwp}
-              setNomorNpwp={setNomorNpwp}
-              //data select
-              banks={banks}
-            />
-            <FormDataKesehatan
-              statusNumber={statusNumber}
-              nomorBpjsKesehatan={nomorBpjsKesehatan}
-              setNomorBpjsKesehatan={setNomorBpjsKesehatan}
-              nomorBpjsKetenagakerjaan={nomorBpjsKetenagakerjaan}
-              setNomorBpjsKetenagakerjaan={setNomorBpjsKetenagakerjaan}
-              contactEmergencyId={contactEmergencyId}
-              setContactEmergencyId={setContactEmergencyId}
-              emergencyNumber={emergencyNumber}
-              setEmergencyNumber={setEmergencyNumber}
-              emergencyAddress={emergencyAddress}
-              setEmergencyAddress={setEmergencyAddress}
-              nomorSim={nomorSim}
-              setNomorSim={setNomorSim}
-              golonganDarahId={golonganDarahId}
-              setGolonganDarahId={setGolonganDarahId}
-              //select data
-              contacts={contacts}
-              golonganDarahs={golonganDarahs}
-            />
-            <FormDataOperasionalKantor
-              statusNumber={statusNumber}
-              penempatanId={penempatanId}
-              setPenempatanId={setPenempatanId}
-              jabatanId={jabatanId}
-              setJabatanId={setJabatanId}
-              atasanId={atasanId}
-              setAtasanId={setAtasanId}
-              jamOperasionalId={jamOperasionalId}
-              setJamOperasionalId={setJamOperasionalId}
-              groupsId={groupsId}
-              setGroupsId={setGroupsId}
-              extention={extention}
-              setExtention={setExtention}
-              quote={quote}
-              setQuote={setQuote}
-              //select data
-              penempatans={penempatans}
-              jabatans={jabatans}
-              jamOperasionals={jamOperasionals}
-              groups={groups}
-              atasans={atasans}
-            />
-          </div>
-        </form>
-        <NextRegister 
-          clickNext={clickNext}
-          clickPrevious={clickPrevious}
-        />
-        
-      </RegisterLayout>
-  );
+          />
+          <FormPendidikan 
+            statusNumber={statusNumber}
+            pendidikanId={pendidikanId}
+            setPendidikanId={setPendidikanId}
+            namaSekolah={namaSekolah}
+            setNamaSekolah={setNamaSekolah}
+            jurusanSekolah={jurusanSekolah}
+            setJurusanSekolah={setJurusanSekolah}
+            tahunLulus={tahunLulus}
+            setTahunLulus={setTahunLulus}
+            ipk={ipk}
+            setIpk={setIpk}
+            //data select
+            pendidikans={pendidikans}
+          />
+          <FormDataPendukung
+            statusNumber={statusNumber}
+            nomorHp={nomorHp}
+            setNomorHp={setNomorHp}
+            nomorKtp={nomorKtp}
+            setNomorKtp={setNomorKtp}
+            alamatKtp={alamatKtp}
+            setAlamatKtp={setAlamatKtp}
+            alamatDomisili={alamatDomisili}
+            setAlamatDomisili={setAlamatDomisili}
+            bankId={bankId}
+            setBankId={setBankId}
+            nomorRekening={nomorRekening}
+            setNomorRekening={setNomorRekening}
+            nomorNpwp={nomorNpwp}
+            setNomorNpwp={setNomorNpwp}
+            //data select
+            banks={banks}
+          />
+          <FormDataKesehatan
+            statusNumber={statusNumber}
+            nomorBpjsKesehatan={nomorBpjsKesehatan}
+            setNomorBpjsKesehatan={setNomorBpjsKesehatan}
+            nomorBpjsKetenagakerjaan={nomorBpjsKetenagakerjaan}
+            setNomorBpjsKetenagakerjaan={setNomorBpjsKetenagakerjaan}
+            contactEmergencyId={contactEmergencyId}
+            setContactEmergencyId={setContactEmergencyId}
+            emergencyNumber={emergencyNumber}
+            setEmergencyNumber={setEmergencyNumber}
+            emergencyAddress={emergencyAddress}
+            setEmergencyAddress={setEmergencyAddress}
+            nomorSim={nomorSim}
+            setNomorSim={setNomorSim}
+            golonganDarahId={golonganDarahId}
+            setGolonganDarahId={setGolonganDarahId}
+            //select data
+            contacts={contacts}
+            golonganDarahs={golonganDarahs}
+          />
+          <FormDataOperasionalKantor
+            statusNumber={statusNumber}
+            penempatanId={penempatanId}
+            setPenempatanId={setPenempatanId}
+            jabatanId={jabatanId}
+            setJabatanId={setJabatanId}
+            atasanId={atasanId}
+            setAtasanId={setAtasanId}
+            jamOperasionalId={jamOperasionalId}
+            setJamOperasionalId={setJamOperasionalId}
+            groupsId={groupsId}
+            setGroupsId={setGroupsId}
+            extention={extention}
+            setExtention={setExtention}
+            quote={quote}
+            setQuote={setQuote}
+            //select data
+            penempatans={penempatans}
+            jabatans={jabatans}
+            jamOperasionals={jamOperasionals}
+            groups={groups}
+            atasans={atasans}
+          />
+          <FormKelengkapanData 
+            status={status}
+            statusNumber={statusNumber}
+            statusId={statusId}
+            setStatusId={setStatusId}
+            isActive={isActive}
+            setIsActive={setIsActive}
+          />
+        </div>
+      </form>
+      <NextRegister 
+        clickNext={clickNext}
+        clickPrevious={clickPrevious}
+      />
+    </div>
+    
+  )
 }
 
-export default Register;
+export default CreateEmploye

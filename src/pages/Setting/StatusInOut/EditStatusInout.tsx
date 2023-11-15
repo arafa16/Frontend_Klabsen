@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import FormCreate from '../../../components/Form/Attribute/FormCreate'
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getStatusInoutById, resetStatusInout, updateStatusInout, deleteStatusInout } from '../../../stores/features/statusInoutSlice';

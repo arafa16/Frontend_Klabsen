@@ -34,6 +34,17 @@ const initialState: SideMenuState = {
       ],
     },
     {
+      icon: "Users",
+      title: "Employees",
+      subMenu: [
+        {
+          icon: "Users",
+          pathname: "/dataEmploye",
+          title: "Data Employe",
+        },
+      ],
+    },
+    {
       icon: "Settings",
       title: "Attribute",
       subMenu: [

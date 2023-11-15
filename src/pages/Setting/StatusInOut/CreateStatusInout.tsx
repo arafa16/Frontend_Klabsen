@@ -30,7 +30,7 @@ const CreateStatusInout = () => {
             uuid, name, code, isActive
         }));
     }
-
+   
     return (
         <div>
             <FormCreate
