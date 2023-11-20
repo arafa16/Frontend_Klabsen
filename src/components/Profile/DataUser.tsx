@@ -253,7 +253,7 @@ const DataUser = (props : any) => {
                                     Nomor Emergency
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.nomorEmergency}
+                                    {users && users.emergencyNumber}
                                 </div>
                             </div>
                             <div>
@@ -261,7 +261,7 @@ const DataUser = (props : any) => {
                                     Alamat Emergancy
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users && users.alamatEmergancy}
+                                    {users && users.emergencyAddress}
                                 </div>
                             </div>
                             <div>

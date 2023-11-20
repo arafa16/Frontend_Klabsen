@@ -16,8 +16,8 @@ const ProfileCover = (props : any) => {
             src={preview16Url}
             />
         </div>
-        <div className="flex flex-col items-center justify-center text-center 2xl:flex-row 2xl:text-left">
-            <div className="z-20 -mt-20 2xl:-mt-10 2xl:ml-10">
+        <div className="flex flex-col items-center justify-center text-center xl:flex-row xl:text-left">
+            <div className="z-20 -mt-20 xl:-mt-10 xl:ml-10">
             <div className="w-40 h-40 overflow-hidden border-4 border-white rounded-full shadow-md image-fit">
                 <img
                 alt="user image"
@@ -25,25 +25,25 @@ const ProfileCover = (props : any) => {
                 />
             </div>
             </div>
-            <div className="2xl:ml-5">
+            <div className="xl:ml-5">
                 <h2 className="mt-5 text-xl font-medium uppercase">
                     {users && users.name}
                 </h2>
-                    <div className="flex items-center justify-center mt-2 text-slate-500 2xl:justify-start">
+                    <div className="flex items-center justify-center mt-2 text-slate-500 xl:justify-start">
                         <Lucide icon="Briefcase" className="w-4 h-4 mr-2" />
                         {users.jabatan && users.jabatan.name}
                     </div>
-                    <div className="flex items-center justify-center mt-2 text-slate-500 2xl:justify-start">
+                    <div className="flex items-center justify-center mt-2 text-slate-500 xl:justify-start">
                         <Lucide icon="MapPin" className="w-4 h-4 mr-2" />
                         {users.penempatan && users.penempatan.name}
                     </div>
                 </div>
-            <div className="grid h-20 grid-cols-2 2xl:grid-cols-2 px-10 mx-auto mt-5 mb-6 border-dashed gap-y-2 md:gap-y-0 gap-x-5 2xl:border-l border-slate-200 2xl:mb-0">
-                <div className="flex items-center justify-center col-span-2 md:col-span-1 2xl:justify-start">
+            <div className="grid h-20 grid-cols-2 xl:grid-cols-2 px-10 mx-auto mt-5 mb-6 border-dashed gap-y-2 md:gap-y-0 gap-x-5 xl:border-l border-slate-200 xl:mb-0">
+                <div className="flex items-center justify-center col-span-2 md:col-span-1 xl:justify-start">
                     <Lucide icon="Mail" className="w-4 h-4 mr-2" />
                     {users && users.email}
                 </div>
-                <div className="flex items-center justify-center col-span-2 md:col-span-1 2xl:justify-start">
+                <div className="flex items-center justify-center col-span-2 md:col-span-1 xl:justify-start">
                     <Lucide icon="Smartphone" className="w-4 h-4 mr-2" />
                     {users && users.nomorHp}
                 </div>

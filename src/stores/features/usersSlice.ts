@@ -123,6 +123,75 @@ export const CreateUser  : any = createAsyncThunk("users/CreateUser", async(user
     }
 });
 
+export const UpdateUser  : any = createAsyncThunk("users/UpdateUser", async(users : any, thunkAPI) => {
+    try {
+        const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/users/${users.id}`, {
+            nik:users.nik,
+            absenId:users.absenId,
+            name:users.name, 
+            ganderId:users.ganderId, 
+            email:users.email,
+            password:users.password,
+            extention:users.extention,
+            nomorHp:users.nomorHp,
+            penempatanId:users.penempatanId,
+            jabatanId:users.jabatanId,
+            atasanId:users.atasanId,
+            nomorKtp:users.nomorKtp,
+            alamatKtp:users.alamatKtp,
+            alamatDomisili:users.alamatDomisili,
+            tempatLahir:users.tempatLahir,
+            tanggalLahir:users.tanggalLahir,
+            nomorNpwp:users.nomorNpwp,
+            statusPerkawinanId:users.statusPerkawinanId,
+            jumlahAnak:users.jumlahAnak,
+            namaIbu:users.namaIbu,
+            pendidikanId:users.pendidikanId,
+            namaSekolah:users.namaSekolah,
+            jurusanSekolah:users.jurusanSekolah,
+            tahunLulus:users.tahunLulus,
+            ipk:users.ipk,
+            nomorBpjsKesehatan:users.nomorBpjsKesehatan,
+            nomorBpjsKetenagakerjaan:users.nomorBpjsKetenagakerjaan,
+            contactEmergencyId:users.contactEmergencyId,
+            emergencyNumber:users.emergencyNumber,
+            emergencyAddress:users.emergencyAddress,
+            nomorSim:users.nomorSim,
+            golonganDarahId:users.golonganDarahId,
+            bankId:users.bankId,
+            nomorRekening:users.nomorRekening,
+            jamOperasionalId:users.jamOperasionalId,
+            groupId:users.groupsId,
+            quote:users.quote,
+            statusId:users.statusId,
+            isActive:users.isActive
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const deleteUser : any = createAsyncThunk("users/deleteUser", async(users : any, thunkAPI) => {
+    try {
+        const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+'/users/'+users.id,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const usersSlice = createSlice({
     name: "users",
     initialState,
@@ -186,6 +255,36 @@ export const usersSlice = createSlice({
             state.messageUsers = action.payload;
         });
         builder.addCase(CreateUser.rejected, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersError = true;
+            state.messageUsers = action.payload;
+        });
+
+        //update users
+        builder.addCase(UpdateUser.pending, (state) => {
+            state.isUsersLoading = true;
+        });
+        builder.addCase(UpdateUser.fulfilled, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersSuccess = true;
+            state.messageUsers = action.payload;
+        });
+        builder.addCase(UpdateUser.rejected, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersError = true;
+            state.messageUsers = action.payload;
+        });
+
+        //update users
+        builder.addCase(deleteUser.pending, (state) => {
+            state.isUsersLoading = true;
+        });
+        builder.addCase(deleteUser.fulfilled, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersSuccess = true;
+            state.messageUsers = action.payload;
+        });
+        builder.addCase(deleteUser.rejected, (state, action) => {
             state.isUsersLoading = false;
             state.isUsersError = true;
             state.messageUsers = action.payload;

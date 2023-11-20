@@ -3,14 +3,13 @@ import { FormInput, FormLabel, FormSelect } from "../../../base-components/Form"
 import Litepicker from '../../../base-components/Litepicker';
 import dayjs from 'dayjs';
 
-const FormDataDiri = (props : any) => {
+const FormDataDiriUpdate = (props : any) => {
     const {
         statusNumber, 
         absenId, setAbsenId, 
         nik, setNik,
         name, setName,
         email, setEmail,
-        password, setPassword,
         ganderId, setGanderId,
         tempatLahir, setTempatLahir,
         tanggalLahir, setTanggalLahir,
@@ -157,20 +156,8 @@ const FormDataDiri = (props : any) => {
                     onChange={(e)=>setNamaIbu(e.target.value)}
                 />
             </div>
-            <div className="col-span-12 intro-y sm:col-span-3">
-                <FormLabel htmlFor="input-wizard-3">Password *</FormLabel>
-                <FormInput
-                    formInputSize="sm"
-                    id="password"
-                    type="password"
-                    placeholder=""
-                    name='password'
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
-                />
-            </div>
         </div>
     )
 }
 
-export default FormDataDiri
+export default FormDataDiriUpdate

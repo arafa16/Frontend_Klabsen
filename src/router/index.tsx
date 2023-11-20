@@ -61,6 +61,7 @@ import DataUser from "../components/Profile/DataUser";
 import DataEmploye from "../pages/Employe/DataEmploye";
 import CreateEmploye from "../pages/Employe/CreateEmploye";
 import ViewEmploye from "../pages/Employe/ViewEmploye";
+import UpdateEmploye from "../pages/Employe/UpdateEmploye";
 
 function Router() {
   const routes = [
@@ -311,6 +312,10 @@ function Router() {
         {
           path: "/viewEmploye/:id",
           element: <ViewEmploye />
+        },
+        {
+          path: "/updateEmploye/:id",
+          element: <UpdateEmploye />
         },
       ],
     },
