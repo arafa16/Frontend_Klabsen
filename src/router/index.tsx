@@ -62,6 +62,9 @@ import DataEmploye from "../pages/Employe/DataEmploye";
 import CreateEmploye from "../pages/Employe/CreateEmploye";
 import ViewEmploye from "../pages/Employe/ViewEmploye";
 import UpdateEmploye from "../pages/Employe/UpdateEmploye";
+import Absen from "../pages/Absen/Absen";
+import ViewKoreksi from "../pages/Koreksi/ViewKoreksi";
+import DataKoreksi from "../pages/Koreksi/DataKoreksi";
 
 function Router() {
   const routes = [
@@ -316,6 +319,20 @@ function Router() {
         {
           path: "/updateEmploye/:id",
           element: <UpdateEmploye />
+        },
+        //absen
+        {
+          path: "/absen",
+          element: <Absen />
+        },
+        //koreksi
+        {
+          path: "/dataKoreksi",
+          element: <DataKoreksi />
+        },
+        {
+          path: "/viewKoreksi/:id",
+          element: <ViewKoreksi />
         },
       ],
     },

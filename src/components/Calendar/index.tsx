@@ -5,47 +5,44 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import { CalendarOptions } from "@fullcalendar/common";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+const Calendar = (props : any) => {
+  const {dataAbsen, clickDate} = props;
+  const [events, setEvents] = useState<any>([]);
 
-function Main() {
+  useEffect(()=>{
+    setEvents([]);
+    inputAbsen(dataAbsen);
+  },[dataAbsen]);
+
+  const inputAbsen = (datas : any) => {
+    datas.map((data : any)=>{
+        const newData : any = {
+          id:data.uuid,
+          title:dayjs(data.tanggalMulai).format('HH:mm:ss')+' '+data.tipe_absen.name,
+          start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
+          end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
+          color:data.pelanggaran.code == 2 ? 'red' : '',
+        } 
+        setEvents((events: any)  => [...events, newData])
+    })
+  }
+
   const options: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     droppable: true,
     headerToolbar: {
-      left: "prev,next today",
+      left: "prev,next today dayGridMonth",
       center: "title",
-      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+      right: "",
     },
-    initialDate: "2021-01-12",
+    initialDate: "2023-11-12",
     navLinks: true,
     editable: true,
     dayMaxEvents: true,
-    events: [
-      {
-        title: "Vue Vixens Day",
-        start: "2021-01-05",
-        end: "2021-01-08",
-      },
-      {
-        title: "VueConfUS",
-        start: "2021-01-11",
-        end: "2021-01-15",
-      },
-      {
-        title: "VueJS Amsterdam",
-        start: "2021-01-17",
-        end: "2021-01-21",
-      },
-      {
-        title: "Vue Fes Japan 2019",
-        start: "2021-01-21",
-        end: "2021-01-24",
-      },
-      {
-        title: "Laracon 2021",
-        start: "2021-01-24",
-        end: "2021-01-27",
-      },
-    ],
+    events: {events},
+    eventClick: (info)=>clickDate(info),
     drop: function (info) {
       if (
         document.querySelectorAll("#checkbox-events").length &&
@@ -71,4 +68,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Calendar;

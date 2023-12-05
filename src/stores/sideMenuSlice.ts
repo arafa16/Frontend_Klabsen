@@ -34,6 +34,22 @@ const initialState: SideMenuState = {
       ],
     },
     {
+      icon: "Calendar",
+      title: "Absen",
+      subMenu: [
+        {
+          icon: "Calendar",
+          pathname: '/absen',
+          title: "Absen",
+        },
+        {
+          icon: "Edit3",
+          pathname: '/dataKoreksi',
+          title: "Data Koreksi",
+        },
+      ],
+    },
+    {
       icon: "Users",
       title: "Employees",
       subMenu: [

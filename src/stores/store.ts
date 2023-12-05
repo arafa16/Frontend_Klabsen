@@ -23,6 +23,8 @@ import pelanggaransSlice from "./features/pelanggaransSlice";
 import statusKoreksiSlice from "./features/statusKoreksiSlice";
 import tipePendapatansSlice from "./features/tipePendapatanSlice";
 import statusInOutSlice from "./features/statusInoutSlice";
+import inOutsSlice from "./features/inOutsSlice";
+import koreksisSlice from "./features/koresisSlice";
 
 export const store = configureStore({
   reducer: {
@@ -49,7 +51,9 @@ export const store = configureStore({
     tipeAbsensReducer : tipeAbsensSlice,
     pelanggaransReducer : pelanggaransSlice,
     statusKoreksiReducer : statusKoreksiSlice,
-    tipePendapatansReducer : tipePendapatansSlice
+    tipePendapatansReducer : tipePendapatansSlice,
+    inOutsReducer : inOutsSlice,
+    koreksisReducer : koreksisSlice
   },
 });
 

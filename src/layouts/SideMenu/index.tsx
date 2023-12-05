@@ -29,20 +29,29 @@ import { LogOut, resetAuth } from "../../stores/features/authSlice";
 function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [datas, setDatas] = useState([]);
 
-  const {meData, isMeDataError, isMeDataSuccess, isMeDataLoading, messageMeData} = useSelector(
+  const {meData, isMeDataError, isMeDataSuccess, messageMeData} = useSelector(
     (state : any) => state.meReducer
   );
+
+  useEffect(()=>{
+    if(isMeDataSuccess && meData){
+      setDatas(meData);
+      // dispatch(resetMeData());
+    }
+    if(isMeDataError && messageMeData){
+      backToLogin();
+    }
+  },[isMeDataSuccess, meData, isMeDataError, messageMeData]);
 
   useEffect(()=>{
     dispatch(getMe());
   },[]);
 
-  useEffect(()=>{
-    if(isMeDataError && messageMeData){
-      backToLogin();
-    }
-  },[isMeDataError, messageMeData]);
+  // useEffect(()=>{
+    
+  // },[]);
 
   const backToLogin : any = () => {
     dispatch(resetMeData());
@@ -414,9 +423,9 @@ function Main() {
           {/* set auth for getMe */}
           <TopBar 
             toggleMobileMenu={toggleMobileMenu} 
-            users={meData}
+            users={datas}
             clickLogOut={clickLogOut}
-            />
+          />
 
           <div className="xl:px-6 mt-2.5">
             <Outlet />
