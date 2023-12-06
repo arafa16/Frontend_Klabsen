@@ -32,6 +32,7 @@ const initialState: SideMenuState = {
           title: "Overview 2",
         },
       ],
+      
     },
     {
       icon: "Calendar",

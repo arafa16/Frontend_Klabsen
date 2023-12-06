@@ -296,12 +296,16 @@ function Main() {
               ) : (
                 <li key={menuKey}>
                   <Menu
-                    className={clsx({
-                      // Animation
-                      [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
-                        (menuKey + 1) * 10
-                      }`]: !menu.active,
-                    })}
+                    className={clsx([
+                      {
+                        // Animation
+                        [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
+                          (menuKey + 1) * 10
+                        }`]: !menu.active,
+                      },
+                      //hidden
+                      `${true ? '' : 'hidden'}`
+                    ])}
                     menu={menu}
                     simpleMenu={simpleMenu}
                     formattedMenuState={[formattedMenu, setFormattedMenu]}
@@ -328,12 +332,16 @@ function Main() {
                         {menu.subMenu.map((subMenu, subMenuKey) => (
                           <li key={subMenuKey}>
                             <Menu
-                              className={clsx({
+                              className={clsx([
+                                {
                                 // Animation
                                 [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                                   (subMenuKey + 1) * 10
                                 }`]: !subMenu.active,
-                              })}
+                                },
+                                //hidden
+                                `${true ? '' : 'hidden'}`
+                              ])}
                               menu={subMenu}
                               simpleMenu={simpleMenu}
                               formattedMenuState={[
@@ -458,7 +466,7 @@ function Menu(props: {
     <a
       href={props.menu.subMenu ? "#" : props.menu.pathname}
       className={clsx([
-        "h-[50px] flex items-center pl-5 mb-1 relative dark:text-slate-300",
+        "h-[50px] flex items-center pl-5 mb-1 relative dark:text-slate-300 ",
         {
           "bg-primary text-white rounded-xl dark:bg-transparent":
             props.menu.active && props.level == "first",
