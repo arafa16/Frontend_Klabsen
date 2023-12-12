@@ -34,6 +34,7 @@ const ViewKoreksi = () => {
       <ViewKoreksiById 
         datas={datas}
         clickBack={clickBack}
+        isOpen={false}
       />
     </div>
   )

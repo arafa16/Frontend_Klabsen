@@ -65,6 +65,8 @@ import UpdateEmploye from "../pages/Employe/UpdateEmploye";
 import Absen from "../pages/Absen/Absen";
 import ViewKoreksi from "../pages/Koreksi/ViewKoreksi";
 import DataKoreksi from "../pages/Koreksi/DataKoreksi";
+import DataKoreksiByApprover from "../pages/Koreksi/DataKoreksiByApprover";
+import ViewKoreksiToApprove from "../pages/Koreksi/ViewKoreksiToApprove";
 
 function Router() {
   const routes = [
@@ -331,8 +333,16 @@ function Router() {
           element: <DataKoreksi />
         },
         {
+          path: "/dataKoreksiByApprover",
+          element: <DataKoreksiByApprover />
+        },
+        {
           path: "/viewKoreksi/:id",
           element: <ViewKoreksi />
+        },
+        {
+          path: "/viewKoreksiToApprove/:id",
+          element: <ViewKoreksiToApprove />
         },
       ],
     },

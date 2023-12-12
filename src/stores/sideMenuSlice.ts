@@ -48,6 +48,12 @@ const initialState: SideMenuState = {
           pathname: '/dataKoreksi',
           title: "Data Koreksi",
         },
+        {
+          icon: "Edit",
+          pathname: '/dataKoreksiByApprover',
+          title: "Approval Koreksi",
+        },
+        
       ],
     },
     {

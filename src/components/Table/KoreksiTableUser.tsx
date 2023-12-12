@@ -69,7 +69,7 @@ const KoreksiTableUser = (props : any) => {
                         <div className="flex px-5 py-3">
                             <div className="flex items-center flex-none mr-5 w-auto">
                                 <div className='w-10'>
-                                    {index+1}
+                                    {index+1+((page-1)*limit)}
                                 </div>
                                 <div
                                     className={clsx([

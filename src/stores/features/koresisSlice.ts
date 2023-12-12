@@ -39,6 +39,45 @@ export const createKoreksis: any = createAsyncThunk("createKoreksis", async(kore
     }
 });
 
+export const updateKoreksis: any = createAsyncThunk("updateKoreksis", async(koreksis : any, thunkAPI) => {
+    try {
+        const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.id}`,{
+            userId : koreksis.userId, 
+            inOutId :  koreksis.inOutId, 
+            keterangan : koreksis.keterangan, 
+            codeStatusKoreksi : koreksis.codeStatusKoreksi, 
+            isActive : koreksis.isActive,
+            codeStatusInout : koreksis.codeStatusInout,
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const approverKoreksis: any = createAsyncThunk("approverKoreksis", async(koreksis : any, thunkAPI) => {
+    try {
+        const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.id}/approve`,{
+            statusKoreksiId : koreksis.codeStatusKoreksi,
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const getKoreksisById: any = createAsyncThunk("getKoreksisById", async(koreksis : any, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.id}`,{
@@ -56,6 +95,20 @@ export const getKoreksisById: any = createAsyncThunk("getKoreksisById", async(ko
 export const getKoreksisByUser: any = createAsyncThunk("getKoreksisByUser", async(koreksis : any, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.limit}&${koreksis.page}&${koreksis.id}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const getKoreksisByApprover: any = createAsyncThunk("getKoreksisByApprover", async(koreksis : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.limit}&${koreksis.page}&${koreksis.id}/approver`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
@@ -90,6 +143,21 @@ export const koreksisSlice = createSlice({
             state.messageKoreksis = action.payload;
         })
 
+        // create koreksi
+        builder.addCase(updateKoreksis.pending, (state) => {
+            state.isKoreksisLoading = true;
+        });
+        builder.addCase(updateKoreksis.fulfilled, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisSuccess = true;
+            state.messageKoreksis = action.payload;
+        });
+        builder.addCase(updateKoreksis.rejected, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisError = true;
+            state.messageKoreksis = action.payload;
+        })
+
         // get koreksi by id
         builder.addCase(getKoreksisById.pending, (state) => {
             state.isKoreksisLoading = true;
@@ -105,7 +173,7 @@ export const koreksisSlice = createSlice({
             state.messageKoreksis = action.payload;
         })
 
-        // get koreksi by id
+        // get koreksi by user
         builder.addCase(getKoreksisByUser.pending, (state) => {
             state.isKoreksisLoading = true;
         });
@@ -119,6 +187,37 @@ export const koreksisSlice = createSlice({
             state.isKoreksisError = true;
             state.messageKoreksis = action.payload;
         })
+
+        // get koreksi by approver
+        builder.addCase(getKoreksisByApprover.pending, (state) => {
+            state.isKoreksisLoading = true;
+        });
+        builder.addCase(getKoreksisByApprover.fulfilled, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisSuccess = true;
+            state.koreksis = action.payload;
+        });
+        builder.addCase(getKoreksisByApprover.rejected, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisError = true;
+            state.messageKoreksis = action.payload;
+        })
+
+        // get koreksi by approver
+        builder.addCase(approverKoreksis.pending, (state) => {
+            state.isKoreksisLoading = true;
+        });
+        builder.addCase(approverKoreksis.fulfilled, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisSuccess = true;
+            state.messageKoreksis = action.payload;
+        });
+        builder.addCase(approverKoreksis.rejected, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisError = true;
+            state.messageKoreksis = action.payload;
+        })
+
 
     }
 })

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../base-components/Button';
 
 const ViewKoreksiById = (props : any) => {
-    const {datas, clickBack} = props;
+    const {datas, clickBack, isOpen, clickApprove} = props;
     
     return (
         <div className="p-5 box intro-y mt-5">
@@ -11,13 +11,32 @@ const ViewKoreksiById = (props : any) => {
                 <div className="text-base font-medium truncate">
                     Pengajuan Koreksi
                 </div>
-                <Button
-                    size='sm'
-                    variant="primary"
-                    onClick={()=>clickBack()}
-                    >
-                    Back
-                </Button>
+                <div className='flex justify-end gap-4'>
+                    <Button
+                        size='sm'
+                        variant="primary"
+                        onClick={()=>clickBack()}
+                        >
+                        Back
+                    </Button>
+                    <Button
+                        size='sm'
+                        variant="primary"
+                        className={`${isOpen ? '' : 'hidden'}`}
+                        onClick={()=>clickApprove(2)}
+                        >
+                        Approve
+                    </Button>
+                    <Button
+                        size='sm'
+                        variant="warning"
+                        className={`${isOpen ? '' : 'hidden'}`}
+                        onClick={()=>clickApprove(3)}
+                        >
+                        Not Approve
+                    </Button>
+                </div>
+                
             </div>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-y-10'>
                 <div>
