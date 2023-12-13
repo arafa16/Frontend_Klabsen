@@ -58,7 +58,7 @@ const KoreksiTableUser = (props : any) => {
                     <div 
                         key={index} 
                         className="intro-y"
-                        onClick={()=>navigate(linkView+`/${data.uuid}`)}
+                        onClick={()=>navigate(linkView+`/${data.uuid}/${data.status_koreksi.code}`)}
                         >
                         <div
                             className={clsx([
@@ -98,7 +98,7 @@ const KoreksiTableUser = (props : any) => {
                     </div>
                     ))}
                 </div>
-                <div className='p-4 flex justify-end text-xs'>{limit} of {datas && datas.count} data</div>
+                <div className='p-4 flex justify-end text-xs'>{limit > datas && datas.count ? limit : datas && datas.count} of {datas && datas.count} data</div>
             </div>
             {/* END: Koreksi Table Content */}
         </div>

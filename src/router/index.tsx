@@ -333,7 +333,7 @@ function Router() {
           element: <DataKoreksi />
         },
         {
-          path: "/dataKoreksiByApprover",
+          path: "/dataKoreksiByApprover?/:code",
           element: <DataKoreksiByApprover />
         },
         {
@@ -341,7 +341,7 @@ function Router() {
           element: <ViewKoreksi />
         },
         {
-          path: "/viewKoreksiToApprove/:id",
+          path: "/viewKoreksiToApprove/:id?/:code",
           element: <ViewKoreksiToApprove />
         },
       ],

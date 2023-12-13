@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getKoreksisById, resetKoreksis, approverKoreksis } from '../../stores/features/koresisSlice';
 
 const ViewKoreksiToApprove = () => {
-    const {id} = useParams();
-    const [datas, setDatas] = useState([]);
+    const {id, code} = useParams();
+    const [datas, setDatas] = useState<any>([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    console.log(datas, 'datas');
 
     const {koreksis, isKoreksisSuccess, messageKoreksis} = useSelector(
         (state : any) => state.koreksisReducer
@@ -32,7 +34,8 @@ const ViewKoreksiToApprove = () => {
     },[]);
 
     const clickBack = () => {
-        navigate(-1)
+        // alert(datas.status_koreksi && datas.status_koreksi.code);
+        navigate(`/dataKoreksiByApprover/${code}`)
     }
 
     const clickApprove = (codeStatusKoreksi : any) => {

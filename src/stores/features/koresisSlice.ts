@@ -3,6 +3,7 @@ import axios from 'axios';
 
 interface variabel {
     koreksis: any;
+    koreksisTable: any;
     isKoreksisError: boolean;
     isKoreksisSuccess: boolean;
     isKoreksisLoading: boolean;
@@ -11,6 +12,7 @@ interface variabel {
 
 const initialState : variabel = {
     koreksis: null,
+    koreksisTable: null,
     isKoreksisError: false,
     isKoreksisSuccess: false,
     isKoreksisLoading: false,
@@ -106,9 +108,23 @@ export const getKoreksisByUser: any = createAsyncThunk("getKoreksisByUser", asyn
     }
 });
 
+export const getKoreksisTableByApprover: any = createAsyncThunk("getKoreksisTableByApprover", async(koreksis : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.limit}&${koreksis.page}&${koreksis.id}&${koreksis.statusCode}/approver`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const getKoreksisByApprover: any = createAsyncThunk("getKoreksisByApprover", async(koreksis : any, thunkAPI) => {
     try {
-        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.limit}&${koreksis.page}&${koreksis.id}/approver`,{
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.id}/approver`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
@@ -183,6 +199,21 @@ export const koreksisSlice = createSlice({
             state.koreksis = action.payload;
         });
         builder.addCase(getKoreksisByUser.rejected, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisError = true;
+            state.messageKoreksis = action.payload;
+        })
+
+        // get koreksi table by approver
+        builder.addCase(getKoreksisTableByApprover.pending, (state) => {
+            state.isKoreksisLoading = true;
+        });
+        builder.addCase(getKoreksisTableByApprover.fulfilled, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisSuccess = true;
+            state.koreksisTable = action.payload;
+        });
+        builder.addCase(getKoreksisTableByApprover.rejected, (state, action) => {
             state.isKoreksisLoading = false;
             state.isKoreksisError = true;
             state.messageKoreksis = action.payload;

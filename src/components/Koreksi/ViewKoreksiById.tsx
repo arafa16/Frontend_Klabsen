@@ -36,7 +36,6 @@ const ViewKoreksiById = (props : any) => {
                         Not Approve
                     </Button>
                 </div>
-                
             </div>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-y-10'>
                 <div>

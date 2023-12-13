@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getKoreksisByApprover } from '../../stores/features/koresisSlice';
+import { getKoreksisTableByApprover, getKoreksisByApprover } from '../../stores/features/koresisSlice';
 import KoreksiTable from '../../components/Table/KoreksiTable';
 import KoreksiTableUser from '../../components/Table/KoreksiTableUser';
+import GeneralReport from '../../components/GeneralReport/GeneralReport';
 
-const DataKoreksiByApprover = () => {
+const DataKoreksiByApprover = (props: any) => {
+    const {code} = props;
+    
+    const [datasTable, setDatasTable] = useState<any>([]);
     const [datas, setDatas] = useState<any>([]);
     const [id, setId] = useState('');
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+    const [statusCode, setStatusCode] = useState(code);
     const [allPage, setAllPage] = useState(0);
 
     const dispatch = useDispatch();
@@ -17,7 +22,7 @@ const DataKoreksiByApprover = () => {
         (state : any)=>state.meReducer
     )
 
-    const {koreksis, isKoreksisSuccess} = useSelector(
+    const {koreksis, koreksisTable, isKoreksisSuccess} = useSelector(
         (state : any) => state.koreksisReducer
     );
 
@@ -28,17 +33,28 @@ const DataKoreksiByApprover = () => {
     },[meData, isMeDataSuccess]);
 
     useEffect(()=>{
+        if(koreksisTable && isKoreksisSuccess){
+            setDatasTable(koreksisTable);
+            countData(koreksisTable.count);
+        }
+    },[koreksisTable, isKoreksisSuccess])
+
+    useEffect(()=>{
         if(koreksis && isKoreksisSuccess){
             setDatas(koreksis);
-            countData(koreksis.count);
+            console.log(koreksis, 'koreksis');
         }
     },[koreksis, isKoreksisSuccess])
 
     useEffect(()=>{
-        if(limit && page && id){
-            dispatch(getKoreksisByApprover({limit, page, id}));
+        dispatch(getKoreksisByApprover({id}));
+    },[id])
+
+    useEffect(()=>{
+        if(limit && page && id && statusCode){
+            dispatch(getKoreksisTableByApprover({limit, page, statusCode, id}));
         }
-    },[limit, page, id]);
+    },[limit, page, id, statusCode, code]);
 
     //table
     const countData = (allData : any) =>{
@@ -60,18 +76,30 @@ const DataKoreksiByApprover = () => {
         }
     }
 
+    const clickStatus = (code : any) => {
+        setStatusCode(code);
+    }
+
     return (
         <div>
-            <KoreksiTableUser 
-                datas={datas}
-                page={page}
-                limit={limit}
-                nextPage={nextPage}
-                prevPage={prevPage}
-                allPage={allPage}
-                linkView={'/viewKoreksiToApprove'}
-                linkCreate={'/'}
-            />
+            <div>
+                <GeneralReport 
+                    datas={datas}
+                    clickStatus={clickStatus}
+                />
+            </div>
+            <div>
+                <KoreksiTableUser 
+                    datas={datasTable}
+                    page={page}
+                    limit={limit}
+                    nextPage={nextPage}
+                    prevPage={prevPage}
+                    allPage={allPage}
+                    linkView={'/viewKoreksiToApprove'}
+                    linkCreate={'/'}
+                />
+            </div>
         </div>
     )
 }
