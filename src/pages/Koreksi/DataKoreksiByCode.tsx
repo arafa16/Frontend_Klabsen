@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getKoreksisTableByApprover, getKoreksisByApprover } from '../../stores/features/koresisSlice';
+import { getKoreksisTableByUser, getKoreksisByUser, resetKoreksis } from '../../stores/features/koresisSlice';
 import KoreksiTable from '../../components/Table/KoreksiTable';
 import KoreksiTableUser from '../../components/Table/KoreksiTableUser';
-import GeneralReportKoreksi from '../../components/GeneralReport/GeneralReportKoreksi';
+import GeneralReport from '../../components/GeneralReport/GeneralReportKoreksi';
 import { useParams } from 'react-router-dom';
 
-const DataKoreksiByApprover = (props: any) => {
+const DataKoreksiByCode = () => {
+    const {code} = useParams();
     
-    const [datasTable, setDatasTable] = useState<any>([]);
+    const [dataTables, setDataTables] = useState<any>([]);
     const [datas, setDatas] = useState<any>([]);
     const [id, setId] = useState('');
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
-    const [statusCode, setStatusCode] = useState(1);
     const [allPage, setAllPage] = useState(0);
+    const [statusCode, setStatusCode] = useState(code);
 
     const dispatch = useDispatch();
 
@@ -34,24 +35,25 @@ const DataKoreksiByApprover = (props: any) => {
 
     useEffect(()=>{
         if(koreksisTable && isKoreksisSuccess){
-            setDatasTable(koreksisTable);
+            setDataTables(koreksisTable);
             countData(koreksisTable.count);
+            dispatch(resetKoreksis())
         }
     },[koreksisTable, isKoreksisSuccess])
 
     useEffect(()=>{
         if(koreksis && isKoreksisSuccess){
             setDatas(koreksis);
-            
+            dispatch(resetKoreksis())
         }
     },[koreksis, isKoreksisSuccess])
 
     useEffect(()=>{
-        dispatch(getKoreksisByApprover({id}));
-    },[id])
+        dispatch(getKoreksisByUser({id}));
+    },[id]);
 
     useEffect(()=>{
-        dispatch(getKoreksisTableByApprover({limit, page, statusCode, id}));
+        dispatch(getKoreksisTableByUser({limit, page, id, statusCode}));
     },[limit, page, id, statusCode]);
 
     //table
@@ -78,29 +80,30 @@ const DataKoreksiByApprover = (props: any) => {
         setStatusCode(code);
     }
 
-    return (
+  return (
+    <div>
         <div>
-            <div>
-                <GeneralReportKoreksi 
-                    datas={datas}
-                    clickStatus={clickStatus}
-                />
-            </div>
-            <div>
-                <KoreksiTableUser 
-                    datas={datasTable}
-                    page={page}
-                    limit={limit}
-                    nextPage={nextPage}
-                    prevPage={prevPage}
-                    allPage={allPage}
-                    linkView={'/viewKoreksiToApprove'}
-                    linkCreate={'/'}
-                    statusCode={statusCode}
-                />
-            </div>
+            <GeneralReport 
+                datas={datas}
+                clickStatus={clickStatus}
+            />
         </div>
-    )
+        <div>
+            <KoreksiTableUser 
+                datas={dataTables}
+                page={page}
+                limit={limit}
+                nextPage={nextPage}
+                prevPage={prevPage}
+                allPage={allPage}
+                linkView={'/viewKoreksi'}
+                linkCreate={'/'}
+                statusCode={statusCode}
+            />
+        </div>
+        
+    </div>
+  )
 }
 
-export default DataKoreksiByApprover
+export default DataKoreksiByCode

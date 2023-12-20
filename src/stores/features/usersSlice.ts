@@ -3,6 +3,7 @@ import axios from 'axios';
 
 interface variabel {
     users: any;
+    usersTable: any;
     isUsersError: boolean;
     isUsersSuccess: boolean;
     isUsersLoading: boolean;
@@ -11,6 +12,7 @@ interface variabel {
 
 const initialState : variabel = {
     users: null,
+    usersTable: null,
     isUsersError: false,
     isUsersSuccess: false,
     isUsersLoading: false,
@@ -56,10 +58,26 @@ export const getUserById : any = createAsyncThunk("users/getUserById", async(use
 
 export const getUsersTable : any = createAsyncThunk("users/getUsersTable", async(users : any, thunkAPI) => {
     try {
-        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/users/${users.limit}&${users.page}`,{
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/users/${users.limit}&${users.page}&${users.statusCode}`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const getUsers: any = createAsyncThunk("users/getUsers", async(_, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/users`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        // console.log(response, 'users');
         return response.data;
     } catch (error : any) {
         if(error.response){
@@ -237,9 +255,24 @@ export const usersSlice = createSlice({
         builder.addCase(getUsersTable.fulfilled, (state, action) => {
             state.isUsersLoading = false;
             state.isUsersSuccess = true;
-            state.users = action.payload;
+            state.usersTable = action.payload;
         });
         builder.addCase(getUsersTable.rejected, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersError = true;
+            state.messageUsers = action.payload;
+        });
+
+        //get users
+        builder.addCase(getUsers.pending, (state) => {
+            state.isUsersLoading = true;
+        });
+        builder.addCase(getUsers.fulfilled, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersSuccess = true;
+            state.users = action.payload;
+        });
+        builder.addCase(getUsers.rejected, (state, action) => {
             state.isUsersLoading = false;
             state.isUsersError = true;
             state.messageUsers = action.payload;

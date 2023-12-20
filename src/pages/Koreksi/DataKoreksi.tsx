@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getKoreksisByUser } from '../../stores/features/koresisSlice';
+import { getKoreksisTableByUser, getKoreksisByUser, resetKoreksis } from '../../stores/features/koresisSlice';
 import KoreksiTable from '../../components/Table/KoreksiTable';
 import KoreksiTableUser from '../../components/Table/KoreksiTableUser';
+import GeneralReportKoreksi from '../../components/GeneralReport/GeneralReportKoreksi';
 
 const DataKoreksi = () => {
+    const [dataTables, setDataTables] = useState<any>([]);
     const [datas, setDatas] = useState<any>([]);
     const [id, setId] = useState('');
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const [allPage, setAllPage] = useState(0);
+    const [statusCode, setStatusCode] = useState(1);
 
     const dispatch = useDispatch();
 
@@ -17,7 +20,7 @@ const DataKoreksi = () => {
         (state : any)=>state.meReducer
     )
 
-    const {koreksis, isKoreksisSuccess} = useSelector(
+    const {koreksis, koreksisTable, isKoreksisSuccess} = useSelector(
         (state : any) => state.koreksisReducer
     );
 
@@ -28,17 +31,27 @@ const DataKoreksi = () => {
     },[meData, isMeDataSuccess]);
 
     useEffect(()=>{
+        if(koreksisTable && isKoreksisSuccess){
+            setDataTables(koreksisTable);
+            countData(koreksisTable.count);
+            dispatch(resetKoreksis())
+        }
+    },[koreksisTable, isKoreksisSuccess])
+
+    useEffect(()=>{
         if(koreksis && isKoreksisSuccess){
             setDatas(koreksis);
-            countData(koreksis.count);
+            dispatch(resetKoreksis())
         }
     },[koreksis, isKoreksisSuccess])
 
     useEffect(()=>{
-        if(limit && page && id){
-            dispatch(getKoreksisByUser({limit, page, id}));
-        }
-    },[limit, page, id]);
+        dispatch(getKoreksisByUser({id}));
+    },[id]);
+
+    useEffect(()=>{
+        dispatch(getKoreksisTableByUser({limit, page, id, statusCode}));
+    },[limit, page, id, statusCode]);
 
     //table
     const countData = (allData : any) =>{
@@ -60,20 +73,32 @@ const DataKoreksi = () => {
         }
     }
 
-
+    const clickStatus = (code : any) => {
+        setStatusCode(code);
+    }
 
   return (
     <div>
-        <KoreksiTableUser 
-            datas={datas}
-            page={page}
-            limit={limit}
-            nextPage={nextPage}
-            prevPage={prevPage}
-            allPage={allPage}
-            linkView={'/viewKoreksi'}
-            linkCreate={'/'}
-        />
+        <div>
+            <GeneralReportKoreksi 
+                datas={datas}
+                clickStatus={clickStatus}
+            />
+        </div>
+        <div>
+            <KoreksiTableUser 
+                datas={dataTables}
+                page={page}
+                limit={limit}
+                nextPage={nextPage}
+                prevPage={prevPage}
+                allPage={allPage}
+                linkView={'/viewKoreksi'}
+                linkCreate={'/'}
+                statusCode={statusCode}
+            />
+        </div>
+        
     </div>
   )
 }

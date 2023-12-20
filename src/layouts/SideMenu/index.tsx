@@ -340,7 +340,6 @@ function Main() {
                                 }`]: !subMenu.active,
                                 },
                                 //hidden
-                                `${true ? '' : 'hidden'}`
                               ])}
                               menu={subMenu}
                               simpleMenu={simpleMenu}

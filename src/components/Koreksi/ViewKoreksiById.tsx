@@ -7,7 +7,7 @@ const ViewKoreksiById = (props : any) => {
     
     return (
         <div className="p-5 box intro-y mt-5">
-            <div className="flex items-center justify-between pb-5 mb-5 border-b border-slate-200/60 dark:border-darkmode-400">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-0 pb-5 mb-5 border-b border-slate-200/60 dark:border-darkmode-400">
                 <div className="text-base font-medium truncate">
                     Pengajuan Koreksi
                 </div>

@@ -94,9 +94,23 @@ export const getKoreksisById: any = createAsyncThunk("getKoreksisById", async(ko
     }
 });
 
+export const getKoreksisTableByUser: any = createAsyncThunk("getKoreksisTableByUser", async(koreksis : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.limit}&${koreksis.page}&${koreksis.id}&${koreksis.statusCode}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const getKoreksisByUser: any = createAsyncThunk("getKoreksisByUser", async(koreksis : any, thunkAPI) => {
     try {
-        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.limit}&${koreksis.page}&${koreksis.id}`,{
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.id}/user`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
@@ -189,7 +203,22 @@ export const koreksisSlice = createSlice({
             state.messageKoreksis = action.payload;
         })
 
-        // get koreksi by user
+        // get koreksi table by user
+        builder.addCase(getKoreksisTableByUser.pending, (state) => {
+            state.isKoreksisLoading = true;
+        });
+        builder.addCase(getKoreksisTableByUser.fulfilled, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisSuccess = true;
+            state.koreksisTable = action.payload;
+        });
+        builder.addCase(getKoreksisTableByUser.rejected, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisError = true;
+            state.messageKoreksis = action.payload;
+        })
+
+        // get koreksi table by user
         builder.addCase(getKoreksisByUser.pending, (state) => {
             state.isKoreksisLoading = true;
         });

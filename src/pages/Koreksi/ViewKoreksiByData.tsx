@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getKoreksisById, resetKoreksis } from '../../stores/features/koresisSlice';
 import dayjs from 'dayjs';
 
-const ViewKoreksi = () => {
+const ViewKoreksiByData = () => {
+    const {code} = useParams();
+
   const {id} = useParams();
   const [datas, setDatas] = useState<any>([]);
   const dispatch = useDispatch();
@@ -27,7 +29,7 @@ const ViewKoreksi = () => {
   },[]);
 
   const clickBack = () => {
-    navigate(`/absen/${dayjs(datas.in_out && datas.in_out.tanggalMulai).format('YYYY-MM-DD')}`)
+    navigate(`/dataKoreksi/${code}`);
   }
 
   return (
@@ -41,4 +43,4 @@ const ViewKoreksi = () => {
   )
 }
 
-export default ViewKoreksi
+export default ViewKoreksiByData

@@ -8,8 +8,9 @@ import { CalendarOptions } from "@fullcalendar/common";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 const Calendar = (props : any) => {
-  const {dataAbsen, clickDate} = props;
+  const {dataAbsen, clickDate, dateSetting} = props;
   const [events, setEvents] = useState<any>([]);
+  const [date, setDate] = useState<any>(null);
 
   useEffect(()=>{
     setEvents([]);
@@ -29,7 +30,7 @@ const Calendar = (props : any) => {
     })
   }
 
-  const options: CalendarOptions = {
+  const options : CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     droppable: true,
     headerToolbar: {
@@ -37,7 +38,7 @@ const Calendar = (props : any) => {
       center: "title",
       right: "",
     },
-    initialDate: "2023-11-12",
+    initialDate: dateSetting,
     navLinks: true,
     editable: true,
     dayMaxEvents: true,

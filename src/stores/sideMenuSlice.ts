@@ -8,6 +8,7 @@ export interface Menu {
   pathname?: string;
   subMenu?: Menu[];
   ignore?: boolean;
+  code?: number;
 }
 
 export interface SideMenuState {
@@ -25,6 +26,7 @@ const initialState: SideMenuState = {
           icon: "Activity",
           pathname: "/",
           title: "Overview 1",
+          code: 1,
         },
         {
           icon: "Activity",

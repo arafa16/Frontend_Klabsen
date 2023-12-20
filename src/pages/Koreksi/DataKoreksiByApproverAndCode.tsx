@@ -3,17 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getKoreksisTableByApprover, getKoreksisByApprover } from '../../stores/features/koresisSlice';
 import KoreksiTable from '../../components/Table/KoreksiTable';
 import KoreksiTableUser from '../../components/Table/KoreksiTableUser';
-import GeneralReportKoreksi from '../../components/GeneralReport/GeneralReportKoreksi';
+import GeneralReport from '../../components/GeneralReport/GeneralReportKoreksi';
 import { useParams } from 'react-router-dom';
 
-const DataKoreksiByApprover = (props: any) => {
+const DataKoreksiByApproverAndCode = (props: any) => {
+    const {code} = useParams();
     
     const [datasTable, setDatasTable] = useState<any>([]);
     const [datas, setDatas] = useState<any>([]);
     const [id, setId] = useState('');
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
-    const [statusCode, setStatusCode] = useState(1);
+    const [statusCode, setStatusCode] = useState(code);
     const [allPage, setAllPage] = useState(0);
 
     const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const DataKoreksiByApprover = (props: any) => {
     useEffect(()=>{
         if(koreksis && isKoreksisSuccess){
             setDatas(koreksis);
-            
+            console.log(koreksis, 'koreksis');
         }
     },[koreksis, isKoreksisSuccess])
 
@@ -81,7 +82,7 @@ const DataKoreksiByApprover = (props: any) => {
     return (
         <div>
             <div>
-                <GeneralReportKoreksi 
+                <GeneralReport 
                     datas={datas}
                     clickStatus={clickStatus}
                 />
@@ -103,4 +104,4 @@ const DataKoreksiByApprover = (props: any) => {
     )
 }
 
-export default DataKoreksiByApprover
+export default DataKoreksiByApproverAndCode

@@ -16,7 +16,8 @@ const KoreksiTableUser = (props : any) => {
         limit,
         allPage,
         nextPage,
-        prevPage
+        prevPage,
+        statusCode
     } = props;
     const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const KoreksiTableUser = (props : any) => {
             <div className="col-span-12 xl:col-span-12 2xl:col-span-12">
             <div className="flex flex-col-reverse px-5 py-4 border-b sm:flex-row text-slate-500 border-slate-200/60">
                     <div className="flex items-center justify-end sm:ml-auto">
-                        <div className="text-xs">{page} of {allPage} page </div>
+                        <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
                         <div
                             className="flex items-center justify-center w-5 h-5 ml-5"
                         >
@@ -58,7 +59,7 @@ const KoreksiTableUser = (props : any) => {
                     <div 
                         key={index} 
                         className="intro-y"
-                        onClick={()=>navigate(linkView+`/${data.uuid}/${data.status_koreksi.code}`)}
+                        onClick={()=>navigate(linkView+`/${data.uuid}/${statusCode}`)}
                         >
                         <div
                             className={clsx([
@@ -67,7 +68,7 @@ const KoreksiTableUser = (props : any) => {
                             ])}
                         >
                         <div className="flex px-5 py-3">
-                            <div className="flex items-center flex-none mr-5 w-auto">
+                            <div className="flex items-center flex-none mr-5 w-72">
                                 <div className='w-10'>
                                     {index+1+((page-1)*limit)}
                                 </div>
@@ -88,7 +89,7 @@ const KoreksiTableUser = (props : any) => {
                             </div>
                             <div
                                 className={clsx([
-                                    "pl-10 ml-auto whitespace-nowrap"
+                                    "pl-10 ml-auto whitespace-nowrap "
                                 ])}
                             >
                             {data.status_koreksi.name}

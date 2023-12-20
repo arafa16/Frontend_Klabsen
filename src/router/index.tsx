@@ -67,6 +67,10 @@ import ViewKoreksi from "../pages/Koreksi/ViewKoreksi";
 import DataKoreksi from "../pages/Koreksi/DataKoreksi";
 import DataKoreksiByApprover from "../pages/Koreksi/DataKoreksiByApprover";
 import ViewKoreksiToApprove from "../pages/Koreksi/ViewKoreksiToApprove";
+import AbsenByDate from "../pages/Absen/AbsenByDate";
+import ViewKoreksiByData from "../pages/Koreksi/ViewKoreksiByData";
+import DataKoreksiByApproverAndCode from "../pages/Koreksi/DataKoreksiByApproverAndCode";
+import DataKoreksiByCode from "../pages/Koreksi/DataKoreksiByCode";
 
 function Router() {
   const routes = [
@@ -327,21 +331,41 @@ function Router() {
           path: "/absen",
           element: <Absen />
         },
+        {
+          path: "/absen/:date",
+          element: <AbsenByDate />
+        },
+        {
+          path: "/absen/:date",
+          element: <Absen />
+        },
         //koreksi
         {
           path: "/dataKoreksi",
           element: <DataKoreksi />
         },
         {
-          path: "/dataKoreksiByApprover?/:code",
+          path: "/dataKoreksi/:code",
+          element: <DataKoreksiByCode />
+        },
+        {
+          path: "/dataKoreksiByApprover",
           element: <DataKoreksiByApprover />
+        },
+        {
+          path: "/dataKoreksiByApprover/:code",
+          element: <DataKoreksiByApproverAndCode />
         },
         {
           path: "/viewKoreksi/:id",
           element: <ViewKoreksi />
         },
         {
-          path: "/viewKoreksiToApprove/:id?/:code",
+          path: "/viewKoreksi/:id/:code",
+          element: <ViewKoreksiByData />
+        },
+        {
+          path: "/viewKoreksiToApprove/:id/:code",
           element: <ViewKoreksiToApprove />
         },
       ],

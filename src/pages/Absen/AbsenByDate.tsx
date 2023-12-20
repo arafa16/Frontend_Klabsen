@@ -11,15 +11,16 @@ import { createKoreksis, resetKoreksis } from '../../stores/features/koresisSlic
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const Absen = () => {
+const AbsenByDate = () => {
     const dispatch = useDispatch();
+    const {date} = useParams();
 
     const [dataUser, setDataUser] = useState<any>([]);
     const [dataAbsen, setDataAbsen] = useState<any>([]);
     const [dataDate, setDataDate] = useState<any>([]);
     const [viewSlideOver, setViewSlideOver] = useState(false);
     const [subViewSlideOver, setSubViewSlideOver] = useState(0);
-    const [dateSetting, setDateSetting] = useState(dayjs(Date.now()).format("YYYY-MM-DD"));
+    const [dateSetting, setDateSetting] = useState(dayjs(date).format("YYYY-MM-DD"));
 
     useEffect(()=>{
         setDateSetting('2023-04-11');
@@ -133,4 +134,4 @@ const Absen = () => {
     )
 }
 
-export default Absen
+export default AbsenByDate
