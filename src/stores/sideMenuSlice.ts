@@ -8,7 +8,7 @@ export interface Menu {
   pathname?: string;
   subMenu?: Menu[];
   ignore?: boolean;
-  code?: number;
+  code?: string;
 }
 
 export interface SideMenuState {
@@ -21,17 +21,19 @@ const initialState: SideMenuState = {
     {
       icon: "Home",
       title: "Dashboard",
+      code: 'dashboard',
       subMenu: [
         {
           icon: "Activity",
           pathname: "/",
           title: "Overview 1",
-          code: 1,
+          code: 'dashboard',
         },
         {
           icon: "Activity",
           pathname: "/dashboard-overview-2",
           title: "Overview 2",
+          code: 'dashboard',
         },
       ],
       
@@ -39,21 +41,25 @@ const initialState: SideMenuState = {
     {
       icon: "Calendar",
       title: "Absen",
+      code: 'absen',
       subMenu: [
         {
           icon: "Calendar",
           pathname: '/absen',
           title: "Absen",
+          code: 'absen',
         },
         {
           icon: "Edit3",
           pathname: '/dataKoreksi',
           title: "Data Koreksi",
+          code: 'absen',
         },
         {
           icon: "Edit",
           pathname: '/dataKoreksiByApprover',
           title: "Approval Koreksi",
+          code: 'absen',
         },
         
       ],
@@ -61,102 +67,122 @@ const initialState: SideMenuState = {
     {
       icon: "Users",
       title: "Employees",
+      code: 'admin',
       subMenu: [
         {
           icon: "Users",
           pathname: "/dataEmploye",
           title: "Data Employe",
+          code: 'admin',
         },
       ],
     },
     {
       icon: "Settings",
       title: "Attribute",
+      code: 'setting',
       subMenu: [
         {
           icon: "MapPin",
           pathname: "/penempatan",
           title: "Penempatan",
+          code: 'setting',
         },
         {
           icon: "Award",
           pathname: "/jabatan",
           title: "Jabatan",
+          code: 'setting',
         },
         {
           icon: "Bookmark",
           pathname: "/pendidikan",
           title: "Pendidikan",
+          code: 'setting',
         },
         {
           icon: "DollarSign",
           pathname: "/bank",
           title: "Bank",
+          code: 'setting',
         },
         {
           icon: "Users",
           pathname: "/statusPerkawinan",
           title: "Status Perkawinan",
+          code: 'setting',
         },
         {
           icon: "PhoneOutgoing",
           pathname: "/contactEmergency",
           title: "Contact Emergency",
+          code: 'setting',
         },
         {
           icon: "Droplet",
           pathname: "/golonganDarah",
           title: "Golongan Darah",
+          code: 'setting',
         },
         {
           icon: "Users",
           pathname: "/group",
           title: "Group",
+          code: 'setting',
         },
         {
           icon: "User",
           pathname: "/gander",
           title: "Gander",
+          code: 'setting',
         },
         {
           icon: "Award",
           pathname: "/status",
           title: "Status",
+          code: 'setting',
         },
         {
           icon: "Shuffle",
           pathname: "/statusInout",
           title: "Status In Out",
+          code: 'setting',
         },
         {
           icon: "MessageSquare",
           pathname: "/tipeNotification",
           title: "Tipe Notification",
+          code: 'setting',
         },
         {
           icon: "Award",
           pathname: "/tipeAbsen",
           title: "Tipe Absen",
+          code: 'setting',
         },
         {
           icon: "Award",
           pathname: "/pelanggaran",
           title: "Pelanggaran",
+          code: 'setting',
         },
         {
           icon: "Award",
           pathname: "/statusKoreksi",
           title: "Status Koreksi",
+          code: 'setting',
         },
         {
           icon: "DollarSign",
           pathname: "/tipePendapatan",
           title: "Tipe Pendapatan",
+          code: 'setting',
         },
         {
           icon: "Watch",
           pathname: "/jamOperasional",
           title: "Jam Operasional",
+          code: 'setting',
         },
       ],
     }

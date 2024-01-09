@@ -29,7 +29,7 @@ import { LogOut, resetAuth } from "../../stores/features/authSlice";
 function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState<any>([]);
 
   const {meData, isMeDataError, isMeDataSuccess, messageMeData} = useSelector(
     (state : any) => state.meReducer
@@ -38,6 +38,7 @@ function Main() {
   useEffect(()=>{
     if(isMeDataSuccess && meData){
       setDatas(meData);
+      console.log(meData, 'me');
       // dispatch(resetMeData());
     }
     if(isMeDataError && messageMeData){
@@ -48,10 +49,6 @@ function Main() {
   useEffect(()=>{
     dispatch(getMe());
   },[]);
-
-  // useEffect(()=>{
-    
-  // },[]);
 
   const backToLogin : any = () => {
     dispatch(resetMeData());
@@ -170,8 +167,8 @@ function Main() {
 
   return (
     <div className="flex h-screen xl:pl-5 xl:py-5">
-      <DarkModeSwitcher />
-      <MainColorSwitcher />
+      {/* <DarkModeSwitcher />
+      <MainColorSwitcher /> */}
       {/* BEGIN: Side Menu */}
       <nav
         className={clsx([
@@ -297,16 +294,16 @@ function Main() {
                 <li key={menuKey}>
                   <Menu
                     className={clsx([
+                      // `${menu.code !== 1 ? 'hidden' : ''}`,
                       {
                         // Animation
                         [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                           (menuKey + 1) * 10
                         }`]: !menu.active,
-                      },
-                      //hidden
-                      `${true ? '' : 'hidden'}`
+                      }
                     ])}
                     menu={menu}
+                    me={datas}
                     simpleMenu={simpleMenu}
                     formattedMenuState={[formattedMenu, setFormattedMenu]}
                     level="first"
@@ -342,6 +339,7 @@ function Main() {
                                 //hidden
                               ])}
                               menu={subMenu}
+                              me={datas}
                               simpleMenu={simpleMenu}
                               formattedMenuState={[
                                 formattedMenu,
@@ -380,6 +378,7 @@ function Main() {
                                             }`]: !lastSubMenu.active,
                                           })}
                                           menu={lastSubMenu}
+                                          me={datas}
                                           simpleMenu={simpleMenu}
                                           formattedMenuState={[
                                             formattedMenu,
@@ -452,6 +451,7 @@ function Menu(props: {
     wrapper: boolean;
   };
   menu: FormattedMenu;
+  me: any;
   formattedMenuState: [
     (FormattedMenu | string)[],
     Dispatch<SetStateAction<(FormattedMenu | string)[]>>
@@ -461,10 +461,17 @@ function Menu(props: {
   const navigate = useNavigate();
   const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
 
+  const dataMe = props.me.privilege;
+
+  const nameColom : any = props.menu.code;
+  
+  console.log(dataMe && dataMe[nameColom], nameColom);
+
   return (
     <a
       href={props.menu.subMenu ? "#" : props.menu.pathname}
       className={clsx([
+        `${dataMe && dataMe[nameColom] ? '' : 'hidden'}`,
         "h-[50px] flex items-center pl-5 mb-1 relative dark:text-slate-300 ",
         {
           "bg-primary text-white rounded-xl dark:bg-transparent":

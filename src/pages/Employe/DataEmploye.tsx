@@ -11,7 +11,7 @@ const DataEmploye = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [allPage, setAllPage] = useState(0);
-  const [statusCode, setStatusCode] = useState(2);
+  const [statusCode, setStatusCode] = useState(1);
 
   const dispatch = useDispatch()
 
@@ -69,6 +69,7 @@ const DataEmploye = () => {
 
   const clickStatus = (code : any) => {
     setStatusCode(code);
+    setPage(1);
   }
 
   return (

@@ -6,6 +6,7 @@ interface variabel {
     usersTable: any;
     isUsersError: boolean;
     isUsersSuccess: boolean;
+    isUpdateUsersSuccess: boolean;
     isUsersLoading: boolean;
     messageUsers: any;
 }
@@ -15,6 +16,7 @@ const initialState : variabel = {
     usersTable: null,
     isUsersError: false,
     isUsersSuccess: false,
+    isUpdateUsersSuccess: false,
     isUsersLoading: false,
     messageUsers: ""
 }
@@ -195,6 +197,23 @@ export const UpdateUser  : any = createAsyncThunk("users/UpdateUser", async(user
     }
 });
 
+export const UpdateStatusUser  : any = createAsyncThunk("users/UpdateStatusUser", async(users : any, thunkAPI) => {
+    try {
+        const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/users/${users.id}`, {
+            statusId:users.statusId,
+            isActive:users.isActive
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const deleteUser : any = createAsyncThunk("users/deleteUser", async(users : any, thunkAPI) => {
     try {
         const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+'/users/'+users.id,{
@@ -308,7 +327,22 @@ export const usersSlice = createSlice({
             state.messageUsers = action.payload;
         });
 
-        //update users
+        //update status users
+        builder.addCase(UpdateStatusUser.pending, (state) => {
+            state.isUsersLoading = true;
+        });
+        builder.addCase(UpdateStatusUser.fulfilled, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUpdateUsersSuccess = true;
+            state.messageUsers = action.payload;
+        });
+        builder.addCase(UpdateStatusUser.rejected, (state, action) => {
+            state.isUsersLoading = false;
+            state.isUsersError = true;
+            state.messageUsers = action.payload;
+        });
+
+        //delete users
         builder.addCase(deleteUser.pending, (state) => {
             state.isUsersLoading = true;
         });
