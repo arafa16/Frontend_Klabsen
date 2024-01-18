@@ -10,11 +10,14 @@ import Button from '../../base-components/Button';
 import { Menu } from '../../base-components/Headless';
 import EditStatusUser from '../../components/Profile/EditStatusUser';
 import UploadPhoto from '../../components/Modal/UploadPhoto';
+import ViewPrivilege from '../../components/Profile/ViewPrivilege';
+import EditViewPrivilege from '../../components/Profile/EditViewPrivilege';
 
 const ViewEmploye = () => {
     const {id} = useParams();
     const [datas, setDatas] = useState<any>([]);
     const [viewEditStatus, setViewEditStatus] = useState(false);
+    const [viewEditPriviege, setViewEditPriviege] = useState(false);
     const [statusId, setStatusId] = useState(0);
     const [dataStatus, setDataStatus] = useState([]);
     const [isActive, setIsActive] = useState(0);
@@ -68,6 +71,10 @@ const ViewEmploye = () => {
 
     const changeEditStatus = (status : boolean) => {
         setViewEditStatus(status);
+    }
+
+    const changeEditPrivilege = (privilege : boolean) => {
+        setViewEditPriviege(privilege);
     }
 
     useEffect(()=>{
@@ -140,24 +147,43 @@ const ViewEmploye = () => {
                 />
             </div>
             <div className="col-span-12 xl:col-span-4">
-                <StatusUser 
-                    title={`Status User`}
-                    datas={datas}
-                    changeEditStatus={changeEditStatus}
-                    viewEditStatus={viewEditStatus}
-                />
-                <EditStatusUser 
-                    title={`Edit Status User`}
-                    viewEditStatus={viewEditStatus}
-                    changeEditStatus={changeEditStatus}
-                    statusId={statusId}
-                    isActive={isActive}
-                    datas={datas}
-                    setStatusId={setStatusId}
-                    setIsActive={setIsActive}
-                    dataStatus={dataStatus}
-                    updateStatus={updateStatus}
-                />
+                <div>
+                    <StatusUser 
+                        title={`Status User`}
+                        datas={datas}
+                        changeEditStatus={changeEditStatus}
+                        viewEditStatus={viewEditStatus}
+                    />
+                    <EditStatusUser 
+                        title={`Edit Status User`}
+                        viewEditStatus={viewEditStatus}
+                        changeEditStatus={changeEditStatus}
+                        statusId={statusId}
+                        isActive={isActive}
+                        datas={datas}
+                        setStatusId={setStatusId}
+                        setIsActive={setIsActive}
+                        dataStatus={dataStatus}
+                        updateStatus={updateStatus}
+                    />
+                </div>
+                <div className='mt-4'>
+                    <ViewPrivilege 
+                        title={`Privilege User`}
+                        datas={datas}
+                        changeEditPrivilege={setViewEditPriviege}
+                        viewEditPriviege={viewEditPriviege}
+                    />
+                    <EditViewPrivilege 
+                        title={`Edit Privilege User`}
+                        datas={datas}
+                        changeEditPrivilege={setViewEditPriviege}
+                        viewEditPriviege={viewEditPriviege}
+                    />
+                </div>
+            </div>
+            <div className="col-span-12 xl:col-span-4">
+                
             </div>
         </div>
     )

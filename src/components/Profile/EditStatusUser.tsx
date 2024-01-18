@@ -1,5 +1,5 @@
 import React from 'react'
-import Lucide from '../../base-components/Lucide'
+import Lucide from '../../base-components/Lucide';
 import { FormSelect } from '../../base-components/Form';
 import Save from '../Button/Save';
 const EditStatusUser = (props : any) => {
@@ -11,7 +11,7 @@ const EditStatusUser = (props : any) => {
                 <div className="text-base font-medium truncate">{title}</div>
                 <Lucide 
                     icon="Edit" 
-                    className="w-4 h-4 ml-auto text-blue-500 cursor-pointer hover:text-yellow-500" 
+                    className={`w-4 h-4 ml-auto text-blue-500 cursor-pointer hover:text-yellow-500 ${viewEditStatus ? 'hidden' : ''}`} 
                     onClick={()=>changeEditStatus(false)}
                     />
             </div>

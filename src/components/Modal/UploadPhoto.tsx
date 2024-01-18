@@ -34,7 +34,7 @@ const UploadPhoto = (props : any) => {
 
             formData.append('photo', data);
 
-            const submit = await axios.patch(`http://localhost:5000/users/${id}/photo`, formData);
+            const submit = await axios.patch(`${import.meta.env.VITE_REACT_APP_API_URL}/users/${id}/photo`, formData);
 
             getDataUser();
             setShowModal(false);
@@ -80,7 +80,7 @@ const UploadPhoto = (props : any) => {
                                 id="modal-form-1"
                                 type="file"
                                 placeholder="file"
-                                className='px-4 py-1'
+                                className='px-4 py-1 border-red-500'
                                 onChange={fileUpload}
                             />
                             {/* <Dropzone
