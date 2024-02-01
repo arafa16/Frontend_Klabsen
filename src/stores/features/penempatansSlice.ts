@@ -17,11 +17,6 @@ const initialState : variabel = {
     messagePenempatans: ""
 }
 
-// interface varAuth {
-//     email: string;
-//     password: string;
-// }
-
 export const getPenempatans : any = createAsyncThunk("getPenempatans", async(_, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/penempatans`,{

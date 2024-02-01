@@ -71,6 +71,9 @@ import AbsenByDate from "../pages/Absen/AbsenByDate";
 import ViewKoreksiByData from "../pages/Koreksi/ViewKoreksiByData";
 import DataKoreksiByApproverAndCode from "../pages/Koreksi/DataKoreksiByApproverAndCode";
 import DataKoreksiByCode from "../pages/Koreksi/DataKoreksiByCode";
+import Pendapatan from "../pages/Pendapatan/Pendapatan";
+import PendapatanLain from "../pages/Pendapatan/PendapatanLain";
+import AdminPendapatan from "../pages/Pendapatan/AdminPendapatan";
 
 function Router() {
   const routes = [
@@ -367,6 +370,19 @@ function Router() {
         {
           path: "/viewKoreksiToApprove/:id/:code",
           element: <ViewKoreksiToApprove />
+        },
+        //pendapatan
+        {
+          path: "/pendapatan",
+          element: <Pendapatan />
+        },
+        {
+          path: "/pendapatanLain",
+          element: <PendapatanLain />
+        },
+        {
+          path: "/pendapatanAdmin",
+          element: <AdminPendapatan />
         },
       ],
     },

@@ -39,6 +39,10 @@ const UploadPhoto = (props : any) => {
             getDataUser();
             setShowModal(false);
             
+            setTimeout(() => { 
+                window.location.reload(); 
+            }, 5000);
+
         } catch (error) {
             console.log(error);
         }

@@ -3,12 +3,12 @@ import Lucide from '../../base-components/Lucide'
 import {FormSelect } from "../../base-components/Form";
 import Button from '../../base-components/Button';
 
-import { resetPrivileges, updatePrivileges } from '../../stores/features/privilegesSlice';
+import { resetPrivileges, createPrivileges } from '../../stores/features/privilegesSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-const EditViewPrivilege = (props : any) => {
-    const {title, changeEditPrivilege, datas, viewEditPriviege, getDataUser} = props;
+const CreatePrivilege = (props : any) => {
+    const {title, changeEditPrivilege, datas, viewCreatePriviege} = props;
     const {id} = useParams();
 
     const [dataPrivilege, setDataPrivilege] = useState([]);
@@ -64,15 +64,15 @@ const EditViewPrivilege = (props : any) => {
             setKoreksiAdminSub(datas.privilege && datas.privilege.koreksiAdminSub ? 1 : 0);
             setPerhitunganNilaiSub(datas.privilege && datas.privilege.perhitunganNilaiSub ? 1 : 0);
             setSetting(datas.privilege && datas.privilege.setting ? 1 : 0);
-            setUserId(datas && datas.id);
             setIdPrivilege(datas.privilege && datas.privilege.uuid);
         }
+        setUserId(datas && datas.uuid);
     },[datas]);
 
     useEffect(()=>{
         if(isPrivilegesSuccess && messagePrivileges){
+            alert('berhasil');
             dispatch(resetPrivileges());
-            getDataUser();
             changeEditPrivilege(false);
         }
     },[isPrivilegesSuccess, messagePrivileges])
@@ -80,8 +80,7 @@ const EditViewPrivilege = (props : any) => {
     const sumbitPrivilege = (e : any) => {
         e.preventDefault();
         try {
-            dispatch(updatePrivileges({
-                idPrivilege,
+            dispatch(createPrivileges({
                 userId,
                 dashboard, 
                 editUserSub, 
@@ -111,10 +110,10 @@ const EditViewPrivilege = (props : any) => {
     }
 
     return (
-        <div className={`p-5 box intro-y ${!viewEditPriviege ? 'hidden' : ''}`}>
+        <div className={`p-5 box intro-y ${!viewCreatePriviege ? 'hidden' : ''}`}>
         <form onSubmit={sumbitPrivilege}>
             <div className="flex items-center pb-5 mb-5 border-b border-slate-200/60 dark:border-darkmode-400">
-                <div className="text-base font-medium truncate">{title}</div>
+                <div className="text-base font-medium truncate">{userId} {title} </div>
                 <div className='flex gap-2 justify-end w-full'>
                     <Button 
                         type='button'
@@ -519,4 +518,4 @@ const EditViewPrivilege = (props : any) => {
     )
 }
 
-export default EditViewPrivilege
+export default CreatePrivilege

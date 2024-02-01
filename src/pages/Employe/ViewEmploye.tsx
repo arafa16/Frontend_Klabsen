@@ -12,12 +12,14 @@ import EditStatusUser from '../../components/Profile/EditStatusUser';
 import UploadPhoto from '../../components/Modal/UploadPhoto';
 import ViewPrivilege from '../../components/Profile/ViewPrivilege';
 import EditViewPrivilege from '../../components/Profile/EditViewPrivilege';
+import CreatePrivilege from '../../components/Profile/CreatePrivilege';
 
 const ViewEmploye = () => {
     const {id} = useParams();
     const [datas, setDatas] = useState<any>([]);
     const [viewEditStatus, setViewEditStatus] = useState(false);
     const [viewEditPriviege, setViewEditPriviege] = useState(false);
+    const [viewCreatePriviege, setViewCreatePriviege] = useState(false);
     const [statusId, setStatusId] = useState(0);
     const [dataStatus, setDataStatus] = useState([]);
     const [isActive, setIsActive] = useState(0);
@@ -74,7 +76,14 @@ const ViewEmploye = () => {
     }
 
     const changeEditPrivilege = (privilege : boolean) => {
-        setViewEditPriviege(privilege);
+        if(datas.privilegeId === 0 || datas.privilegeId === null){
+            setViewCreatePriviege(privilege);
+        }
+        else{
+            setViewEditPriviege(privilege);
+        }
+        
+        
     }
 
     useEffect(()=>{
@@ -171,14 +180,22 @@ const ViewEmploye = () => {
                     <ViewPrivilege 
                         title={`Privilege User`}
                         datas={datas}
-                        changeEditPrivilege={setViewEditPriviege}
+                        changeEditPrivilege={changeEditPrivilege}
                         viewEditPriviege={viewEditPriviege}
+                        viewCreatePriviege={viewCreatePriviege}
                     />
                     <EditViewPrivilege 
                         title={`Edit Privilege User`}
                         datas={datas}
-                        changeEditPrivilege={setViewEditPriviege}
+                        changeEditPrivilege={changeEditPrivilege}
                         viewEditPriviege={viewEditPriviege}
+                        getDataUser={getDataUser}
+                    />
+                    <CreatePrivilege
+                        title={`Create Privilege User`}
+                        datas={datas}
+                        changeEditPrivilege={changeEditPrivilege}
+                        viewCreatePriviege={viewCreatePriviege}
                     />
                 </div>
             </div>

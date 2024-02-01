@@ -17,11 +17,6 @@ const initialState : variabel = {
     messageBanks: ""
 }
 
-// interface varAuth {
-//     email: string;
-//     password: string;
-// }
-
 export const getBanks : any = createAsyncThunk("getBanks", async(_, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/banks`,{

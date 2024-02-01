@@ -3,7 +3,7 @@ import Lucide from '../../base-components/Lucide'
 import { FormSelect } from '../../base-components/Form';
 
 const ViewPrivilege = (props : any) => {
-    const {title, changeEditPrivilege, datas, viewEditPriviege} = props;
+    const {title, changeEditPrivilege, datas, viewEditPriviege, viewCreatePriviege} = props;
     const [dataPrivilege, setDataPrivilege] = useState([]);
     const [dashboard, setDashboard] = useState(0);
 
@@ -17,7 +17,7 @@ const ViewPrivilege = (props : any) => {
 
     console.log(dataPrivilege, 'data privilege');
     return (
-        <div className={`p-5 box intro-y ${viewEditPriviege ? 'hidden' : ''}`}>
+        <div className={`p-5 box intro-y ${viewEditPriviege | viewCreatePriviege ? 'hidden' : ''}`}>
             <div className="flex items-center pb-5 mb-5 border-b border-slate-200/60 dark:border-darkmode-400">
                 <div className="text-base font-medium truncate">{title}</div>
                 <Lucide 

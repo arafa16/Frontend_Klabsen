@@ -78,6 +78,31 @@ const initialState: SideMenuState = {
       ],
     },
     {
+      icon: "DollarSign",
+      title: "Slip Gaji",
+      code: 'slipGaji',
+      subMenu: [
+        {
+          icon: "FileText",
+          pathname: "/pendapatan",
+          title: "Pendapatan",
+          code: 'pendapatanSub',
+        },
+        {
+          icon: "FileText",
+          pathname: "/pendapatanLain",
+          title: "Pendapatan Lain",
+          code: 'pendapatanLainSub',
+        },
+        {
+          icon: "FileEdit",
+          pathname: "/pendapatanAdmin",
+          title: "Admin Pendapatan",
+          code: 'pendapatanAdminSub',
+        }
+      ],
+    },
+    {
       icon: "Settings",
       title: "Attribute",
       code: 'setting',
