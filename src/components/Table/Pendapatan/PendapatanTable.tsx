@@ -5,12 +5,18 @@ import clsx from 'clsx'
 import dayjs from 'dayjs';
 
 const PendapatanTable = (props : any) => {
-    const {datas, page, allPage, prevPage, nextPage
+    const {datas, page, allPage, prevPage, nextPage, limit
         // linkView, linkCreate
     } = props;
     const navigate = useNavigate();
 
     console.log(datas && datas, 'datas pendapatan')
+
+    const rupiah = (number : number)=>{
+        return new Intl.NumberFormat("id-ID", {
+          style: "decimal"
+        }).format(number)+',00';
+    }
     
     return (
         <div className="grid grid-cols-12 mt-5 box">
@@ -37,12 +43,6 @@ const PendapatanTable = (props : any) => {
                             onClick={()=>nextPage()}
                             />
                     </div>
-                    <div
-                        className="flex items-center justify-center w-5 h-5 ml-5 cursor-pointer hover:text-blue-500"
-                        // onClick={()=>navigate(linkCreate)}
-                    >
-                        <Lucide icon="FilePlus" className="w-4 h-4" />
-                    </div>
                     </div>
                 </div>
                 <div className="overflow-x-auto sm:overflow-x-visible">
@@ -50,7 +50,7 @@ const PendapatanTable = (props : any) => {
                     <div 
                         key={index} 
                         className="intro-y"
-                        // onClick={()=>navigate(linkView+`/${data.uuid}`)}
+                        onClick={()=>navigate(`/viewSlip/${data.uuid}`)}
                         >
                         <div
                             className={clsx([
@@ -59,19 +59,29 @@ const PendapatanTable = (props : any) => {
                             ])}
                         >
                         <div className="flex px-5 py-3">
-                            <div className="flex items-center flex-none mr-5 w-72">
-                                <div className='w-16'>
-                                {index+1}
+                            <div className="flex items-center flex-none mr-5 w-2/6">
+                                <div className='w-1/4'>
+                                {index+1+((page-1)*limit)}
                                 </div>
                                 <div
+                                className={clsx([
+                                "ml-3 truncate w-3/4"
+                                ])}
+                                >
+                                {data && data.pendapatanAtas}
+                                {/* {dayjs(data.periode).format('MMMM YYYY')} */}
+                                </div>
+                            </div>
+                            <div className="w-64 truncate sm:w-2/6">
+                                <span
                                 className={clsx([
                                 "ml-3 truncate"
                                 ])}
                                 >
-                                {dayjs(data.periode).format('MMMM YYYY')}
-                                </div>
+                                {data.user && data.user.nik}
+                                </span>
                             </div>
-                            <div className="w-64 truncate sm:w-72">
+                            <div className="w-64 truncate sm:w-2/6">
                                 <span
                                 className={clsx([
                                 "ml-3 truncate"
@@ -80,22 +90,15 @@ const PendapatanTable = (props : any) => {
                                 {data.user && data.user.name}
                                 </span>
                             </div>
-                            <div className="w-64 truncate sm:w-72">
+                            <div className="w-64 truncate sm:w-1/6 text-right">
                                 <span
                                 className={clsx([
                                 "ml-3 truncate"
                                 ])}
                                 >
-                                {data.total}
+                                {rupiah(data.total)}
                                 </span>
                             </div>
-                            {/* <div
-                                className={clsx([
-                                "pl-10 ml-auto whitespace-nowrap"
-                                ])}
-                                >
-                                {data.isActive ? 'active' : 'non active'}
-                            </div> */}
                         </div>
                         </div>
                     </div>

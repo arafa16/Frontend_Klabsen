@@ -4,8 +4,8 @@ import Button from '../../../base-components/Button'
 import axios from 'axios';
 
 const FormUploadPendapatan = (props : any) => {
-    const {getPendapatans, fromUpload} = props;
-    const [data, setData] = useState('');
+    const {getPendapatans, fromUpload, NotificationRegister, setMsg, setFormUpload} = props;
+    const [data, setData] = useState<any>([]);
 
     console.log(data, 'data');
 
@@ -19,8 +19,10 @@ const FormUploadPendapatan = (props : any) => {
             await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/pendapatans/import`, formData);
             // setViewModal(false);
             getPendapatans();
-            setData('');
-            alert('success');
+            setData([]);
+            NotificationRegister.current?.showToast();
+            setMsg('Upload Success');
+            setFormUpload(false);
         } catch (error) {
             console.log(error);
         }

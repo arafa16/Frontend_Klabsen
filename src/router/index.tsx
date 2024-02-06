@@ -74,6 +74,7 @@ import DataKoreksiByCode from "../pages/Koreksi/DataKoreksiByCode";
 import Pendapatan from "../pages/Pendapatan/Pendapatan";
 import PendapatanLain from "../pages/Pendapatan/PendapatanLain";
 import AdminPendapatan from "../pages/Pendapatan/AdminPendapatan";
+import ViewSlip from "../pages/Pendapatan/ViewSlip";
 
 function Router() {
   const routes = [
@@ -383,6 +384,10 @@ function Router() {
         {
           path: "/pendapatanAdmin",
           element: <AdminPendapatan />
+        },
+        {
+          path: "/viewSlip/:id",
+          element: <ViewSlip />
         },
       ],
     },
