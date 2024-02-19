@@ -115,6 +115,7 @@ const Pendapatan = () => {
             nextPage={nextPage}
             prevPage={prevPage}
             allPage={allPage}
+            link={'/viewSlip/'}
           />
         </div>
       </div>

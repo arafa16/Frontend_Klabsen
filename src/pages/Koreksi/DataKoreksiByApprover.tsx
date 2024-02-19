@@ -47,11 +47,22 @@ const DataKoreksiByApprover = (props: any) => {
     },[koreksis, isKoreksisSuccess])
 
     useEffect(()=>{
-        dispatch(getKoreksisByApprover({id}));
+        if(!id){
+            console.log('id belum ada');
+        }
+        else{
+            dispatch(getKoreksisByApprover({id}));
+        }
     },[id])
 
     useEffect(()=>{
-        dispatch(getKoreksisTableByApprover({limit, page, statusCode, id}));
+        console.log(id, 'id');
+        if(!id){
+            console.log('id belum ada');
+        }
+        else{
+            dispatch(getKoreksisTableByApprover({limit, page, statusCode, id}));
+        }
     },[limit, page, id, statusCode]);
 
     //table

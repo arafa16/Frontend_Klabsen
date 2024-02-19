@@ -61,7 +61,12 @@ const initialState: SideMenuState = {
           title: "Approval Koreksi",
           code: 'absen',
         },
-        
+        {
+          icon: "Edit",
+          pathname: '/absenCheck',
+          title: "Absen Check",
+          code: 'absen',
+        },
       ],
     },
     {

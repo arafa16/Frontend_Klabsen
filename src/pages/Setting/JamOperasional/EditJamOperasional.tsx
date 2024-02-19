@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getJamOperasionalsById, resetJamOperasionals, updateJamOperasionals, deleteJamOperasionals } from '../../../stores/features/jamOperasionalsSlice';
+import { getJamOperasionalsById, resetJamOperasionals, updateJamOperasionals, deleteJamOperasionals, getJamOperasionals } from '../../../stores/features/jamOperasionalsSlice';
 import FormEditJamOperasional from '../../../components/Form/Attribute/FormEditJamOperasional';
+import { getTipeAbsens, resetTipeAbsens } from '../../../stores/features/tipeAbsenSlice';
 
 const EditJamOperasional = () => {
     const {uuid} = useParams();
@@ -12,6 +13,8 @@ const EditJamOperasional = () => {
     const [keterangan, setKeterangan] = useState('');
     const [code, setCode] = useState('');
     const [isActive, setIsActive] = useState('');
+    const [tipeAbsenId, setTipeAbsenId] = useState('');
+    const [tipeAbsenSelect, setTipeAbsenSelect] = useState([]);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -20,8 +23,19 @@ const EditJamOperasional = () => {
         (state : any) => state.jamOperasionalsReducer
     )
 
+    const {tipeAbsens, isTipeAbsensSuccess} = useSelector(
+        (state : any) => state.tipeAbsensReducer
+    )
+
+    useEffect(()=>{
+        if(tipeAbsens && isTipeAbsensSuccess){
+            setTipeAbsenSelect(tipeAbsens)
+        }
+    },[tipeAbsens, isTipeAbsensSuccess]);
+
     useEffect(()=>{
         dispatch(getJamOperasionalsById({uuid}));
+        dispatch(getTipeAbsens());
     },[]);
 
     useEffect(()=>{
@@ -31,6 +45,7 @@ const EditJamOperasional = () => {
             setJamPulang(jamOperasionals && jamOperasionals.jamPulang);
             setKeterangan(jamOperasionals && jamOperasionals.keterangan);
             setCode(jamOperasionals && jamOperasionals.code);
+            setTipeAbsenId(jamOperasionals && jamOperasionals.tipeAbsenId)
             setIsActive(jamOperasionals && jamOperasionals.isActive ? '1' : '0');
             dispatch(resetJamOperasionals());
         }
@@ -43,10 +58,16 @@ const EditJamOperasional = () => {
         }
     },[isJamOperasionalsSuccess, messageJamOperasionals])
 
+    useEffect(()=>{
+        if(tipeAbsens && isTipeAbsensSuccess){
+            setTipeAbsenSelect(tipeAbsens)
+        }
+    },[tipeAbsens, isTipeAbsensSuccess]);
+
     const changeDataSetting = (e : any) => {
         e.preventDefault();
         dispatch(updateJamOperasionals({
-            uuid, name, jamMasuk, jamPulang, keterangan, code, isActive
+            uuid, name, jamMasuk, jamPulang, keterangan, code, tipeAbsenId, isActive
         }));
     }
 
@@ -74,6 +95,9 @@ const EditJamOperasional = () => {
                 linkBack={'/jamOperasional'}
                 changeDataSetting={changeDataSetting}
                 deleteDataSetting={deleteDataSetting}
+                tipeAbsenSelect={tipeAbsenSelect}
+                tipeAbsenId={tipeAbsenId}
+                setTipeAbsenId={setTipeAbsenId}
             />
         </div>
     )

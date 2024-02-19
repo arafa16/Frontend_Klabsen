@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import dayjs from 'dayjs';
 
 const PendapatanTable = (props : any) => {
-    const {datas, page, allPage, prevPage, nextPage, limit
+    const {datas, page, allPage, prevPage, nextPage, limit, link
         // linkView, linkCreate
     } = props;
     const navigate = useNavigate();
@@ -50,7 +50,7 @@ const PendapatanTable = (props : any) => {
                     <div 
                         key={index} 
                         className="intro-y"
-                        onClick={()=>navigate(`/viewSlip/${data.uuid}`)}
+                        onClick={()=>navigate(`${link+data.uuid}`)}
                         >
                         <div
                             className={clsx([

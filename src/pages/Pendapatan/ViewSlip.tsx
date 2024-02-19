@@ -32,7 +32,8 @@ const ViewSlip = () => {
     },[]);
 
     const handlePrint = useReactToPrint({
-        content: () => printRef.current,
+        documentTitle: id + '-' + (data && data.pendapatanAtas),
+        content: () => printRef.current
     });
 
     const {pendapatans, isPendapatansSuccess} = useSelector(
@@ -73,7 +74,7 @@ const ViewSlip = () => {
     return (
         <>
         <div className="flex justify-end flex-col items-center mt-8 intro-y sm:flex-row">
-            <div className="flex w-full mt-4 sm:w-auto sm:mt-0">
+            <div className="flex justify-end w-full mt-4 sm:w-auto sm:mt-0">
             <Button variant="primary" className="mr-2 shadow-md" onClick={()=>handlePrint()}>
                 <Lucide icon="Printer" className="w-4 h-4 mr-2" /> Print Invoice
             </Button>
@@ -104,7 +105,7 @@ const ViewSlip = () => {
                         </div>
                         <div className="mt-1 grid grid-cols-2 gap-4">
                             <div className=''>Pendapatan</div>
-                            <div>: 2023-12</div>
+                            <div>: {data && data.pendapatanAtas}</div>
                         </div>
                     </div>
                 </div>

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { getMe, resetMeData } from '../../stores/features/meSlice';
-import { getInOutsByUser, resetInOuts } from '../../stores/features/inOutsSlice';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Calendar from "../../components/Calendar";
-
 import axios from 'axios';
 import SlideOverDate from '../../components/SlideOver/SlideOverDate';
+import Calendar from "../../components/Calendar";
 
-import { createKoreksis, resetKoreksis } from '../../stores/features/koresisSlice';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import ButtonAbsen from '../../components/Button/ButtonAbsen';
+
+import { getMe, resetMeData } from '../../stores/features/meSlice';
+import { getInOutsByUser, createInOutsByAbsenWeb, resetInOuts } from '../../stores/features/inOutsSlice';
+import { createKoreksis, resetKoreksis } from '../../stores/features/koresisSlice';
 
 const Absen = () => {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Absen = () => {
         (state: any) => state.meReducer
     );
 
-    const {inOuts, isInOutsSuccess} = useSelector(
+    const {inOuts, messageInOuts, isInOutsSuccess} = useSelector(
         (state: any) => state.inOutsReducer
     );
 
@@ -59,15 +60,6 @@ const Absen = () => {
         }
     },[dataUser]);
 
-    // useEffect(()=>{
-    //     if(date === undefined){
-    //         setDateSetting(dayjs(Date.now()).format("YYYY-MM-DD"));
-    //     }
-    //     else{
-    //         setDateSetting(dayjs(date).format("YYYY-MM-DD"));
-    //     }
-    // },[date])
-
     const clickDate = async(info : any) => {
         // alert(info.event.id);
         // e.preventDefault();
@@ -89,13 +81,11 @@ const Absen = () => {
             setViewSlideOver(false);
             setDataDate([]);
             setKeterangan("");
-            // console.log('submit koreksi sukses');
         }
     },[messageKoreksis, isKoreksisSuccess])
 
     const submitKoreksiUser = (e : any) => {
         e.preventDefault();
-        // console.log(dataDate.uuid, 'data absen');
         dispatch(createKoreksis({
             userId : dataUser.uuid, 
             inOutId :  dataDate.uuid, 
@@ -103,6 +93,29 @@ const Absen = () => {
             codeStatusKoreksi : 1, 
             isActive : 1,
             codeStatusInout : 2,
+        }));
+    }
+
+    //absen By Web
+
+    useEffect(()=>{
+        if(messageInOuts && isInOutsSuccess){
+            if(dataUser.uuid !== undefined){
+                dispatch(getInOutsByUser({uuid:dataUser.uuid}));
+            }
+            alert(messageInOuts.msg);
+        }
+    },[messageInOuts, isInOutsSuccess, dataUser])
+
+    const clickAbsen = (codeTipeAbsen :any) => {
+        const dateNow = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
+        alert(codeTipeAbsen);
+        dispatch(createInOutsByAbsenWeb({
+            userId:dataUser.uuid,
+            tanggalMulai:dateNow,
+            tanggalSelesai:dateNow,
+            //codeTipeAbsen menggunakan kode menin absen
+            codeTipeAbsen:codeTipeAbsen
         }));
     }
 
@@ -125,6 +138,41 @@ const Absen = () => {
                             dataAbsen = {dataAbsen}
                             clickDate = {clickDate}
                             dateSetting={dateSetting}
+                        />
+                    </div>
+                </div>
+                <div className="col-span-12 xl:col-span-4 2xl:col-span-9">
+                    <div className="mb-4">
+                        <ButtonAbsen 
+                            name='Absen'
+                            nameButton1='Masuk'
+                            nameButton2='Pulang'
+                            idButton1={0}
+                            idButton2={1}
+                            actionButton1={clickAbsen}
+                            actionButton2={clickAbsen}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <ButtonAbsen 
+                            name='Absen Shift'
+                            nameButton1='Masuk'
+                            nameButton2='Pulang'
+                            idButton1={4}
+                            idButton2={5}
+                            actionButton1={clickAbsen}
+                            actionButton2={clickAbsen}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <ButtonAbsen 
+                            name='Absen WFH'
+                            nameButton1='Masuk'
+                            nameButton2='Pulang'
+                            idButton1={8}
+                            idButton2={9}
+                            actionButton1={clickAbsen}
+                            actionButton2={clickAbsen}
                         />
                     </div>
                 </div>

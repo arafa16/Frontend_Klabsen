@@ -75,6 +75,8 @@ import Pendapatan from "../pages/Pendapatan/Pendapatan";
 import PendapatanLain from "../pages/Pendapatan/PendapatanLain";
 import AdminPendapatan from "../pages/Pendapatan/AdminPendapatan";
 import ViewSlip from "../pages/Pendapatan/ViewSlip";
+import ViewSlipBonus from "../pages/Pendapatan/ViewSlipBonus";
+import AbsenCheck from "../pages/Absen/AbsenCheck";
 
 function Router() {
   const routes = [
@@ -343,6 +345,10 @@ function Router() {
           path: "/absen/:date",
           element: <Absen />
         },
+        {
+          path: "/absenCheck",
+          element: <AbsenCheck />
+        },
         //koreksi
         {
           path: "/dataKoreksi",
@@ -388,6 +394,10 @@ function Router() {
         {
           path: "/viewSlip/:id",
           element: <ViewSlip />
+        },
+        {
+          path: "/viewSlipBonus/:id",
+          element: <ViewSlipBonus />
         },
       ],
     },

@@ -115,6 +115,7 @@ const PendapatanLain = () => {
             nextPage={nextPage}
             prevPage={prevPage}
             allPage={allPage}
+            link={'/viewSlipBonus/'}
           />
         </div>
       </div>

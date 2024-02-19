@@ -13,7 +13,10 @@ const FormCreateJamOperasional = (props : any) => {
         code, setCode, 
         isActive, setIsActive, 
         linkBack,
-        createDataSetting
+        createDataSetting,
+        tipeAbsenSelect,
+        tipeAbsenId,
+        setTipeAbsenId
     } = props;
     const navigate = useNavigate();
 
@@ -75,6 +78,21 @@ const FormCreateJamOperasional = (props : any) => {
                             value={keterangan}
                             onChange={(e)=>setKeterangan(e.target.value)}
                         />
+                    </div>
+                    <div className="col-span-12 intro-y sm:col-span-6">
+                        <FormLabel htmlFor="input-wizard-1">Tipe Absen {tipeAbsenId}</FormLabel>
+                        <FormSelect
+                            formSelectSize="sm"
+                            aria-label=".form-select-sm example"
+                            name='tipeAbsenId'
+                            value={tipeAbsenId}
+                            onChange={(e)=>setTipeAbsenId(e.target.value)}
+                            >
+                            <option value=''></option>
+                            {tipeAbsenSelect.map((tipeAbsen : any, key : any)=>(
+                                <option key={key} value={tipeAbsen && tipeAbsen.id}>{tipeAbsen && tipeAbsen.name}</option>
+                            ))}
+                        </FormSelect>
                     </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
                         <FormLabel htmlFor="input-wizard-1">Is Active ?</FormLabel>

@@ -44,6 +44,7 @@ const Calendar = (props : any) => {
     dayMaxEvents: true,
     events: {events},
     eventClick: (info)=>clickDate(info),
+    // dateClick: ()=>alert('date'),
     drop: function (info) {
       if (
         document.querySelectorAll("#checkbox-events").length &&
