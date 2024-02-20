@@ -38,7 +38,7 @@ function Main() {
   useEffect(()=>{
     if(isMeDataSuccess && meData){
       setDatas(meData);
-      console.log(meData, 'me');
+      // console.log(meData, 'me');
       // dispatch(resetMeData());
     }
     if(isMeDataError && messageMeData){
@@ -465,7 +465,7 @@ function Menu(props: {
 
   const nameColom : any = props.menu.code;
   
-  console.log(dataMe && dataMe[nameColom], nameColom);
+  // console.log(dataMe && dataMe[nameColom], nameColom);
 
   return (
     <a

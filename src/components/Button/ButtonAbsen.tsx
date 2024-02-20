@@ -8,11 +8,12 @@ const ButtonAbsen = (props : any) => {
         idButton1,
         idButton2, 
         actionButton1, 
-        actionButton2
+        actionButton2,
+        isView
     } = props;
 
     return (
-        <div className='p-4 box'>
+        <div className={`p-4 box ${isView ? '' : 'hidden'}`}>
             <div>
                 <p className=' border-b mb-4'>{name}</p>
             </div>

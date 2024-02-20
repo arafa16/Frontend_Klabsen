@@ -40,6 +40,7 @@ const Absen = () => {
     useEffect(()=>{
         if(meData && isMeDataSuccess){
             setDataUser(meData);
+            console.log(meData, 'me')
         }
     },[meData, isMeDataSuccess])
 
@@ -151,6 +152,7 @@ const Absen = () => {
                             idButton2={1}
                             actionButton1={clickAbsen}
                             actionButton2={clickAbsen}
+                            isView={dataUser.privilege && dataUser.privilege.absenModal}
                         />
                     </div>
                     <div className="mb-4">
@@ -162,6 +164,7 @@ const Absen = () => {
                             idButton2={5}
                             actionButton1={clickAbsen}
                             actionButton2={clickAbsen}
+                            isView={dataUser.privilege && dataUser.privilege.shiftModal}
                         />
                     </div>
                     <div className="mb-4">
@@ -173,6 +176,7 @@ const Absen = () => {
                             idButton2={9}
                             actionButton1={clickAbsen}
                             actionButton2={clickAbsen}
+                            isView={dataUser.privilege && dataUser.privilege.wfhModal}
                         />
                     </div>
                 </div>

@@ -63,7 +63,7 @@ const initialState: SideMenuState = {
         },
         {
           icon: "Edit",
-          pathname: '/absenCheck',
+          pathname: '/absenViewUser',
           title: "Absen Check",
           code: 'absen',
         },
