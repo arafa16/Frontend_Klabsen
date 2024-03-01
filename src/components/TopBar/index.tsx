@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Lucide from "../../base-components/Lucide";
 import Breadcrumb from "../../base-components/Breadcrumb";
 import { Menu, Popover} from "../../base-components/Headless";
@@ -8,13 +8,17 @@ import clsx from "clsx";
 import ResetPassword from "../Modal/ResetPassword";
 import { useNavigate } from "react-router-dom";
 import userImage from '../../assets/images/user.jpg';
+import { useDispatch, useSelector } from "react-redux";
+import { resetPages } from "../../stores/features/pageSlice";
 
 function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void; users:any; clickLogOut:any;}) {
   const [searchResultModal, setSearchResultModal] = useState(false);
+  const [namePage, setNamePage] = useState(null);
   const {users, clickLogOut} = props;
   const [modalPassword, setModalPassword] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //show reset password modal
   const clickResetPasswordModal = () => {
@@ -38,6 +42,22 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void; user
     }
   };
 
+  const {pages, isPagesSuccess, isPagesError} = useSelector(
+    (state : any) => state.pagesReducer
+  );
+
+  useEffect(()=>{
+    if(pages && isPagesSuccess){
+      setNamePage(pages && pages.pages);
+      dispatch(resetPages());
+    }
+    if(isPagesError){
+      setNamePage(null);
+    }
+  },[pages, isPagesSuccess, isPagesError])
+
+  console.log(namePage, 'name page');
+
   return (
     <>
       <ResetPassword 
@@ -55,11 +75,12 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void; user
       >
         {/* BEGIN: Breadcrumb */}
         <Breadcrumb className="hidden -intro-x xl:flex">
-          <Breadcrumb.Link to="/">App</Breadcrumb.Link>
-          <Breadcrumb.Link to="/">Administrator</Breadcrumb.Link>
-          <Breadcrumb.Link to="/" active={true}>
+          {/* <Breadcrumb.Link to="#">APP</Breadcrumb.Link> */}
+          <Breadcrumb.Link to="#" className={`${namePage === null ? 'hidden' : '' }`}>{namePage}</Breadcrumb.Link>
+          {/* <Breadcrumb.Link to="/">Administrator</Breadcrumb.Link>
+          <Breadcrumb.Link to="/" >
             Dashboard
-          </Breadcrumb.Link>
+          </Breadcrumb.Link> */}
         </Breadcrumb>
         {/* END: Breadcrumb */}
         {/* BEGIN: Mobile Menu */}
@@ -80,51 +101,6 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void; user
           
         </div>
         {/* END: Search */}
-        {/* BEGIN: Notifications */}
-        <Popover className="mr-5 intro-x sm:mr-6">
-          <Popover.Button
-            className={clsx([
-              "relative outline-none block",
-              "before:content-[''] before:w-[8px] before:h-[8px] before:rounded-full before:absolute before:top-[-2px] before:right-0 before:bg-danger before:opacity-50 before:animate-ping",
-              "after:content-[''] after:w-[8px] after:h-[8px] after:rounded-full after:absolute after:top-[-2px] after:right-0 after:bg-danger",
-            ])}
-          >
-            <Lucide icon="Bell" className="w-5 h-5 dark:text-slate-500" />
-          </Popover.Button>
-          <Popover.Panel className="w-[280px] sm:w-[350px] p-5 mt-2">
-            <div className="mb-5 text-base font-medium">Notifications</div>
-            {_.take(fakerData, 3).map((faker, fakerKey) => (
-              <div
-                key={fakerKey}
-                className={clsx([
-                  "cursor-pointer relative flex",
-                  { "mt-5": fakerKey },
-                ])}
-              >
-                <div className="flex-none w-10 h-10 mr-1 image-fit">
-                  <img
-                    alt="Rocketman - HTML Admin Template"
-                    className="rounded-full"
-                    src={faker.photos[0]}
-                  />
-                  <div className="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-success dark:border-darkmode-600"></div>
-                </div>
-                <div className="ml-2">
-                  <a href="" className="mr-1 font-medium">
-                    {faker.users[0].name}
-                  </a>
-                  <span className="text-slate-500">
-                    {faker.news[0].shortContent}
-                  </span>
-                  <div className="mt-1 text-xs text-slate-400">
-                    {faker.times[0]}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Popover.Panel>
-        </Popover>
-        {/* END: Notifications */}
         {/* BEGIN: Account Menu */}
         <Menu className="h-10 intro-x">
           <Menu.Button className="flex items-center h-full dropdown-toggle">

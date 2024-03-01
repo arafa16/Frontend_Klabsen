@@ -6,6 +6,8 @@ import {
   SetStateAction,
   createRef,
   useRef,
+  useContext,
+  createContext,
 } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import useCallbackState from "../../utils/callback-state";
@@ -30,6 +32,7 @@ function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [datas, setDatas] = useState<any>([]);
+
 
   const {meData, isMeDataError, isMeDataSuccess, messageMeData} = useSelector(
     (state : any) => state.meReducer
@@ -61,7 +64,6 @@ function Main() {
     dispatch(resetAuth());
     backToLogin();
   }
-
 
   const location = useLocation();
   const [formattedMenu, setFormattedMenu] = useState<
@@ -427,6 +429,7 @@ function Main() {
           ])}
         >
           {/* set auth for getMe */}
+          
           <TopBar 
             toggleMobileMenu={toggleMobileMenu} 
             users={datas}

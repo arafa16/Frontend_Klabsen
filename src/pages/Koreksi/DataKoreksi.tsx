@@ -4,6 +4,7 @@ import { getKoreksisTableByUser, getKoreksisByUser, resetKoreksis } from '../../
 import KoreksiTable from '../../components/Table/KoreksiTable';
 import KoreksiTableUser from '../../components/Table/KoreksiTableUser';
 import GeneralReportKoreksi from '../../components/GeneralReport/GeneralReportKoreksi';
+import { getMe } from '../../stores/features/meSlice';
 
 const DataKoreksi = () => {
     const [dataTables, setDataTables] = useState<any>([]);
@@ -46,7 +47,9 @@ const DataKoreksi = () => {
     },[koreksis, isKoreksisSuccess])
 
     useEffect(()=>{
-        dispatch(getKoreksisByUser({id}));
+        if(id !== ''){
+            dispatch(getKoreksisByUser({id}));
+        }
     },[id]);
 
     useEffect(()=>{

@@ -3,17 +3,23 @@ import axios from 'axios';
 
 interface variabel {
     inOuts: any;
+    inOutsById: any;
     isInOutsError: boolean;
     isInOutsSuccess: boolean;
+    isDeleteInOutsSuccess: boolean;
     isInOutsLoading: boolean;
+    isDeleteInOutsLoading: boolean;
     messageInOuts: any;
 }
 
 const initialState : variabel = {
     inOuts: null,
+    inOutsById: null,
     isInOutsError: false,
     isInOutsSuccess: false,
+    isDeleteInOutsSuccess: false,
     isInOutsLoading: false,
+    isDeleteInOutsLoading: false,
     messageInOuts: ""
 }
 
@@ -122,9 +128,13 @@ export const createInOutsByAbsenWeb : any = createAsyncThunk("createInOutsByAbse
 export const updateInOuts : any = createAsyncThunk("updateInOuts", async(inOuts : any, thunkAPI) => {
     try {
         const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/inOuts/${inOuts.uuid}`,{
-            name: inOuts.name,
-            code: inOuts.code,
-            isActive: inOuts.isActive
+            userId:inOuts.userId,
+            tanggalMulai:inOuts.tanggalMulai,
+            tanggalSelesai:inOuts.tanggalSelesai,
+            tipeAbsenId:inOuts.tipeAbsenId,
+            pelanggaranId:inOuts.pelanggaranId,
+            statusInoutId:inOuts.statusInoutId,
+            isAbsenWeb:inOuts.isAbsenWeb
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
@@ -195,7 +205,7 @@ export const inOutsSlice = createSlice({
         builder.addCase(getInOutsById.fulfilled, (state, action) => {
             state.isInOutsLoading = false;
             state.isInOutsSuccess = true;
-            state.inOuts = action.payload;
+            state.inOutsById = action.payload;
         });
         builder.addCase(getInOutsById.rejected, (state, action) => {
             state.isInOutsLoading = false;
@@ -265,15 +275,15 @@ export const inOutsSlice = createSlice({
 
         // delete inOuts
         builder.addCase(deleteInOuts.pending, (state) => {
-            state.isInOutsLoading = true;
+            state.isDeleteInOutsLoading = true;
         });
         builder.addCase(deleteInOuts.fulfilled, (state, action) => {
-            state.isInOutsLoading = false;
-            state.isInOutsSuccess = true;
+            state.isDeleteInOutsLoading = false;
+            state.isDeleteInOutsSuccess = true;
             state.messageInOuts = action.payload;
         });
         builder.addCase(deleteInOuts.rejected, (state, action) => {
-            state.isInOutsLoading = false;
+            state.isDeleteInOutsLoading = false;
             state.isInOutsError = true;
             state.messageInOuts = action.payload;
         })

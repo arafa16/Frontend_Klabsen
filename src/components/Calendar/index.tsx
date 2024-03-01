@@ -8,7 +8,7 @@ import { CalendarOptions } from "@fullcalendar/common";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 const Calendar = (props : any) => {
-  const {dataAbsen, clickDate, dateSetting} = props;
+  const {dataAbsen, clickEvent, clickDate, dateSetting} = props;
   const [events, setEvents] = useState<any>([]);
   const [date, setDate] = useState<any>(null);
 
@@ -25,6 +25,7 @@ const Calendar = (props : any) => {
           start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
           color:data.pelanggaran.code == 2 ? 'red' : '',
+          className:'text-xs w-full px-0',
         } 
         setEvents((events: any)  => [...events, newData])
     })
@@ -43,8 +44,9 @@ const Calendar = (props : any) => {
     editable: true,
     dayMaxEvents: true,
     events: {events},
-    eventClick: (info)=>clickDate(info),
-    // dateClick: ()=>alert('date'),
+    eventClick: (info)=>clickEvent(info),
+    dateClick: (info)=>clickDate(info),
+    viewClassNames:'hover:cursor-pointer',
     drop: function (info) {
       if (
         document.querySelectorAll("#checkbox-events").length &&

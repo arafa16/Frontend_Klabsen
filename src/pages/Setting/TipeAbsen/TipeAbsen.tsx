@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import AttributTable from '../../../components/Table/AttributTable';
 import { getTipeAbsensTable, resetTipeAbsens } from '../../../stores/features/tipeAbsenSlice';
+import TipeAbsenTable from '../../../components/Table/TipeAbsen/TipeAbsenTable';
 
 const TipeNotification = () => {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const TipeNotification = () => {
 
     return (
         <div>
-            <AttributTable 
+            <TipeAbsenTable
                 datas={datas}
                 linkView="/editTipeAbsen"
                 linkCreate="/createTipeAbsen"

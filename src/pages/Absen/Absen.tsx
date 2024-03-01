@@ -11,16 +11,22 @@ import ButtonAbsen from '../../components/Button/ButtonAbsen';
 import { getMe, resetMeData } from '../../stores/features/meSlice';
 import { getInOutsByUser, createInOutsByAbsenWeb, resetInOuts } from '../../stores/features/inOutsSlice';
 import { createKoreksis, resetKoreksis } from '../../stores/features/koresisSlice';
+import { getPages } from '../../stores/features/pageSlice';
+import SlideOverDateKoreksiUser from '../../components/SlideOver/SlideOverDateKoreksiUser';
 
 const Absen = () => {
     const dispatch = useDispatch();
 
     const [dataUser, setDataUser] = useState<any>([]);
     const [dataAbsen, setDataAbsen] = useState<any>([]);
-    const [dataDate, setDataDate] = useState<any>([]);
+    const [dataEvent, setDataEvent] = useState<any>([]);
     const [viewSlideOver, setViewSlideOver] = useState(false);
     const [subViewSlideOver, setSubViewSlideOver] = useState(0);
     const [dateSetting, setDateSetting] = useState(dayjs(Date.now()).format("YYYY-MM-DD"));
+
+    const [openSlideDate, setOpenSlideDate] = useState(false);
+    const [dataDate, setDataDate] = useState<any>([]);
+    const [msg, setMsg] = useState<any>(null);
 
     useEffect(()=>{
         setDateSetting('2023-04-11');
@@ -38,9 +44,13 @@ const Absen = () => {
     );
 
     useEffect(()=>{
+        dispatch(getMe());
+    },[]);
+    
+    useEffect(()=>{
         if(meData && isMeDataSuccess){
             setDataUser(meData);
-            console.log(meData, 'me')
+            // console.log(meData, 'me')
         }
     },[meData, isMeDataSuccess])
 
@@ -51,21 +61,19 @@ const Absen = () => {
         }
     },[inOuts, isInOutsSuccess])
 
-    useEffect(()=>{
-        dispatch(getMe());
-    },[]);
+    
 
     useEffect(()=>{
         if(dataUser.uuid !== undefined){
-            dispatch(getInOutsByUser({uuid:dataUser.uuid}));
+            dispatch(getInOutsByUser({uuid:dataUser && dataUser.uuid}));
         }
     },[dataUser]);
 
-    const clickDate = async(info : any) => {
+    const clickEvent = async(info : any) => {
         // alert(info.event.id);
         // e.preventDefault();
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/inOuts/${info.event.id}`);
-        setDataDate(response.data);
+        setDataEvent(response.data);
         setViewSlideOver(true);
         setSubViewSlideOver(0);
     }
@@ -80,7 +88,7 @@ const Absen = () => {
         if(messageKoreksis && isKoreksisSuccess){
             dispatch(resetKoreksis());
             setViewSlideOver(false);
-            setDataDate([]);
+            setDataEvent([]);
             setKeterangan("");
         }
     },[messageKoreksis, isKoreksisSuccess])
@@ -89,7 +97,7 @@ const Absen = () => {
         e.preventDefault();
         dispatch(createKoreksis({
             userId : dataUser.uuid, 
-            inOutId :  dataDate.uuid, 
+            inOutId :  dataEvent.uuid, 
             keterangan : keterangan, 
             codeStatusKoreksi : 1, 
             isActive : 1,
@@ -98,7 +106,6 @@ const Absen = () => {
     }
 
     //absen By Web
-
     useEffect(()=>{
         if(messageInOuts && isInOutsSuccess){
             if(dataUser.uuid !== undefined){
@@ -108,9 +115,10 @@ const Absen = () => {
         }
     },[messageInOuts, isInOutsSuccess, dataUser])
 
+    //absen by web
     const clickAbsen = (codeTipeAbsen :any) => {
         const dateNow = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
-        alert(codeTipeAbsen);
+        // alert(codeTipeAbsen);
         dispatch(createInOutsByAbsenWeb({
             userId:dataUser.uuid,
             tanggalMulai:dateNow,
@@ -120,12 +128,30 @@ const Absen = () => {
         }));
     }
 
+    useEffect(()=>{
+        dispatch(getPages({pages : null}))
+      },[dataUser])
+
+    //click date
+    const clickDate = (info : any) => {
+        setOpenSlideDate(true);
+        setDataDate(info);
+        // console.log(info.dateStr, 'dari click date');
+    }
+
     return (
         <>
+            <SlideOverDateKoreksiUser
+                open={openSlideDate}
+                setOpen={setOpenSlideDate}
+                dataInfo={dataDate}
+                dataUser={dataUser}s
+            />
+            {/* click event */}
             <SlideOverDate 
                 viewSlideOver = {viewSlideOver}
                 setViewSlideOver = {setViewSlideOver}
-                dataDate = {dataDate}
+                dataEvent = {dataEvent}
                 subViewSlideOver = {subViewSlideOver}
                 setSubViewSlideOver = {setSubViewSlideOver}
                 keterangan={keterangan}
@@ -137,6 +163,7 @@ const Absen = () => {
                     <div className="p-5 box">
                         <Calendar 
                             dataAbsen = {dataAbsen}
+                            clickEvent = {clickEvent}
                             clickDate = {clickDate}
                             dateSetting={dateSetting}
                         />

@@ -27,6 +27,8 @@ import inOutsSlice from "./features/inOutsSlice";
 import koreksisSlice from "./features/koresisSlice";
 import privilegesSlice from "./features/privilegesSlice";
 import pendapatansSlice from "./features/pendapatansSlice";
+import pageSlice from "./features/pageSlice";
+import periodeKerjasSlice from "./features/periodeKerjasSlice";
 
 export const store = configureStore({
   reducer: {
@@ -58,6 +60,8 @@ export const store = configureStore({
     koreksisReducer : koreksisSlice,
     privilegesReducer : privilegesSlice,
     pendapatansReducer : pendapatansSlice,
+    pagesReducer : pageSlice,
+    periodeKerjasReducer : periodeKerjasSlice,
   },
 });
 

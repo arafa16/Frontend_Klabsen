@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers, getUsersTable, resetUsers } from "../../stores/features/usersSlice";
 import EmployeForAbsenTable from '../../components/Table/EmployeForAbsenTable';
 import GeneralReportEmploye from '../../components/GeneralReport/GeneralReportEmploye';
+import SlideOverEditDate from '../../components/SlideOver/SlideOverEditDate';
 
 const AbsenViewUser = () => {
   const [datas, setDatas] = useState([]);

@@ -41,6 +41,34 @@ export const createKoreksis: any = createAsyncThunk("createKoreksis", async(kore
     }
 });
 
+export const createKoreksisByDate: any = createAsyncThunk("createKoreksisByDate", async(koreksis : any, thunkAPI) => {
+
+    // userId, tanggalMulai, codeTipeAbsen, codePelanggaran, keterangan, codeStatusKoreksi, isActive, codeStatusInout
+    try {
+        const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/byDate`,{
+            userId:koreksis.userId,
+            tanggalMulai:koreksis.tanggalMulai,
+            tanggalSelesai:koreksis.tanggalSelesai,
+            tipeAbsenId:koreksis.tipeAbsenId,
+            codePelanggaran:koreksis.codePelanggaran,
+            codeStatusInout:koreksis.codeStatusInout,
+            codeStatusKoreksi:koreksis.codeStatusKoreksi,
+            jamOperasionalId:koreksis.jamOperasionalId,
+            keterangan:koreksis.keterangan,
+            isAbsenWeb:koreksis.isAbsenWeb,
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const updateKoreksis: any = createAsyncThunk("updateKoreksis", async(koreksis : any, thunkAPI) => {
     try {
         const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/koreksis/${koreksis.id}`,{
@@ -168,6 +196,21 @@ export const koreksisSlice = createSlice({
             state.messageKoreksis = action.payload;
         });
         builder.addCase(createKoreksis.rejected, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisError = true;
+            state.messageKoreksis = action.payload;
+        })
+
+        // create koreksi
+        builder.addCase(createKoreksisByDate.pending, (state) => {
+            state.isKoreksisLoading = true;
+        });
+        builder.addCase(createKoreksisByDate.fulfilled, (state, action) => {
+            state.isKoreksisLoading = false;
+            state.isKoreksisSuccess = true;
+            state.messageKoreksis = action.payload;
+        });
+        builder.addCase(createKoreksisByDate.rejected, (state, action) => {
             state.isKoreksisLoading = false;
             state.isKoreksisError = true;
             state.messageKoreksis = action.payload;

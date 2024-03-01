@@ -78,6 +78,9 @@ import ViewSlip from "../pages/Pendapatan/ViewSlip";
 import ViewSlipBonus from "../pages/Pendapatan/ViewSlipBonus";
 import AbsenViewUser from "../pages/Absen/AbsenViewUser";
 import AbsenViewCalendar from "../pages/Absen/AbsenViewCalendar";
+import PeriodeKerja from "../pages/Setting/PeriodeKerja/PeriodeKerja";
+import EditPeriodeKerja from "../pages/Setting/PeriodeKerja/EditPeriodeKerja";
+import CreatePeriodeKerja from "../pages/Setting/PeriodeKerja/CreatePeriodeKerja";
 
 function Router() {
   const routes = [
@@ -404,6 +407,19 @@ function Router() {
           path: "/viewSlipBonus/:id",
           element: <ViewSlipBonus />
         },
+        //periode kerja
+        {
+          path:"/periodeKerja",
+          element: <PeriodeKerja />
+        },
+        {
+          path:"/editPeriodeKerja/:id",
+          element: <EditPeriodeKerja />
+        },
+        {
+          path:"/createPeriodeKerja",
+          element: <CreatePeriodeKerja />
+        }
       ],
     },
     {

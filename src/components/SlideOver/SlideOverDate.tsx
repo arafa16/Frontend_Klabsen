@@ -16,7 +16,7 @@ import { isEmpty } from 'lodash';
 const SlideOverDate = (props : any) => {
     const {
         viewSlideOver, setViewSlideOver, 
-        dataDate, 
+        dataEvent, 
         subViewSlideOver, setSubViewSlideOver,
         keterangan, setKeterangan,
         submitKoreksiUser
@@ -73,17 +73,17 @@ const SlideOverDate = (props : any) => {
                             <div className={`grid grid-cols-1 md:grid-cols-1 gap-6 mb-10`}>
                                 <div>
                                 <FormLabel htmlFor="modal-form-1">Tanggal</FormLabel>
-                                <div>: {dayjs(dataDate && dataDate.tanggalMulai).format('YYYY-MM-DD')}</div>
+                                <div>: {dayjs(dataEvent && dataEvent.tanggalMulai).format('YYYY-MM-DD')}</div>
                                 </div>
                                 <div className="">
                                 <FormLabel htmlFor="modal-form-2">Jam</FormLabel>
-                                <div>: {dayjs(dataDate && dataDate.tanggalMulai).format('HH:mm:ss')}</div>
+                                <div>: {dayjs(dataEvent && dataEvent.tanggalMulai).format('HH:mm:ss')}</div>
                                 </div>
                                 <div className="">
                                 <FormLabel htmlFor="modal-form-3">
                                     Tipe Absen
                                 </FormLabel>
-                                <div>: {dataDate.tipe_absen && dataDate.tipe_absen.name}</div>
+                                <div>: {dataEvent.tipe_absen && dataEvent.tipe_absen.name}</div>
                                 </div>
                             </div>
                             {/* form koreksi */}
@@ -111,7 +111,7 @@ const SlideOverDate = (props : any) => {
                                 <option>Shift Pulang</option>
                             </FormSelect>
                             </div> */}
-                            <div className={`${dataDate.koreksis && dataDate.koreksis.length === 0 ? '' : 'hidden'}`}>
+                            <div className={`${dataEvent.koreksis && dataEvent.koreksis.length === 0 ? '' : 'hidden'}`}>
                                 <FormLabel htmlFor="modal-form-4">
                                     Keterangan
                                 </FormLabel>
@@ -123,9 +123,9 @@ const SlideOverDate = (props : any) => {
                                     onChange={(e)=>setKeterangan(e.target.value)}
                                 />
                             </div>
-                            {dataDate.koreksis && dataDate.koreksis.length !== 0 ?  
+                            {dataEvent.koreksis && dataEvent.koreksis.length !== 0 ?  
                                 <KoreksiTable 
-                                    datas={dataDate.koreksis}
+                                    datas={dataEvent.koreksis}
                                     linkView={'/viewKoreksi'}
                                     linkCreate={'/'}
                                 />
@@ -135,7 +135,7 @@ const SlideOverDate = (props : any) => {
                         </Slideover.Description>
                         {/* end: form koreksi */}
                         {/* BEGIN: Slide Over Footer */}
-                        <Slideover.Footer className={`${dataDate.koreksis && dataDate.koreksis.length === 0 ? '' : 'hidden'}`}>
+                        <Slideover.Footer className={`${dataEvent.koreksis && dataEvent.koreksis.length === 0 ? '' : 'hidden'}`}>
                             <Button
                             variant="outline-secondary"
                             type="button"

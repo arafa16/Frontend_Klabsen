@@ -64,6 +64,7 @@ export const createTipeAbsens : any = createAsyncThunk("createTipeAbsens", async
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/tipeAbsens`,{
             name: tipeAbsens.name,
             code: tipeAbsens.code,
+            isSelect : tipeAbsens.isSelect,
             isActive: tipeAbsens.isActive
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
@@ -82,6 +83,7 @@ export const updateTipeAbsens : any = createAsyncThunk("updateTipeAbsens", async
         const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/tipeAbsens/${tipeAbsens.uuid}`,{
             name: tipeAbsens.name,
             code: tipeAbsens.code,
+            isSelect : tipeAbsens.isSelect,
             isActive: tipeAbsens.isActive
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 

@@ -9,13 +9,13 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 
 const CalendarAdmin = (props : any) => {
-  const {dataAbsen} = props;
+  const {dataAbsen, clickDate, clickEvent} = props;
 
-  console.log(dataAbsen);
 
   // const {dataAbsen, clickDate, dateSetting} = props;
   const [events, setEvents] = useState<any>([]);
   // const [date, setDate] = useState<any>(null);
+  // console.log(events, 'view');
 
   useEffect(()=>{
     setEvents([]);
@@ -30,6 +30,7 @@ const CalendarAdmin = (props : any) => {
           start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
           color:data.pelanggaran.code == 2 ? 'red' : '',
+          className:'text-xs w-full px-0',
         } 
         setEvents((events: any)  => [...events, newData])
     })
@@ -44,12 +45,13 @@ const CalendarAdmin = (props : any) => {
       right: "",
     },
     // initialDate: dateSetting,
+    viewClassNames:'cursor-pointer',
     navLinks: true,
     editable: true,
     dayMaxEvents: true,
     events: {events},
-    // eventClick: (info)=>clickDate(info),
-    // dateClick: ()=>alert('date'),
+    dateClick: (info)=>clickDate(info),
+    eventClick: (info)=>clickEvent(info.event._def),
     // drop: function (info) {
     //   if (
     //     document.querySelectorAll("#checkbox-events").length &&

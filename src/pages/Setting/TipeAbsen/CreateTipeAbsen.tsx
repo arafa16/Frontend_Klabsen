@@ -3,11 +3,13 @@ import FormCreate from '../../../components/Form/Attribute/FormCreate'
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { resetTipeAbsens, createTipeAbsens } from '../../../stores/features/tipeAbsenSlice';
+import FormCreateTipeAbsen from '../../../components/Form/TipeAbsen/FormCreateTipeAbsen';
 
 const CreateTipeAbsen = () => {
     const {uuid} = useParams();
     const [name, setName] = useState('');
     const [code, setCode] = useState('');
+    const [isSelect, setIsSelect] = useState('');
     const [isActive, setIsActive] = useState('');
 
     const dispatch = useDispatch();
@@ -27,17 +29,19 @@ const CreateTipeAbsen = () => {
     const createDataSetting = (e : any) => {
         e.preventDefault();
         dispatch(createTipeAbsens({
-            uuid, name, code, isActive
+            uuid, name, code, isSelect, isActive
         }));
     }
 
     return (
         <div>
-            <FormCreate
+            <FormCreateTipeAbsen
                 name={name}
                 setName={setName}
                 code={code}
                 setCode={setCode}
+                isSelect={isSelect}
+                setIsSelect={setIsSelect}
                 isActive={isActive}
                 setIsActive={setIsActive}
                 linkBack={'/tipeAbsen'}
