@@ -81,6 +81,11 @@ import AbsenViewCalendar from "../pages/Absen/AbsenViewCalendar";
 import PeriodeKerja from "../pages/Setting/PeriodeKerja/PeriodeKerja";
 import EditPeriodeKerja from "../pages/Setting/PeriodeKerja/EditPeriodeKerja";
 import CreatePeriodeKerja from "../pages/Setting/PeriodeKerja/CreatePeriodeKerja";
+import TipeEvent from "../pages/Setting/TipeEvent/TipeEvent";
+import CreateTipeEvent from "../pages/Setting/TipeEvent/CreateTipeEvent";
+import EditTipeEvent from "../pages/Setting/TipeEvent/EditTipeEvent";
+import EventPage from "../pages/Setting/EventsPage/EventPage";
+import EditEvent from "../pages/Setting/EventsPage/EditEvent";
 
 function Router() {
   const routes = [
@@ -419,7 +424,29 @@ function Router() {
         {
           path:"/createPeriodeKerja",
           element: <CreatePeriodeKerja />
-        }
+        },
+        //tipe Event
+        {
+          path:"/tipeEvent",
+          element: <TipeEvent />
+        },
+        {
+          path:"/createTipeEvent",
+          element: <CreateTipeEvent />
+        },
+        {
+          path:"/editTipeEvent/:id",
+          element: <EditTipeEvent />
+        },
+        //Event
+        {
+          path:"/events",
+          element: <EventPage />
+        },
+        {
+          path:"/editEvent/:id",
+          element: <EditEvent />
+        },
       ],
     },
     {

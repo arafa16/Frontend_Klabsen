@@ -2,17 +2,16 @@ import React from 'react'
 import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { Menu } from '../../base-components/Headless'
-import fakerData from '../../utils/faker'
 import clsx from 'clsx'
 import { FormCheck, FormInput } from '../../base-components/Form'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
 
-const PeriodeKerjaTable = (props : any) => {
+const EventsTable = (props : any) => {
     const {datas, linkView, linkCreate} = props;
     const navigate = useNavigate();
-    console.log(datas, 'periode kerja');
+
     return (
         <>
         <div className="grid grid-cols-12 mt-5 box">
@@ -63,70 +62,52 @@ const PeriodeKerjaTable = (props : any) => {
                                     className={clsx([
                                     "ml-3 truncate"
                                     ])}
-                                    >
+                                >
                                     {data.name}
                                 </div>
                             </div>
-                            <div className="flex items-center flex-none mr-5 w-24">
-                                <div
-                                    className={clsx([
-                                    "ml-3 truncate"
-                                    ])}
-                                    >
-                                    {data.bulan}
-                                </div>
-                            </div>
-                            <div className="flex items-center flex-none mr-5 w-24">
-                                <div
-                                    className={clsx([
-                                    "ml-3 truncate"
-                                    ])}
-                                    >
-                                    {data.tahun}
-                                </div>
-                            </div>
-                            <div className="w-64 truncate sm:w-48">
+                            <div className="w-64 truncate sm:w-64">
                                 <span
                                     className={clsx([
                                     "ml-3 truncate"
                                     ])}
-                                    >
+                                >
                                     {dayjs(data.tanggalMulai).format('YYYY-MM-DD HH:mm:ss')}
                                 </span>
                             </div>
-                            <div className="w-64 truncate sm:w-48">
+                            <div className="w-72 truncate sm:w-64">
                                 <span
                                     className={clsx([
                                     "ml-3 truncate"
                                     ])}
-                                    >
-                                    {dayjs(data.tanggalSelesai).format('YYYY-MM-DD HH:mm:ss')}
+                                >
+                                    {dayjs(data.tanggalSelesai).format('YYYY-MM-DD HH:mm:ss') }
                                 </span>
                             </div>
-                            <div className="w-24 truncate sm:w-48 text-center">
-                                <span
-                                    className={clsx([
-                                    "ml-3 truncate "
-                                    ])}
-                                    >
-                                    {data.jumlahHari}
-                                </span>
-                            </div>
-                            <div className="w-24 truncate sm:w-48 text-center">
+                            <div className="w-48 truncate">
                                 <span
                                     className={clsx([
                                     "ml-3 truncate"
                                     ])}
-                                    >
+                                >
+                                    {data.tipe_event && data.tipe_event.name}
+                                </span>
+                            </div>
+                            <div className="w-64 truncate sm:w-auto">
+                                <span
+                                    className={clsx([
+                                    "ml-3 truncate"
+                                    ])}
+                                >
                                     {data.code}
                                 </span>
                             </div>
                             <div
-                                className={clsx([
+                            className={clsx([
                                 "pl-10 ml-auto whitespace-nowrap"
-                                ])}
-                                >
-                                {data.isActive ? 'active' : 'non active'}
+                            ])}
+                            >
+                            {data.isActive ? 'active' : 'non active'}
                             </div>
                         </div>
                         </div>
@@ -140,4 +121,4 @@ const PeriodeKerjaTable = (props : any) => {
     )
 }
 
-export default PeriodeKerjaTable
+export default EventsTable

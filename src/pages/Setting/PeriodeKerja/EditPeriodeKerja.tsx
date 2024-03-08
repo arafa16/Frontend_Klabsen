@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import FormPeriodeKerja from '../../../components/Form/Attribute/FormPeriodeKerja';
-import { getPeriodeKerjasById, resetPeriodeKerjas, updatePeriodeKerjas } from '../../../stores/features/periodeKerjasSlice';
+import { deletePeriodeKerjas, getPeriodeKerjasById, resetPeriodeKerjas, updatePeriodeKerjas } from '../../../stores/features/periodeKerjasSlice';
 
 const EditPeriodeKerja = () => {
     const {id} = useParams();
@@ -72,6 +72,10 @@ const EditPeriodeKerja = () => {
       }));
     }
 
+    const clickDelete = () => {
+      dispatch(deletePeriodeKerjas({id}));
+    }
+
   return (
     <div>
       <FormPeriodeKerja
@@ -92,6 +96,7 @@ const EditPeriodeKerja = () => {
         isActive={isActive}
         setIsActive={setIsActive}
         linkBack='/periodeKerja'
+        clickDelete={clickDelete}
         linkSubmit={submitEditPeriodeKerja}
       />
     </div>

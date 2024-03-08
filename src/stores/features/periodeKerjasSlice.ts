@@ -94,6 +94,22 @@ export const updatePeriodeKerjas : any = createAsyncThunk("updatePeriodeKerjas",
     }
 });
 
+export const deletePeriodeKerjas : any = createAsyncThunk("deletePeriodeKerjas", async(jamOperasionals : any, thunkAPI) => {
+    try {
+        const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+`/periode/${jamOperasionals.id}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+
 export const periodeKerjasSlice = createSlice({
     name: "periodeKerjas",
     initialState,
@@ -157,6 +173,21 @@ export const periodeKerjasSlice = createSlice({
             state.messagePeriodeKerjas = action.payload;
         });
         builder.addCase(updatePeriodeKerjas.rejected, (state, action) => {
+            state.isPeriodeKerjasLoading = false;
+            state.isPeriodeKerjasError = true;
+            state.messagePeriodeKerjas = action.payload;
+        });
+
+        // update jam operasional
+        builder.addCase(deletePeriodeKerjas.pending, (state) => {
+            state.isPeriodeKerjasLoading = true;
+        });
+        builder.addCase(deletePeriodeKerjas.fulfilled, (state, action) => {
+            state.isPeriodeKerjasLoading = false;
+            state.isPeriodeKerjasSuccess = true;
+            state.messagePeriodeKerjas = action.payload;
+        });
+        builder.addCase(deletePeriodeKerjas.rejected, (state, action) => {
             state.isPeriodeKerjasLoading = false;
             state.isPeriodeKerjasError = true;
             state.messagePeriodeKerjas = action.payload;

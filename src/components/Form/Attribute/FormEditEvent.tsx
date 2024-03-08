@@ -1,43 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { FormLabel, FormSelect, FormInput } from '../../../base-components/Form';
 import Button from '../../../base-components/Button';
 import { useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
 
-const FormPeriodeKerja = (props : any) => {
-
+const FormEditEvent = (props : any) => {
     const {
-        name, setName,
-        bulan, setBulan,
-        tahun, setTahun,
+        name, setName, 
         tanggalMulai, setTanggalMulai,
         tanggalSelesai, setTanggalSelesai,
-        jumlahHari, setJumlahHari,
-        code, setCode,
-        isActive, setIsActive,
+        tipeEventId, setTipeEventId,
+        code, setCode, 
+        isActive, setIsActive, 
+        dataTipeEvents,
         linkBack,
-        linkSubmit,
-        clickDelete
+        changeDataSetting,
+        deleteDataSetting
     } = props;
-    
     const navigate = useNavigate();
-
-    useEffect(()=>{
-        setBulan(dayjs(name).format('M'));
-        setTahun(dayjs(name).format('YYYY'));
-    },[name]);
 
     return (
         <div className="p-5 mt-5 box intro-y">
-            <form onSubmit={linkSubmit}>
+            <form onSubmit={changeDataSetting}>
                 <div className={`grid grid-cols-12 gap-4 mt-5 gap-y-5`}>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="name">Name</FormLabel>
+                        <FormLabel htmlFor="input-wizard-1">Name</FormLabel>
                         <FormInput
                             formInputSize="sm"
                             id="name"
-                            type="month"
+                            type="text"
                             name='name'
                             value={name}
                             onChange={(e)=>setName(e.target.value)}
@@ -51,7 +42,7 @@ const FormPeriodeKerja = (props : any) => {
                             type="datetime-local"
                             step='1'
                             name='tanggalMulai'
-                            value={dayjs(tanggalMulai).format('YYYY-MM-DD HH:mm:ss')}
+                            value={tanggalMulai}
                             onChange={(e)=>setTanggalMulai(e.target.value)}
                         />
                     </div>
@@ -63,23 +54,28 @@ const FormPeriodeKerja = (props : any) => {
                             type="datetime-local"
                             step='1'
                             name='tanggalSelesai'
-                            value={dayjs(tanggalSelesai).format('YYYY-MM-DD HH:mm:ss')}
+                            value={tanggalSelesai}
                             onChange={(e)=>setTanggalSelesai(e.target.value)}
                         />
                     </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="jumlahHari">Jumlah Hari</FormLabel>
-                        <FormInput
-                            formInputSize="sm"
-                            id="jumlahHari"
-                            type="number"
-                            name='jumlahHari'
-                            value={jumlahHari}
-                            onChange={(e)=>setJumlahHari(e.target.value)}
-                        />
+                        <FormLabel htmlFor="tipeEventId">Tipe Event</FormLabel>
+                        <FormSelect
+                            formSelectSize="sm"
+                            aria-label=".form-select-sm example"
+                            name='tipeEventId'
+                            value={tipeEventId}
+                            onChange={(e)=>setTipeEventId(e.target.value)}
+                            >
+                            <option></option>
+                            {dataTipeEvents && dataTipeEvents.map((data:any, index:any)=>(
+                                <option key={index} value={data.uuid}>{data.name}</option>
+                            ))}
+                            
+                        </FormSelect>
                     </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="code">Code</FormLabel>
+                        <FormLabel htmlFor="input-wizard-1">Code</FormLabel>
                         <FormInput
                             formInputSize="sm"
                             id="code"
@@ -90,7 +86,7 @@ const FormPeriodeKerja = (props : any) => {
                         />
                     </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="isActive">Is Active ?</FormLabel>
+                        <FormLabel htmlFor="input-wizard-1">Is Active ?</FormLabel>
                         <FormSelect
                             formSelectSize="sm"
                             aria-label=".form-select-sm example"
@@ -110,7 +106,7 @@ const FormPeriodeKerja = (props : any) => {
                         className="w-24"
                         size='sm'
                         type='button'
-                        onClick={(e:any)=>clickDelete()}
+                        onClick={()=>deleteDataSetting()}
                         >
                         Delete
                     </Button>
@@ -142,4 +138,4 @@ const FormPeriodeKerja = (props : any) => {
     )
 }
 
-export default FormPeriodeKerja
+export default FormEditEvent

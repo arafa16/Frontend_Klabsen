@@ -3,7 +3,7 @@ import Lucide from "../../base-components/Lucide";
 import Button from "../../base-components/Button";
 import Table from "../../base-components/Table";
 import Logo from '../../assets/images/logo_kopkarla_color.png';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getPendapatansById, resetPendapatans } from '../../stores/features/pendapatansSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
@@ -17,6 +17,7 @@ const ViewSlipBonus = () => {
     const [linkQr, setLinkQr] = useState('');
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const printRef = useRef<any>();
 
     const generateQR = async (text:any) => {
@@ -65,6 +66,10 @@ const ViewSlipBonus = () => {
         }).format(number)+',00';
     }
 
+    const clickBack = () => {
+        navigate(-1);
+    }
+
     return (
         <>
         <div className="flex justify-end flex-col items-center mt-8 intro-y sm:flex-row">
@@ -72,8 +77,11 @@ const ViewSlipBonus = () => {
             <Button variant="primary" className="mr-2 shadow-md" onClick={()=>handlePrint()}>
                 <Lucide icon="Printer" className="w-4 h-4 mr-2" /> Print Invoice
             </Button>
-            <Button className="!box">
-                <Lucide icon="Settings" className="w-4 h-4 mr-2" /> Settings
+            <Button 
+                className="!box"
+                onClick={()=>clickBack()}
+                >
+                <Lucide icon="ArrowLeftCircle" className="w-4 h-4 mr-2" /> Back
             </Button>
             </div>
         </div>

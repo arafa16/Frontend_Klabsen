@@ -67,6 +67,12 @@ const initialState: SideMenuState = {
           title: "Absen Check",
           code: 'absen',
         },
+        {
+          icon: "Edit",
+          pathname: '/events',
+          title: "Admin Event",
+          code: 'absen',
+        },
       ],
     },
     {
@@ -188,6 +194,12 @@ const initialState: SideMenuState = {
           icon: "Award",
           pathname: "/tipeAbsen",
           title: "Tipe Absen",
+          code: 'setting',
+        },
+        {
+          icon: "Award",
+          pathname: "/tipeEvent",
+          title: "Tipe Event",
           code: 'setting',
         },
         {
