@@ -8,9 +8,12 @@ import Notification from "../../base-components/Notification";
 import { NotificationElement } from "../../base-components/Notification";
 import { FormInput, FormLabel } from '../../base-components/Form';
 import { getMe } from '../../stores/features/meSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Pendapatan = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [id, setId] =useState<any>(null);
   const [type, setType] = useState<any>(1);
   const [datas, setDatas] = useState([]);
@@ -77,6 +80,15 @@ const Pendapatan = () => {
       }
   }
 
+  const viewSlip = (data : any) => {
+    if(data && data.tipe_pendapatan.code === '1'){
+      navigate('/viewSlip/'+data.uuid);
+    }
+    else{
+      navigate('/viewSlipBonus/'+data.uuid);
+    }
+  }
+
   return (
     <div>
       <Notification
@@ -116,6 +128,7 @@ const Pendapatan = () => {
             prevPage={prevPage}
             allPage={allPage}
             link={'/viewSlip/'}
+            viewSlip={viewSlip}
           />
         </div>
       </div>

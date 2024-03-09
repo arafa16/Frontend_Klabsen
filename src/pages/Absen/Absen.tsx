@@ -30,9 +30,9 @@ const Absen = () => {
     const [dataDate, setDataDate] = useState<any>([]);
     const [msg, setMsg] = useState<any>(null);
 
-    useEffect(()=>{
-        setDateSetting('2023-04-11');
-    },[]);
+    // useEffect(()=>{
+    //     setDateSetting('2023-04-11');
+    // },[]);
 
     //koreksi
     const [keterangan, setKeterangan] = useState("");

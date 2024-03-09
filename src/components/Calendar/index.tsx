@@ -27,7 +27,7 @@ const Calendar = (props : any) => {
           title:dayjs(data.tanggalMulai).format('HH:mm:ss')+' '+data.tipe_absen.name,
           start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
-          color:data.pelanggaran.code == 2 ? 'red' : '',
+          color:data.pelanggaran.code == 2 ? '#ff3c00' : '',
           className:'text-xs w-full px-0',
           groupId:'absen'
         } 
@@ -43,9 +43,10 @@ const Calendar = (props : any) => {
           title:data.name,
           start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
+          className:'text-sm text-white py-1 text-center w-full px-0',
+          groupId:'event',
           color:'red',
-          className:'text-xs w-full px-0',
-          groupId:'event'
+          textColor:'white',
         } 
         setEvents((events: any)  => [...events, newData])
         // events.push(newData);

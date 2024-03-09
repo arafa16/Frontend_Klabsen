@@ -5,12 +5,13 @@ import clsx from 'clsx'
 import dayjs from 'dayjs';
 
 const PendapatanTable = (props : any) => {
-    const {datas, page, allPage, prevPage, nextPage, limit, link
+    const {datas, page, allPage, prevPage, nextPage, limit, link, viewSlip
         // linkView, linkCreate
     } = props;
+
     const navigate = useNavigate();
 
-    console.log(datas && datas, 'datas pendapatan')
+    // console.log(datas && datas, 'datas pendapatan')
 
     const rupiah = (number : number)=>{
         return new Intl.NumberFormat("id-ID", {
@@ -50,7 +51,7 @@ const PendapatanTable = (props : any) => {
                     <div 
                         key={index} 
                         className="intro-y"
-                        onClick={()=>navigate(`${link+data.uuid}`)}
+                        onClick={()=>viewSlip(data)}
                         >
                         <div
                             className={clsx([

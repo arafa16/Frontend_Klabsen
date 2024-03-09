@@ -7,9 +7,12 @@ import Button from '../../base-components/Button'
 import Notification from "../../base-components/Notification";
 import { NotificationElement } from "../../base-components/Notification";
 import { FormInput, FormLabel } from '../../base-components/Form'
+import { useNavigate } from 'react-router-dom'
 
 const AdminPendapatan = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [datas, setDatas] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -57,6 +60,15 @@ const prevPage = () => {
         const count = page - 1;
         setPage(count);
     }
+}
+
+const viewSlip = (data : any) => {
+  if(data && data.tipe_pendapatan.code === '1'){
+    navigate('/viewSlip/'+data.uuid);
+  }
+  else{
+    navigate('/viewSlipBonus/'+data.uuid);
+  }
 }
 
   return (
@@ -113,6 +125,8 @@ const prevPage = () => {
             nextPage={nextPage}
             prevPage={prevPage}
             allPage={allPage}
+            link={'/viewSlip/'}
+            viewSlip={viewSlip}
           />
         </div>
       </div>
