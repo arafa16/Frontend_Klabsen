@@ -18,8 +18,6 @@ const Calendar = (props : any) => {
     inputEvent(dataEventInternal)
   },[dataAbsen, dataEventInternal]);
 
-
-
   const inputAbsen = (datas : any) => {
     datas.map((data : any)=>{
         const newData : any = {

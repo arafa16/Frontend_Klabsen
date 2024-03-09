@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
-import AttributTable from '../../../components/Table/AttributTable';
-import { getEventsTable, resetEvents } from '../../../stores/features/eventsSlice';
-import EventsTable from '../../../components/Table/EventsTable';
+import AttributTable from '../../components/Table/AttributTable';
+import { getEventsTable, resetEvents } from '../../stores/features/eventsSlice';
+import EventsTable from '../../components/Table/EventsTable';
 
 const EventPage = () => {
     const dispatch = useDispatch();

@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import FormCreateEvent from '../../../components/Form/Attribute/FormCreateEvent'
+import FormCreate from '../../components/Form/Attribute/FormCreate'
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { createEvents, resetEvents } from '../../../stores/features/eventsSlice';
-import { getTipeEvents, resetTipeEvents } from '../../../stores/features/tipeEventSlice';
-const CreateEvent = () => {
+import FormEditEvent from '../../components/Form/Attribute/FormEditEvent';
+import { getEventsById, resetEvents, deleteEvents, updateEvents } from '../../stores/features/eventsSlice';
+import { getTipeEvents, resetTipeEvents } from '../../stores/features/tipeEventSlice';
+import dayjs from 'dayjs';
+
+const EditEvent = () => {
+    const {id} = useParams();
     const [name, setName] = useState('');
     const [tanggalMulai, setTanggalMulai] = useState('');
     const [tanggalSelesai, setTanggalSelesai] = useState('');
@@ -16,7 +20,7 @@ const CreateEvent = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {isEventsSuccess, messageEvents} = useSelector(
+    const {events, isEventsSuccess, messageEvents} = useSelector(
         (state : any) => state.eventsReducer
     )
 
@@ -25,9 +29,25 @@ const CreateEvent = () => {
     )
 
     useEffect(()=>{
+        dispatch(getEventsById({id}));
+    },[]);
+
+    useEffect(()=>{
+        console.log(events, 'tipe event');
+        if(isEventsSuccess && events){
+            setName(events && events.name);
+            setTanggalMulai(dayjs(events && events.tanggalMulai).format('YYYY-MM-DD HH:mm:ss') );
+            setTanggalSelesai(dayjs(events && events.tanggalSelesai).format('YYYY-MM-DD HH:mm:ss'));
+            setTipeEventId(events.tipe_event && events.tipe_event.uuid);
+            setCode(events && events.code);
+            setIsActive(events && events.isActive ? '1' : '0');
+            dispatch(resetEvents());
+        }
+    },[events, isEventsSuccess]);
+
+    useEffect(()=>{
         if(tipeEvents && isTipeEventsSuccess){
             setDataTipeEvents(tipeEvents);
-            dispatch(resetTipeEvents());
         }
     },[tipeEvents, isTipeEventsSuccess])
 
@@ -42,16 +62,22 @@ const CreateEvent = () => {
         }
     },[isEventsSuccess, messageEvents])
 
-    const createEvent = (e : any) => {
+    const changeDataSetting = (e : any) => {
         e.preventDefault();
-        dispatch(createEvents({
-            name, tanggalMulai, tanggalSelesai, tipeEventId, code, isActive
+        dispatch(updateEvents({
+            id, name, tanggalMulai, tanggalSelesai, tipeEventId, code, isActive
+        }));
+    }
+
+    const deleteDataSetting = () => {
+        dispatch(deleteEvents({
+            id
         }));
     }
 
     return (
         <div>
-            <FormCreateEvent
+            <FormEditEvent
                 name={name}
                 setName={setName}
                 tanggalMulai={tanggalMulai}
@@ -66,10 +92,11 @@ const CreateEvent = () => {
                 setIsActive={setIsActive}
                 dataTipeEvents={dataTipeEvents}
                 linkBack={'/events'}
-                createEvent={createEvent}
+                changeDataSetting={changeDataSetting}
+                deleteDataSetting={deleteDataSetting}
             />
         </div>
     )
 }
 
-export default CreateEvent
+export default EditEvent

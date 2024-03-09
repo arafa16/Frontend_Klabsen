@@ -84,9 +84,9 @@ import CreatePeriodeKerja from "../pages/Setting/PeriodeKerja/CreatePeriodeKerja
 import TipeEvent from "../pages/Setting/TipeEvent/TipeEvent";
 import CreateTipeEvent from "../pages/Setting/TipeEvent/CreateTipeEvent";
 import EditTipeEvent from "../pages/Setting/TipeEvent/EditTipeEvent";
-import EventPage from "../pages/Setting/EventsPage/EventPage";
-import EditEvent from "../pages/Setting/EventsPage/EditEvent";
-import CreateEvent from "../pages/Setting/EventsPage/CreateEvent";
+import EventPage from "../pages/EventsPage/EventPage";
+import EditEvent from "../pages/EventsPage/EditEvent";
+import CreateEvent from "../pages/EventsPage/CreateEvent";
 
 function Router() {
   const routes = [
