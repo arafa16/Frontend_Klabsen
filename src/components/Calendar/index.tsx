@@ -8,14 +8,17 @@ import { CalendarOptions } from "@fullcalendar/common";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 const Calendar = (props : any) => {
-  const {dataAbsen, clickEvent, clickDate, dateSetting} = props;
+  const {dataAbsen, clickEvent, clickDate, dateSetting, dataEventInternal} = props;
   const [events, setEvents] = useState<any>([]);
   const [date, setDate] = useState<any>(null);
 
   useEffect(()=>{
     setEvents([]);
     inputAbsen(dataAbsen);
-  },[dataAbsen]);
+    inputEvent(dataEventInternal)
+  },[dataAbsen, dataEventInternal]);
+
+
 
   const inputAbsen = (datas : any) => {
     datas.map((data : any)=>{
@@ -26,8 +29,26 @@ const Calendar = (props : any) => {
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
           color:data.pelanggaran.code == 2 ? 'red' : '',
           className:'text-xs w-full px-0',
+          groupId:'absen'
         } 
         setEvents((events: any)  => [...events, newData])
+        // events.push(newData);
+    })
+  }
+
+  const inputEvent = (datas : any) => {
+    datas.map((data : any)=>{
+        const newData : any = {
+          id:data.uuid,
+          title:data.name,
+          start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
+          end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
+          color:'red',
+          className:'text-xs w-full px-0',
+          groupId:'event'
+        } 
+        setEvents((events: any)  => [...events, newData])
+        // events.push(newData);
     })
   }
 

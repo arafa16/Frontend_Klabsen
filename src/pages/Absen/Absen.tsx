@@ -13,6 +13,7 @@ import { getInOutsByUser, createInOutsByAbsenWeb, resetInOuts } from '../../stor
 import { createKoreksis, resetKoreksis } from '../../stores/features/koresisSlice';
 import { getPages } from '../../stores/features/pageSlice';
 import SlideOverDateKoreksiUser from '../../components/SlideOver/SlideOverDateKoreksiUser';
+import { getEvents, resetEvents } from '../../stores/features/eventsSlice';
 
 const Absen = () => {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Absen = () => {
     const [dataUser, setDataUser] = useState<any>([]);
     const [dataAbsen, setDataAbsen] = useState<any>([]);
     const [dataEvent, setDataEvent] = useState<any>([]);
+    const [dataEventInternal, setDataEventInternal] = useState<any>([]);
     const [viewSlideOver, setViewSlideOver] = useState(false);
     const [subViewSlideOver, setSubViewSlideOver] = useState(0);
     const [dateSetting, setDateSetting] = useState(dayjs(Date.now()).format("YYYY-MM-DD"));
@@ -43,6 +45,22 @@ const Absen = () => {
         (state: any) => state.inOutsReducer
     );
 
+    const {events, isEventsSuccess} = useSelector(
+        (state : any) => state.eventsReducer
+    )
+
+    useEffect(()=>{
+        dispatch(getEvents());
+    },[]);
+
+    useEffect(()=>{
+        if(isEventsSuccess && events){
+            // console.log(events, 'event');
+            setDataEventInternal(events);
+            dispatch(resetEvents());
+        }
+    },[events, isEventsSuccess])
+
     useEffect(()=>{
         dispatch(getMe());
     },[]);
@@ -56,6 +74,7 @@ const Absen = () => {
 
     useEffect(()=>{
         if(inOuts && isInOutsSuccess){
+            console.log(inOuts, 'in out');
             setDataAbsen(inOuts);
             dispatch(resetInOuts());
         }
@@ -70,12 +89,15 @@ const Absen = () => {
     },[dataUser]);
 
     const clickEvent = async(info : any) => {
-        // alert(info.event.id);
+        // alert(info.event.groupId);
+        // console.log(info.event.groupId, 'kalau');
         // e.preventDefault();
-        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/inOuts/${info.event.id}`);
-        setDataEvent(response.data);
-        setViewSlideOver(true);
-        setSubViewSlideOver(0);
+        if(info.event.groupId === 'absen'){
+            const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/inOuts/${info.event.id}`);
+            setDataEvent(response.data);
+            setViewSlideOver(true);
+            setSubViewSlideOver(0);
+        }
     }
 
     //submit koreksi
@@ -163,6 +185,7 @@ const Absen = () => {
                     <div className="p-5 box">
                         <Calendar 
                             dataAbsen = {dataAbsen}
+                            dataEventInternal = {dataEventInternal}
                             clickEvent = {clickEvent}
                             clickDate = {clickDate}
                             dateSetting={dateSetting}

@@ -86,6 +86,7 @@ import CreateTipeEvent from "../pages/Setting/TipeEvent/CreateTipeEvent";
 import EditTipeEvent from "../pages/Setting/TipeEvent/EditTipeEvent";
 import EventPage from "../pages/Setting/EventsPage/EventPage";
 import EditEvent from "../pages/Setting/EventsPage/EditEvent";
+import CreateEvent from "../pages/Setting/EventsPage/CreateEvent";
 
 function Router() {
   const routes = [
@@ -446,6 +447,10 @@ function Router() {
         {
           path:"/editEvent/:id",
           element: <EditEvent />
+        },
+        {
+          path:"/createEvent",
+          element: <CreateEvent />
         },
       ],
     },

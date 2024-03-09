@@ -60,6 +60,27 @@ export const getEventsTable : any = createAsyncThunk("getEventsTable", async(tip
     }
 });
 
+export const createEvents : any = createAsyncThunk("createEvents", async(events : any, thunkAPI) => {
+    try {
+        const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/events`,{
+            name: events.name,
+            tanggalMulai: events.tanggalMulai,
+            tanggalSelesai: events.tanggalSelesai,
+            tipeEventId: events.tipeEventId,
+            code: events.code,
+            isActive: events.isActive
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const updateEvents : any = createAsyncThunk("updateEvents", async(events : any, thunkAPI) => {
     try {
         const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/events/`+events.id,{
@@ -158,6 +179,21 @@ export const eventsSlice = createSlice({
             state.messageEvents = action.payload;
         });
         builder.addCase(updateEvents.rejected, (state, action) => {
+            state.isEventsLoading = false;
+            state.isEventsError = true;
+            state.messageEvents = action.payload;
+        })
+
+        // get events table
+        builder.addCase(createEvents.pending, (state) => {
+            state.isEventsLoading = true;
+        });
+        builder.addCase(createEvents.fulfilled, (state, action) => {
+            state.isEventsLoading = false;
+            state.isEventsSuccess = true;
+            state.messageEvents = action.payload;
+        });
+        builder.addCase(createEvents.rejected, (state, action) => {
             state.isEventsLoading = false;
             state.isEventsError = true;
             state.messageEvents = action.payload;

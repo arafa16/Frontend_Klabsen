@@ -22,7 +22,6 @@ const EventPage = () => {
 
     useEffect(()=>{
         if(isEventsSuccess && events){
-            console.log(events, 'events');
             setDatas(events);
             dispatch(resetEvents());
         }
