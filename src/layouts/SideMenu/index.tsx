@@ -25,8 +25,7 @@ import MainColorSwitcher from "../../components/MainColorSwitcher";
 import SimpleBar from "simplebar";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getMe, resetMeData } from "../../stores/features/meSlice";
-import { LogOut, resetAuth } from "../../stores/features/authSlice";
+import { getMe, LogOut, resetAuth } from "../../stores/features/authSlice";
 
 function Main() {
   const dispatch = useDispatch();
@@ -34,35 +33,39 @@ function Main() {
   const [datas, setDatas] = useState<any>([]);
 
 
-  const {meData, isMeDataError, isMeDataSuccess, messageMeData} = useSelector(
-    (state : any) => state.meReducer
+  const {auth, meData, isAuthError, isAuthSuccess, isMeAuthSuccess, isAuthLoading, messageAuth} = useSelector(
+    (state : any) => state.authReducer
   );
-
-  useEffect(()=>{
-    if(isMeDataSuccess && meData){
-      setDatas(meData);
-      // console.log(meData, 'me');
-      // dispatch(resetMeData());
-    }
-    if(isMeDataError && messageMeData){
-      backToLogin();
-    }
-  },[isMeDataSuccess, meData, isMeDataError, messageMeData]);
-
+  
   useEffect(()=>{
     dispatch(getMe());
   },[]);
 
+  useEffect(()=>{
+    if(isMeAuthSuccess && meData){
+      setDatas(meData);
+      // console.log(meData, 'me');
+      dispatch(resetAuth());
+    }
+  },[isMeAuthSuccess, meData]);
+
+  useEffect(()=>{
+      if(isAuthError && isAuthLoading === false){
+        // dispatch(resetAuth());
+        backToLogin();
+      }
+  },[isAuthError]);
+
   const backToLogin : any = () => {
-    dispatch(resetMeData());
+    // dispatch(resetMeData());
     navigate('/login');
   }
 
   const clickLogOut : any = () => {
     dispatch(LogOut());
     console.log('sampai di click logout')
-    dispatch(resetAuth());
-    backToLogin();
+    dispatch(getMe());
+    // backToLogin();
   }
 
   const location = useLocation();

@@ -31,6 +31,20 @@ export const getEvents : any = createAsyncThunk("getEvents", async(_, thunkAPI) 
     }
 });
 
+export const getEventsByMonth : any = createAsyncThunk("getEventsByMonth", async(events:any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/events/bulanTahun/${events.bulan}&${events.tahun}&${events.limit}&${events.page}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const getEventsById : any = createAsyncThunk("getEventsById", async(events : any, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/events/`+events.id,{
@@ -64,6 +78,8 @@ export const createEvents : any = createAsyncThunk("createEvents", async(events 
     try {
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/events`,{
             name: events.name,
+            bulan: events.bulan,
+            tahun: events.tahun,
             tanggalMulai: events.tanggalMulai,
             tanggalSelesai: events.tanggalSelesai,
             tipeEventId: events.tipeEventId,
@@ -85,6 +101,8 @@ export const updateEvents : any = createAsyncThunk("updateEvents", async(events 
     try {
         const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/events/`+events.id,{
             name: events.name,
+            bulan: events.bulan,
+            tahun: events.tahun,
             tanggalMulai: events.tanggalMulai,
             tanggalSelesai: events.tanggalSelesai,
             tipeEventId: events.tipeEventId,
@@ -134,6 +152,21 @@ export const eventsSlice = createSlice({
             state.events = action.payload;
         });
         builder.addCase(getEvents.rejected, (state, action) => {
+            state.isEventsLoading = false;
+            state.isEventsError = true;
+            state.messageEvents = action.payload;
+        })
+
+        // get events
+        builder.addCase(getEventsByMonth.pending, (state) => {
+            state.isEventsLoading = true;
+        });
+        builder.addCase(getEventsByMonth.fulfilled, (state, action) => {
+            state.isEventsLoading = false;
+            state.isEventsSuccess = true;
+            state.events = action.payload;
+        });
+        builder.addCase(getEventsByMonth.rejected, (state, action) => {
             state.isEventsLoading = false;
             state.isEventsError = true;
             state.messageEvents = action.payload;

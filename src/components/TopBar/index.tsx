@@ -76,7 +76,7 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void; user
         {/* BEGIN: Breadcrumb */}
         <Breadcrumb className="hidden -intro-x xl:flex">
           {/* <Breadcrumb.Link to="#">APP</Breadcrumb.Link> */}
-          <Breadcrumb.Link to="#" className={`${namePage === null ? 'hidden' : '' }`}>{namePage}</Breadcrumb.Link>
+          <Breadcrumb.Link to="#" className={`${namePage === null ? 'hidden' : '' } text-gray-800 `}>{namePage}</Breadcrumb.Link>
           {/* <Breadcrumb.Link to="/">Administrator</Breadcrumb.Link>
           <Breadcrumb.Link to="/" >
             Dashboard

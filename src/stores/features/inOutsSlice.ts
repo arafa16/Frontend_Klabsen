@@ -70,6 +70,21 @@ export const getInOutsByUser : any = createAsyncThunk("getInOutsByUser", async(i
     }
 });
 
+export const getInOutsByIdAndMonth : any = createAsyncThunk("getInOutsByIdAndMonth", async(inOuts : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/inOuts/idAndMonth/${inOuts.id}&${inOuts.tanggalMulai}&${inOuts.tanggalSelesai}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        console.log(inOuts.id, inOuts.tanggalMulai, inOuts.tanggalSelesai);
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const getInOutsTable : any = createAsyncThunk("getInOutsTable", async(inOuts : any, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/inOuts/${inOuts.limit}&${inOuts.page}`,{
@@ -202,18 +217,36 @@ export const inOutsSlice = createSlice({
         builder.addCase(getInOutsById.pending, (state) => {
             state.isInOutsLoading = true;
         });
+
         builder.addCase(getInOutsById.fulfilled, (state, action) => {
             state.isInOutsLoading = false;
             state.isInOutsSuccess = true;
-            state.inOutsById = action.payload;
+            state.inOuts = action.payload;
         });
+
         builder.addCase(getInOutsById.rejected, (state, action) => {
+            state.isInOutsLoading = false;
+            state.isInOutsError = true;
+            state.messageInOuts = action.payload;
+        });
+
+        // get inOuts by id
+        builder.addCase(getInOutsByIdAndMonth.pending, (state) => {
+            state.isInOutsLoading = true;
+        });
+        builder.addCase(getInOutsByIdAndMonth.fulfilled, (state, action) => {
+            state.isInOutsLoading = false;
+            state.isInOutsSuccess = true;
+            state.inOuts = action.payload;
+        });
+        builder.addCase(getInOutsByIdAndMonth.rejected, (state, action) => {
             state.isInOutsLoading = false;
             state.isInOutsError = true;
             state.messageInOuts = action.payload;
         })
 
-        // get inOuts by user
+
+        // get inOuts by user getInOutsByIdAndMonth
         builder.addCase(getInOutsByUser.pending, (state) => {
             state.isInOutsLoading = true;
         });

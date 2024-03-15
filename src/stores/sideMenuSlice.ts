@@ -22,21 +22,7 @@ const initialState: SideMenuState = {
       icon: "Home",
       title: "Dashboard",
       code: 'dashboard',
-      subMenu: [
-        {
-          icon: "Activity",
-          pathname: "/",
-          title: "Overview 1",
-          code: 'dashboard',
-        },
-        {
-          icon: "Activity",
-          pathname: "/dashboard-overview-2",
-          title: "Overview 2",
-          code: 'dashboard',
-        },
-      ],
-      
+      pathname: "/"
     },
     {
       icon: "Calendar",
@@ -71,7 +57,13 @@ const initialState: SideMenuState = {
           icon: "Edit",
           pathname: '/events',
           title: "Admin Event",
-          code: 'absen',
+          code: 'admin',
+        },
+        {
+          icon: "Edit",
+          pathname: '/perhitunganAbsen',
+          title: "Perhitungan Absen",
+          code: 'admin',
         },
       ],
     },

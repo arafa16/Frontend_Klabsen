@@ -17,9 +17,37 @@ const initialState : variabel = {
     messagePeriodeKerjas: ""
 }
 
+export const getPeriodeKerjas : any = createAsyncThunk("getPeriodeKerjas", async(_, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/periode`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const getPeriodeKerjasTable : any = createAsyncThunk("getPeriodeKerjasTable", async(jamOperasionals : any, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/periode/${jamOperasionals.limit}&${jamOperasionals.page}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const getPeriodeKerjasTableStatus : any = createAsyncThunk("getPeriodeKerjasTableStatus", async(jamOperasionals : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/periode/${jamOperasionals.limit}&${jamOperasionals.page}&${jamOperasionals.isActive}`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
@@ -118,6 +146,21 @@ export const periodeKerjasSlice = createSlice({
     },
     extraReducers:(builder) => {
 
+        // get jam operasional
+        builder.addCase(getPeriodeKerjas.pending, (state) => {
+            state.isPeriodeKerjasLoading = true;
+        });
+        builder.addCase(getPeriodeKerjas.fulfilled, (state, action) => {
+            state.isPeriodeKerjasLoading = false;
+            state.isPeriodeKerjasSuccess = true;
+            state.periodeKerjas = action.payload;
+        });
+        builder.addCase(getPeriodeKerjas.rejected, (state, action) => {
+            state.isPeriodeKerjasLoading = false;
+            state.isPeriodeKerjasError = true;
+            state.messagePeriodeKerjas = action.payload;
+        });
+
         // get jam operasional table
         builder.addCase(getPeriodeKerjasTable.pending, (state) => {
             state.isPeriodeKerjasLoading = true;
@@ -128,6 +171,21 @@ export const periodeKerjasSlice = createSlice({
             state.periodeKerjas = action.payload;
         });
         builder.addCase(getPeriodeKerjasTable.rejected, (state, action) => {
+            state.isPeriodeKerjasLoading = false;
+            state.isPeriodeKerjasError = true;
+            state.messagePeriodeKerjas = action.payload;
+        });
+
+        // get jam operasional table
+        builder.addCase(getPeriodeKerjasTableStatus.pending, (state) => {
+            state.isPeriodeKerjasLoading = true;
+        });
+        builder.addCase(getPeriodeKerjasTableStatus.fulfilled, (state, action) => {
+            state.isPeriodeKerjasLoading = false;
+            state.isPeriodeKerjasSuccess = true;
+            state.periodeKerjas = action.payload;
+        });
+        builder.addCase(getPeriodeKerjasTableStatus.rejected, (state, action) => {
             state.isPeriodeKerjasLoading = false;
             state.isPeriodeKerjasError = true;
             state.messagePeriodeKerjas = action.payload;

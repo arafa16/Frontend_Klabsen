@@ -4,6 +4,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { createEvents, resetEvents } from '../../stores/features/eventsSlice';
 import { getTipeEvents, resetTipeEvents } from '../../stores/features/tipeEventSlice';
+import dayjs from 'dayjs';
 const CreateEvent = () => {
     const [name, setName] = useState('');
     const [tanggalMulai, setTanggalMulai] = useState('');
@@ -45,7 +46,14 @@ const CreateEvent = () => {
     const createEvent = (e : any) => {
         e.preventDefault();
         dispatch(createEvents({
-            name, tanggalMulai, tanggalSelesai, tipeEventId, code, isActive
+            name, 
+            bulan:dayjs(tanggalMulai).format('M'),
+            tahun:dayjs(tanggalMulai).format('YYYY'),
+            tanggalMulai, 
+            tanggalSelesai, 
+            tipeEventId, 
+            code, 
+            isActive
         }));
     }
 

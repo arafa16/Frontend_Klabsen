@@ -98,11 +98,21 @@ const FormDataDiri = (props : any) => {
                 />
             </div>
             <div className="col-span-12 intro-y sm:col-span-3">
-                <FormLabel htmlFor="input-wizard-3">Tanggal Lahir *</FormLabel>
-                <Litepicker
+                <FormLabel htmlFor="tanggalLahir">Tanggal Lahir *</FormLabel>
+                <FormInput
+                    formInputSize="sm"
+                    id="tanggalLahir"
+                    type="date"
+                    placeholder=""
+                    name='tanggalLahir'
+                    value={tanggalLahir}
+                    onChange={(e)=>setTanggalLahir(e.target.value)}
+                />
+                {/* <Litepicker
+                    id='tanggalLahir'
                     name='tanggalLahir'
                     value={dayjs(tanggalLahir).format('YYYY-MM-DD')}
-                    onChange={setTanggalLahir}
+                    onChange={()=>setTanggalLahir()}
                     options={{
                     autoApply: false,
                     showWeekNumbers: true,
@@ -116,7 +126,7 @@ const FormDataDiri = (props : any) => {
                     }}
                     className="block mx-auto "
                     formInputSize="sm"
-                />
+                /> */}
             </div>
             <div className="col-span-12 intro-y sm:col-span-3">
                 <FormLabel htmlFor="input-wizard-3">Status Perkawinan *</FormLabel>

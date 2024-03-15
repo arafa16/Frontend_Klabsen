@@ -65,7 +65,15 @@ const EditEvent = () => {
     const changeDataSetting = (e : any) => {
         e.preventDefault();
         dispatch(updateEvents({
-            id, name, tanggalMulai, tanggalSelesai, tipeEventId, code, isActive
+            id, 
+            name, 
+            bulan:dayjs(tanggalMulai).format('M'),
+            tahun:dayjs(tanggalMulai).format('YYYY'),
+            tanggalMulai, 
+            tanggalSelesai, 
+            tipeEventId, 
+            code, 
+            isActive
         }));
     }
 

@@ -26,6 +26,7 @@ import { getJamOperasionals } from "../../stores/features/jamOperasionalsSlice";
 import { getGroups } from "../../stores/features/groupsSlice";
 import { getAtasans } from "../../stores/features/atasansSlice";
 import { RegisterUser, resetAuth } from "../../stores/features/authSlice";
+import dayjs from "dayjs";
 
 const Register = () => {
   const [statusNumber, setStatusNumber] = useState(1);
@@ -295,12 +296,11 @@ const Register = () => {
         <Status 
           statusNumber={statusNumber}
         />
+        <NextRegister 
+          clickNext={clickNext}
+          clickPrevious={clickPrevious}
+        />
         <form onSubmit={submitRegister}>
-          <SaveRegister 
-            clickBack={clickBack}
-            active={statusButton}
-            isAuthLoading={isAuthLoading}
-          />
           <div className="px-5 pt-10 mt-2 border-t sm:px-20 border-slate-200/60 dark:border-darkmode-400">
             <FormDataDiri
               statusNumber={statusNumber}
@@ -409,11 +409,13 @@ const Register = () => {
               atasans={atasans}
             />
           </div>
+          <SaveRegister 
+            clickBack={clickBack}
+            active={statusButton}
+            isAuthLoading={isAuthLoading}
+          />
         </form>
-        <NextRegister 
-          clickNext={clickNext}
-          clickPrevious={clickPrevious}
-        />
+        
         
       </RegisterLayout>
   );

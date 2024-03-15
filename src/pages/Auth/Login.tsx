@@ -27,7 +27,7 @@ const Login = () => {
 
   useEffect(()=>{
     if(isAuthSuccess && auth){
-      dispatch(resetAuth());
+      // dispatch(resetAuth());
       navigate('/');
     }
   },[isAuthSuccess, auth])

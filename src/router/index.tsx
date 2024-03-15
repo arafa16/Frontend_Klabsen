@@ -1,10 +1,10 @@
 import { useRoutes } from "react-router-dom";
 import Menu from "../layouts/SideMenu";
-import DashboardOverview1 from "../pages/DashboardOverview1";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 
 //profile
+import DasboardUser from "../pages/Dashboard/DashboardUser";
 import UserProfile from "../pages/Profile/UserProfile";
 import Penempatan from "../pages/Setting/Penempatan/Penempatan";
 import Jabatan from "../pages/Setting/Jabatan/Jabatan";
@@ -87,6 +87,7 @@ import EditTipeEvent from "../pages/Setting/TipeEvent/EditTipeEvent";
 import EventPage from "../pages/EventsPage/EventPage";
 import EditEvent from "../pages/EventsPage/EditEvent";
 import CreateEvent from "../pages/EventsPage/CreateEvent";
+import PerhitunganAbsen from "../pages/PerhitunganAbsen/PerhitunganAbsen";
 
 function Router() {
   const routes = [
@@ -96,7 +97,7 @@ function Router() {
       children: [
         {
           path: "/",
-          element: <DashboardOverview1 />,
+          element: <DasboardUser />,
         },
         //profile user
         {
@@ -452,6 +453,11 @@ function Router() {
           path:"/createEvent",
           element: <CreateEvent />
         },
+        //perhitungan absen
+        {
+          path:"/perhitunganAbsen",
+          element: <PerhitunganAbsen />
+        }
       ],
     },
     {

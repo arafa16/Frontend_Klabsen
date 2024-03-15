@@ -3,18 +3,24 @@ import axios from 'axios';
 
 interface variabel {
     auth: any;
+    meData: any;
     isAuthError: boolean;
     isAuthSuccess: boolean;
+    isMeAuthSuccess: boolean;
     isAuthLoading: boolean;
     messageAuth: any;
+    messageMeData: any;
 }
 
 const initialState : variabel = {
     auth: null,
+    meData: null,
     isAuthError: false,
     isAuthSuccess: false,
+    isMeAuthSuccess: false,
     isAuthLoading: false,
-    messageAuth: ""
+    messageAuth: '',
+    messageMeData: '',
 }
 
 interface varAuth {
@@ -139,6 +145,20 @@ export const LogOut : any = createAsyncThunk("auth/LogOut", async() => {
     });
 });
 
+export const getMe : any = createAsyncThunk("meData/getMe", async(_, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+'/me',{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        return response.data;
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -161,19 +181,53 @@ export const authSlice = createSlice({
             state.messageAuth = action.payload;
         });
 
+        // get me
+        builder.addCase(getMe.pending, (state) => {
+            state.isAuthLoading = true;
+        });
+
+        builder.addCase(getMe.fulfilled, (state, action) => {
+            state.isAuthLoading = false;
+            state.isMeAuthSuccess = true;
+            state.meData = action.payload;
+            // state.auth = action.payload;
+        });
+        builder.addCase(getMe.rejected, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthError = true;
+            state.messageMeData = action.payload;
+        })
+
         //register
         builder.addCase(RegisterUser.pending, (state) => {
             state.isAuthLoading = true;
         });
         builder.addCase(RegisterUser.fulfilled, (state, action) => {
             state.isAuthLoading = false;
-            state.isAuthSuccess = true;
+            state.isMeAuthSuccess = true;
             state.messageAuth = action.payload;
         });
         builder.addCase(RegisterUser.rejected, (state, action) => {
             state.isAuthLoading = false;
             state.isAuthError = true;
             state.messageAuth = action.payload;
+        });
+
+        //register
+        builder.addCase(LogOut.pending, (state) => {
+            state.isAuthLoading = true;
+        });
+        builder.addCase(LogOut.fulfilled, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthSuccess = false;
+            state.isMeAuthSuccess = false;
+            state.isAuthError = true;
+            state.auth = null;
+            // state.messageAuth = null;
+        });
+        builder.addCase(LogOut.rejected, (state, action) => {
+            state.isAuthLoading = false;
+            
         });
     }
 })
