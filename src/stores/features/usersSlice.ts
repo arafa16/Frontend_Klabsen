@@ -181,7 +181,7 @@ export const UpdateUser  : any = createAsyncThunk("users/UpdateUser", async(user
             bankId:users.bankId,
             nomorRekening:users.nomorRekening,
             jamOperasionalId:users.jamOperasionalId,
-            groupId:users.groupsId,
+            groupId:users.groupId,
             quote:users.quote,
             statusId:users.statusId,
             isActive:users.isActive

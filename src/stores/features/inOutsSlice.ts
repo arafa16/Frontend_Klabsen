@@ -221,7 +221,7 @@ export const inOutsSlice = createSlice({
         builder.addCase(getInOutsById.fulfilled, (state, action) => {
             state.isInOutsLoading = false;
             state.isInOutsSuccess = true;
-            state.inOuts = action.payload;
+            state.inOutsById = action.payload;
         });
 
         builder.addCase(getInOutsById.rejected, (state, action) => {

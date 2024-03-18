@@ -8,7 +8,7 @@ const FormDataOperasionalKantor = (props : any) => {
         jabatanId, setJabatanId,
         atasanId, setAtasanId,
         jamOperasionalId, setJamOperasionalId,
-        groupsId, setGroupsId,
+        groupId, setGroupId,
         extention, setExtention,
         quote, setQuote,
         penempatans,
@@ -85,12 +85,12 @@ const FormDataOperasionalKantor = (props : any) => {
                     formSelectSize="sm"
                     aria-label=".form-select-sm example"
                     name='groupsId'
-                    value={groupsId}
-                    onChange={(e)=>setGroupsId(e.target.value)}
+                    value={groupId}
+                    onChange={(e)=>setGroupId(e.target.value)}
                     >
                         <option></option>
                         {groups && groups.map((data : any, index : any)=>(
-                            <option key={index} value={'1'}>{data.name}</option>
+                            <option key={index} value={data.id}>{data.name}</option>
                         ))}
                 </FormSelect>
             </div>

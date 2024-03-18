@@ -27,7 +27,7 @@ import { UpdateUser, resetUsers, getUserById } from "../../stores/features/users
 import FormKelengkapanData from "../../components/Form/User/FormKelengkapanData";
 import Save from "../../components/Button/Save";
 
-import Notification from "../../base-components/Notification";
+import NotificationMsg from "../../base-components/Notification";
 import { NotificationElement } from "../../base-components/Notification";
 
 
@@ -81,7 +81,7 @@ const UpdateEmploye = () => {
   const [jabatanId, setJabatanId] = useState('');
   const [atasanId, setAtasanId] = useState();
   const [jamOperasionalId, setJamOperasionalId] = useState('');
-  const [groupsId, setGroupsId] = useState('');
+  const [groupId, setGroupId] = useState('');
   const [extention, setExtention] = useState('');
   const [quote, setQuote] = useState('');
 
@@ -233,14 +233,18 @@ const UpdateEmploye = () => {
     setJabatanId(data && data.jabatanId);
     setAtasanId(data && data.atasanId);
     setJamOperasionalId(data && data.jamOperasionalId);
-    setGroupsId(data && data.groupsId);
+    setGroupId(data && data.groupId);
     setExtention(data && data.extention);
     setQuote(data && data.quote);
 
     //value kelengkapan data
     setStatusId(data && data.statusId);
     setIsActive(data && data.isActive ? '1' : '0');
+
+    console.log(data && data.groupId, 'data && data.groupsId')
   }
+
+  
 
   //update user
 
@@ -248,19 +252,20 @@ const UpdateEmploye = () => {
     if(isUsersSuccess && messageUsers){
       setMsg(messageUsers.msg);
       if(msg !== ''){
-        NotificationRegister.current?.showToast();
+        Notif.current?.showToast();
       }
-      navigate(`/viewEmploye/${id}`);
+      
       dispatch(resetUsers());
+      navigate(`/viewEmploye/${id}`);
     }
   },[isUsersSuccess, messageUsers]);
 
   const infoError = () => {
     setMsg("Mohon lengkapi data anda terlebih dahulu.");
-    NotificationRegister.current?.showToast();
+    Notif.current?.showToast();
   }
 
-  const NotificationRegister = useRef<NotificationElement>();
+  const Notif = useRef<NotificationElement>();
 
   const submitUpdate = (e : any) => {
     e.preventDefault();
@@ -297,7 +302,7 @@ const UpdateEmploye = () => {
       && penempatanId
       && jabatanId
       && jamOperasionalId
-      && groupsId
+      && groupId
       && extention
       && quote
       && statusId
@@ -339,7 +344,7 @@ const UpdateEmploye = () => {
       jabatanId,
       atasanId,
       jamOperasionalId,
-      groupsId,
+      groupId,
       extention,
       quote,
       statusId,
@@ -354,9 +359,9 @@ const UpdateEmploye = () => {
 
   return (
     <div className="w-full mt-5 box py-5">
-      <Notification
+      <NotificationMsg
         getRef={(el) => {
-          NotificationRegister.current = el;
+          Notif.current = el;
         }}
         options={{
           duration: 3000,
@@ -364,9 +369,9 @@ const UpdateEmploye = () => {
         className="flex flex-col sm:flex-row"
       >
         <div className="font-medium normal-case">
-          {msg}
+          haii
         </div>
-      </Notification>
+      </NotificationMsg>
       <div className='my-10'>
         <StatusEmploye 
           statusNumber={statusNumber}
@@ -471,8 +476,8 @@ const UpdateEmploye = () => {
             setAtasanId={setAtasanId}
             jamOperasionalId={jamOperasionalId}
             setJamOperasionalId={setJamOperasionalId}
-            groupsId={groupsId}
-            setGroupsId={setGroupsId}
+            groupId={groupId}
+            setGroupId={setGroupId}
             extention={extention}
             setExtention={setExtention}
             quote={quote}

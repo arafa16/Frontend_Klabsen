@@ -7,6 +7,7 @@ import { getUserById, resetUsers } from '../../stores/features/usersSlice';
 import { getPages, resetPages } from '../../stores/features/pageSlice';
 import SlideOverEditDate from '../../components/SlideOver/SlideOverEditDate';
 import SlideOverEditEvent from '../../components/SlideOver/SlideOverEditEvent';
+import { getEvents, resetEvents } from '../../stores/features/eventsSlice';
 
 const AbsenViewCalendar = () => {
   const { uuid } = useParams();
@@ -16,6 +17,7 @@ const AbsenViewCalendar = () => {
   const [openFormByEvent, setOpenFormByEvent] = useState(false);
   const [dataInfo, setDataInfo] = useState(null);
   const [dataEvent, setDataEvent] = useState(null);
+  const [dataEventInternal, setDataEventInternal] = useState<any>([]);
 
   const dispatch = useDispatch();
 
@@ -87,6 +89,23 @@ const AbsenViewCalendar = () => {
     dispatch(deleteInOuts({uuid}))
   }
 
+  //event
+  const {events, isEventsSuccess} = useSelector(
+    (state : any) => state.eventsReducer
+  )
+
+  useEffect(()=>{
+      dispatch(getEvents());
+  },[]);
+
+  useEffect(()=>{
+      if(isEventsSuccess && events){
+          // console.log(events, 'event');
+          setDataEventInternal(events);
+          dispatch(resetEvents());
+      }
+  },[events, isEventsSuccess])
+
   return (
     <>
       <SlideOverEditDate
@@ -111,6 +130,7 @@ const AbsenViewCalendar = () => {
               dataAbsen={dataAbsen}
               clickDate={clickDate}
               clickEvent={clickEvent}
+              dataEventInternal = {dataEventInternal}
             />
           </div>
         </div>

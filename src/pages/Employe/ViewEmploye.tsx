@@ -82,8 +82,6 @@ const ViewEmploye = () => {
         else{
             setViewEditPriviege(privilege);
         }
-        
-        
     }
 
     useEffect(()=>{

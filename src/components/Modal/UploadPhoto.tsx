@@ -1,6 +1,5 @@
 import React, {useRef, useState} from 'react'
 import Notification from "../../base-components/Notification";
-import { NotificationElement } from "../../base-components/Notification";
 import { Dialog } from '../../base-components/Headless';
 import Button from '../../base-components/Button';
 import {FormInput } from '../../base-components/Form';
@@ -19,7 +18,6 @@ const UploadPhoto = (props : any) => {
     // console.log(data, 'data uppload');
 
     const sendButtonRef = useRef(null);
-    const NotificationUploadPhoto = useRef<NotificationElement>();
 
     const fileUpload = (e : any) => {
         const file = e.target.files[0];
@@ -50,19 +48,6 @@ const UploadPhoto = (props : any) => {
 
     return (
         <>
-            <Notification
-                getRef={(el) => {
-                    NotificationUploadPhoto.current = el;
-                }}
-                options={{
-                    duration: 3000,
-                }}
-                className="flex flex-col sm:flex-row"
-                >
-                <div className="font-medium normal-case">
-                    {msg}
-                </div>
-            </Notification>
             {/* BEGIN: Modal Content */}
             <Dialog
                 open={showModal}

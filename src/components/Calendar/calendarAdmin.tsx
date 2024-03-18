@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 
 const CalendarAdmin = (props : any) => {
-  const {dataAbsen, clickDate, clickEvent} = props;
+  const {dataAbsen, clickDate, clickEvent, dataEventInternal} = props;
 
 
   // const {dataAbsen, clickDate, dateSetting} = props;
@@ -20,7 +20,8 @@ const CalendarAdmin = (props : any) => {
   useEffect(()=>{
     setEvents([]);
     inputAbsen(dataAbsen);
-  },[dataAbsen]);
+    inputEvent(dataEventInternal);
+  },[dataAbsen, dataEventInternal]);
 
   const inputAbsen = (datas : any) => {
     datas.map((data : any)=>{
@@ -33,6 +34,23 @@ const CalendarAdmin = (props : any) => {
           className:'text-xs w-full px-0',
         } 
         setEvents((events: any)  => [...events, newData])
+    })
+  }
+  
+  const inputEvent = (datas : any) => {
+    datas.map((data : any)=>{
+        const newData : any = {
+          id:data.uuid,
+          title:data.name,
+          start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
+          end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
+          className:'text-sm text-white py-1 text-center w-full px-0',
+          groupId:'event',
+          color:'red',
+          textColor:'white',
+        } 
+        setEvents((events: any)  => [...events, newData])
+        // events.push(newData);
     })
   }
 
@@ -51,6 +69,7 @@ const CalendarAdmin = (props : any) => {
     dayMaxEvents: true,
     events: {events},
     dateClick: (info)=>clickDate(info),
+    // eventClick: (info)=>alert(info.event._def),
     eventClick: (info)=>clickEvent(info.event._def),
     // drop: function (info) {
     //   if (
