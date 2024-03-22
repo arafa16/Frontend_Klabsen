@@ -47,11 +47,11 @@ const PerhitunganAbsen = () => {
         dispatch(getPerhitunganByGroupPeriode({idGroup, idPeriode}))
     }
 
-    const downloadFile = async(data:any) => {
+    const downloadFile = async() => {
         dispatch(downloadPerhitunganByGroupPeriode({
             idGroup:idGroup,
             idPeriode:idPeriode,
-            name:data.name
+            name:idGroup+idPeriode+'data_perhitungan.xlsx'
         }))
     }
 

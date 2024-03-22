@@ -10,6 +10,7 @@ const FormLogin = (props : any) => {
         logoUrlColor, 
         email, setEmail,
         password, setPassword,
+        confPassword, setConfPassword,
         isAuthLoading
     } = props;
     const navigate = useNavigate();
@@ -33,6 +34,7 @@ const FormLogin = (props : any) => {
                     className="block px-4 py-3"
                     placeholder="Email"
                     name='email'
+                    disabled
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                 />
@@ -44,8 +46,16 @@ const FormLogin = (props : any) => {
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
                 />
+                <FormInput
+                    type="password"
+                    className="block px-4 py-3 mt-4"
+                    placeholder="Confirmation Password"
+                    name='confPassword'
+                    value={confPassword}
+                    onChange={(e)=>setConfPassword(e.target.value)}
+                />
                 <div className="flex justify-end mt-4 text-xs text-slate-500 sm:text-sm">
-                <p onClick={()=>navigate('/forgotPassword')} className='cursor-pointer hover:text-blue-500'>Forgot Password?</p>
+                <p onClick={()=>navigate('/login')} className='cursor-pointer hover:text-blue-500'>Back to login ?</p>
                 </div>
                 <div className="mt-5 text-center xl:mt-8 xl:text-left">                    
                     {isAuthLoading 
@@ -59,7 +69,7 @@ const FormLogin = (props : any) => {
                             className="w-full xl:mr-3"
                             type='submit'
                             >
-                            Login
+                            Reset Password
                         </Button>
                     }
                     

@@ -4,6 +4,7 @@ import axios from 'axios';
 interface variabel {
     auth: any;
     meData: any;
+    dataToken:any;
     isAuthError: boolean;
     isAuthSuccess: boolean;
     isMeAuthSuccess: boolean;
@@ -15,6 +16,7 @@ interface variabel {
 const initialState : variabel = {
     auth: null,
     meData: null,
+    dataToken: null,
     isAuthError: false,
     isAuthSuccess: false,
     isMeAuthSuccess: false,
@@ -46,47 +48,58 @@ export const LoginUser: any = createAsyncThunk("auth/LoginUser", async(auth : va
     }
 });
 
-interface varRegister {
-    nik: string;
-    absenId: string;
-    name: string;
-    ganderId: string;
-    email: string;
-    password: string;
-    extention: string;
-    nomorHp: string;
-    penempatanId: string;
-    jabatanId: string;
-    atasanId: string;
-    nomorKtp: string;
-    alamatKtp: string;
-    alamatDomisili: string;
-    tempatLahir: string;
-    tanggalLahir: string;
-    nomorNpwp: string;
-    statusPerkawinanId: string;
-    jumlahAnak: string;
-    namaIbu: string;
-    pendidikanId: string;
-    namaSekolah: string;
-    jurusanSekolah: string;
-    tahunLulus: string;
-    ipk: string;
-    nomorBpjsKesehatan: string;
-    nomorBpjsKetenagakerjaan: string;
-    contactEmergencyId: string;
-    emergencyNumber: string;
-    emergencyAddress: string;
-    nomorSim: string;
-    golonganDarahId: string;
-    bankId: string;
-    nomorRekening: string;
-    jamOperasionalId: string;
-    groupsId: string;
-    quote: string;
-}
+export const SendEmailForgot : any = createAsyncThunk("auth/SendEmailForgot", async(auth : any, thunkAPI) => {
+    
+    try {
+        const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/resetByEmail', {
+            email: auth.email
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
 
-export const RegisterUser  : any = createAsyncThunk("auth/RegisterUser", async(auth : varRegister, thunkAPI) => {
+        return response.data;
+    } catch (error: any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const VerifyToken : any = createAsyncThunk("auth/VerifyToken", async(auth : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+'/verifyToken/'+auth.token,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+
+        return response.data;
+    } catch (error: any) {
+        const message = error.response.data.msg;
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
+export const ResetPasswordByToken : any = createAsyncThunk("auth/ResetPasswordByToken", async(auth : any, thunkAPI) => {
+    try {
+        const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/reset/'+auth.token, {
+            password: auth.password,
+            confPassword: auth.confPassword,
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+
+        console.log(response.data, 'response');
+
+        return response.data.msg;
+    } catch (error: any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+export const RegisterUser  : any = createAsyncThunk("auth/RegisterUser", async(auth : any, thunkAPI) => {
     console.log('sampai register');
     try {
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/register', {
@@ -228,6 +241,51 @@ export const authSlice = createSlice({
         builder.addCase(LogOut.rejected, (state, action) => {
             state.isAuthLoading = false;
             
+        });
+
+        //forgot password
+        builder.addCase(SendEmailForgot.pending, (state) => {
+            state.isAuthLoading = true;
+        });
+        builder.addCase(SendEmailForgot.fulfilled, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthSuccess = true;
+            state.messageAuth = action.payload;
+        });
+        builder.addCase(SendEmailForgot.rejected, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthError = true;
+            state.messageAuth = action.payload;
+        });
+
+        //forgot password
+        builder.addCase(VerifyToken.pending, (state) => {
+            state.isAuthLoading = true;
+        });
+        builder.addCase(VerifyToken.fulfilled, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthSuccess = true;
+            state.dataToken = action.payload;
+        });
+        builder.addCase(VerifyToken.rejected, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthError = true;
+            state.dataToken = action.payload;
+        });
+
+        //forgot password
+        builder.addCase(ResetPasswordByToken.pending, (state) => {
+            state.isAuthLoading = true;
+        });
+        builder.addCase(ResetPasswordByToken.fulfilled, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthSuccess = true;
+            state.messageAuth = action.payload;
+        });
+        builder.addCase(ResetPasswordByToken.rejected, (state, action) => {
+            state.isAuthLoading = false;
+            state.isAuthError = true;
+            state.messageAuth = action.payload;
         });
     }
 })

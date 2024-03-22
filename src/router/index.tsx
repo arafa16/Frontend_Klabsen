@@ -1,7 +1,9 @@
 import { useRoutes } from "react-router-dom";
 import Menu from "../layouts/SideMenu";
 import Login from "../pages/Auth/Login";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Register from "../pages/Auth/Register";
+import ResetPassword from "../pages/Auth/ResetPassword";
 
 //profile
 import DasboardUser from "../pages/Dashboard/DashboardUser";
@@ -467,6 +469,14 @@ function Router() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/forgotPassword",
+      element: <ForgotPassword />,
+    },
+    {
+      path: "/resetPassword/:token",
+      element: <ResetPassword />,
     },
   ];
 

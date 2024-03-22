@@ -120,9 +120,7 @@ const FormSortingPeriodeGroup = (props:any) => {
                                 className={`w-36 ml-2`}
                                 size='sm'
                                 type='button'
-                                onClick={()=>downloadFile({
-                                    name:'data_perhitungan.xlsx'
-                                })}
+                                onClick={()=>downloadFile()}
                                 >
                                 Download Perhitungan
                             </Button>

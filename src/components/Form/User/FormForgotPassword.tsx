@@ -4,12 +4,11 @@ import { FormInput, FormCheck } from "../../../base-components/Form";
 import { useNavigate } from "react-router-dom";
 import LoadingIcon from '../../../base-components/LoadingIcon';
 
-const FormLogin = (props : any) => {
+const FormForgotPassword = (props : any) => {
     const {
         logoUrl, 
         logoUrlColor, 
         email, setEmail,
-        password, setPassword,
         isAuthLoading
     } = props;
     const navigate = useNavigate();
@@ -36,16 +35,8 @@ const FormLogin = (props : any) => {
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                 />
-                <FormInput
-                    type="password"
-                    className="block px-4 py-3 mt-4"
-                    placeholder="Password"
-                    name='password'
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
-                />
                 <div className="flex justify-end mt-4 text-xs text-slate-500 sm:text-sm">
-                <p onClick={()=>navigate('/forgotPassword')} className='cursor-pointer hover:text-blue-500'>Forgot Password?</p>
+                <p onClick={()=>navigate('/login')} className='cursor-pointer hover:text-blue-500'>Back to login ?</p>
                 </div>
                 <div className="mt-5 text-center xl:mt-8 xl:text-left">                    
                     {isAuthLoading 
@@ -59,18 +50,9 @@ const FormLogin = (props : any) => {
                             className="w-full xl:mr-3"
                             type='submit'
                             >
-                            Login
+                            Send Email
                         </Button>
                     }
-                    
-                    <Button 
-                        type='button'
-                        variant="outline-secondary" 
-                        className="w-full mt-3"
-                        onClick={()=>navigate('/register')}
-                        >
-                        Registration
-                    </Button>
                 </div>
             </div>
             </div>
@@ -78,4 +60,4 @@ const FormLogin = (props : any) => {
     )
 }
 
-export default FormLogin
+export default FormForgotPassword
