@@ -24,17 +24,18 @@ function Tab({
 }: ExtractProps<typeof HeadlessTab> & {
   fullWidth?: boolean;
 }) {
-  const list = useContext(listContext);
+  const list = useContext(listContext); 
   return (
     <HeadlessTab as={Fragment}>
+      
       {({ selected }) => (
         <li
-          className={twMerge([
-            "focus-visible:outline-none",
-            fullWidth && "flex-1",
-            list.variant == "tabs" && "-mb-px",
-          ])}
-          {...props}
+        // className={twMerge([
+        //   "focus-visible:outline-none",
+        //   fullWidth && "flex-1",
+        //   list.variant == "tabs" && "-mb-px",
+        // ])}
+        // {...props}
         >
           <tabContext.Provider
             value={{

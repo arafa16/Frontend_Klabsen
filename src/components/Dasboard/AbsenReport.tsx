@@ -11,44 +11,99 @@ const AbsenReport = (props:any) => {
 
     const dispatch = useDispatch();
 
-    // const {inOuts, messageInOuts, isInOutsSuccess} = useSelector(
-    //     (state: any) => state.inOutsReducer
-    // );
-
-    // useEffect(()=>{
-    //     if(inOuts && isInOutsSuccess){
-    //         setDataInOut(inOuts);
-    //         dispatch(resetInOuts());
-    //     }
-    // },[inOuts, isInOutsSuccess])
-
-    // useEffect(()=>{
-    //     dispatch(getInOutsByIdAndMonth({
-    //             id:dataUser.uuid,
-    //             tanggalMulai:dataPeriodeKerja.tanggalMulai,
-    //             tanggalSelesai:dataPeriodeKerja.tanggalSelesai
-    //         })
-    //     );
-    // },[dataUser, dataPeriodeKerja]);
-
-    console.log(dataInOut, 'data');
-
     const getData = async() => {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/inOuts/idAndMonth/${dataUser.uuid}&${dataPeriodeKerja.tanggalMulai}&${dataPeriodeKerja.tanggalSelesai}`);
         // console.log(response.data, 'response');
         setDataInOut(response.data);
+        // console.log(response.data.tipe_absen, 'data response')
     } 
 
     useEffect(()=>{
         getData();
     },[dataPeriodeKerja]);
 
-    console.log(dataInOut, 'data in out')
+    const dataIn = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '0');
+    const dataInPelanggaran = dataIn.filter((data: { pelanggaran : any }) => data.pelanggaran.code === '2');
+    const dataInNormal = dataIn.length - dataInPelanggaran.length;
 
-    const dataIn = dataInOut.filter((data: { tipeAbsenId: number; }) => data.tipeAbsenId === 1);
-    const dataOut = dataInOut.filter((data: { tipeAbsenId: number; }) => data.tipeAbsenId === 2);
-    const dataTidakAbsen = dataInOut.filter((data: { tipeAbsenId: number; }) => data.tipeAbsenId === 3);
+    const dataOut = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '1');
+    const dataOutPelanggaran = dataOut.filter((data: { pelanggaran : any }) => data.pelanggaran.code === '2');
+    const dataOutNormal = dataOut.length - dataOutPelanggaran.length;
 
+    const dataInShift = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '4');
+    const dataInShiftPelanggaran = dataInShift.filter((data: { pelanggaran : any }) => data.pelanggaran.code === '2');
+    const dataInShiftNormal = dataInShift.length - dataInShiftPelanggaran.length;
+
+    const dataOutShift = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '5');
+    const dataOutShiftPelanggaran = dataOutShift.filter((data: { pelanggaran : any }) => data.pelanggaran.code === '2');
+    const dataOutShiftNormal = dataOutShift.length - dataOutShiftPelanggaran.length;
+
+    const dataInWFH = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '8');
+    const dataInWFHPelanggaran = dataInWFH.filter((data: { pelanggaran : any }) => data.pelanggaran.code === '2');
+    const dataInWFHNormal = dataInWFH.length - dataInWFHPelanggaran.length;
+
+    const dataOutWFH = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '9');
+    const dataOutWFHPelanggaran = dataOutWFH.filter((data: { pelanggaran : any }) => data.pelanggaran.code === '2');
+    const dataOutWFHNormal = dataOutWFH.length - dataOutWFHPelanggaran.length;
+
+    const dataTidakAbsen = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '11');
+    const dataTidakAbsenPelanggaran = dataTidakAbsen.filter((data: { pelanggaran : any }) => data.pelanggaran.code === '2');
+    const dataTidakAbsenNormal = dataTidakAbsen.length - dataTidakAbsenPelanggaran.length;
+
+    const dataCuti = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '12');
+    const dataSakit = dataInOut.filter((data: { tipe_absen : any }) => data.tipe_absen.code === '13');
+    
+    const dataInOutPelangaran = 
+        dataInPelanggaran.length + 
+        dataOutPelanggaran.length + 
+        dataInShiftPelanggaran.length +
+        dataOutShiftPelanggaran.length +
+        dataInWFHPelanggaran.length +
+        dataOutWFHPelanggaran.length +
+        dataTidakAbsenPelanggaran.length;
+
+    const dataAllInPelangaran = 
+        dataInPelanggaran.length + 
+        dataInShiftPelanggaran.length +
+        dataInWFHPelanggaran.length;
+
+    const dataAllOutPelangaran = 
+        dataOutPelanggaran.length + 
+        dataOutShiftPelanggaran.length +
+        dataOutWFHPelanggaran.length;
+
+    const dataAllPelanggaran = dataInOutPelangaran * 0.5;
+
+    const dataInOutNormal = 
+        dataInNormal+ 
+        dataOutNormal+ 
+        dataInShiftNormal+ 
+        dataOutShiftNormal+ 
+        dataInWFHNormal+
+        dataOutWFHNormal+
+        dataTidakAbsenNormal;
+    
+    const dataAllInNormal = 
+        dataInNormal+ 
+        dataInShiftNormal+ 
+        dataInWFHNormal;
+    
+    const dataAllOutNormal = 
+        dataOutNormal+ 
+        dataOutShiftNormal+ 
+        dataOutWFHNormal;
+
+    const dataAllNormal = (dataInOutNormal*0.5) + dataCuti.length + dataSakit.length;
+
+    const dataBelumAbsen = dataPeriodeKerja.jumlahHari - dataAllPelanggaran - dataAllNormal;
+    
+    console.log(
+        dataInOutPelangaran,
+        'dataInPelanggaran');
+
+    console.log(
+        dataAllNormal,
+        'normal');
 
     return (
         <div>
@@ -66,10 +121,9 @@ const AbsenReport = (props:any) => {
                         <DataAbsen
                             className="relative z-10 mt-3"
                             height={190}
-                            dataAbsen={dataPeriodeKerja.jumlahHari}
-                            dataIn={dataIn.length}
-                            dataOut={dataOut.length}
-                            dataTidakAbsen={dataTidakAbsen.length}
+                            dataBelumAbsen={dataBelumAbsen}
+                            dataNormal={dataAllNormal}
+                            dataPelanggaran={dataAllPelanggaran}
                         />
                         </div>
                         <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full">
@@ -78,25 +132,50 @@ const AbsenReport = (props:any) => {
                         </div>
                     </div>
                     <div className="mx-auto mt-8 w-52 lg:w-auto">
-                        <div className="flex items-center">
+                        {/* <div className="flex items-center">
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-secondary/50 border-primary/50"></div>
+                            <span className="truncate">Belum Absen</span>
+                            <span className="ml-auto">{dataBelumAbsen} hari</span>
+                        </div> */}
+                        <div className="flex items-center mt-4">
                             <div className="w-2 h-2 mr-3 border rounded-full bg-primary/50 border-primary/50"></div>
-                            <span className="truncate">Jumlah Absen</span>
-                            <span className="ml-auto">{dataInOut.length}</span>
+                            <span className="truncate">Masuk</span>
+                            <span className="ml-auto">{dataAllInNormal} kali</span>
                         </div>
                         <div className="flex items-center mt-4">
-                            <div className="w-2 h-2 mr-3 border rounded-full bg-pending/50 border-pending/50"></div>
-                            <span className="truncate">Data Masuk</span>
-                            <span className="ml-auto">{dataIn.length}</span>
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-primary/50 border-primary/60"></div>
+                            <span className="truncate">Pulang</span>
+                            <span className="ml-auto">{dataAllOutNormal} kali</span>
                         </div>
                         <div className="flex items-center mt-4">
-                            <div className="w-2 h-2 mr-3 border rounded-full bg-warning/50 border-warning/60"></div>
-                            <span className="truncate">Data Pulang</span>
-                            <span className="ml-auto">{dataOut.length}</span>
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-primary/50 border-primary/60"></div>
+                            <span className="truncate">Cuti</span>
+                            <span className="ml-auto">{dataCuti.length} kali</span>
                         </div>
                         <div className="flex items-center mt-4">
-                            <div className="w-2 h-2 mr-3 border rounded-full bg-warning/50 border-warning/60"></div>
-                            <span className="truncate">Data Tidak Absen</span>
-                            <span className="ml-auto">{dataTidakAbsen.length}</span>
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-primary/50 border-primary/60"></div>
+                            <span className="truncate">Sakit</span>
+                            <span className="ml-auto">{dataSakit.length} kali</span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-primary/50 border-primary/60"></div>
+                            <span className="truncate">Perbaikan Tidak Absen</span>
+                            <span className="ml-auto">{dataTidakAbsenNormal} kali</span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-danger/50 border-danger/50"></div>
+                            <span className="truncate">Masuk</span>
+                            <span className="ml-auto">{dataAllInNormal} kali</span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-danger/50 border-danger/60"></div>
+                            <span className="truncate">Pulang</span>
+                            <span className="ml-auto">{dataAllOutPelangaran} kali</span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                            <div className="w-2 h-2 mr-3 border rounded-full bg-danger/50 border-danger/60"></div>
+                            <span className="truncate">Tidak Absen</span>
+                            <span className="ml-auto">{dataTidakAbsenPelanggaran.length} kali</span>
                         </div>
                     </div>
                     </div>

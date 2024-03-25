@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPelanggaransTable, resetPelanggarans } from '../../../stores/features/PelanggaransSlice';
+import { getPelanggaransTable, resetPelanggarans } from '../../../stores/features/pelanggaransSlice';
 import AttributTable from '../../../components/Table/AttributTable';
 
 export const Pelanggaran = () => {
