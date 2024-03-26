@@ -138,7 +138,7 @@ export const RegisterUser  : any = createAsyncThunk("auth/RegisterUser", async(a
             bankId:auth.bankId,
             nomorRekening:auth.nomorRekening,
             jamOperasionalId:auth.jamOperasionalId,
-            groupId:auth.groupsId,
+            groupId:auth.groupId,
             quote:auth.quote
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
@@ -158,10 +158,11 @@ export const LogOut : any = createAsyncThunk("auth/LogOut", async() => {
     });
 });
 
-export const getMe : any = createAsyncThunk("meData/getMe", async(_, thunkAPI) => {
+export const getMe : any = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+'/me',{
             withCredentials: true, // Now this is was the missing piece in the client side 
+            // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
         });
         return response.data;
     } catch (error : any) {
@@ -203,7 +204,6 @@ export const authSlice = createSlice({
             state.isAuthLoading = false;
             state.isMeAuthSuccess = true;
             state.meData = action.payload;
-            // state.auth = action.payload;
         });
         builder.addCase(getMe.rejected, (state, action) => {
             state.isAuthLoading = false;

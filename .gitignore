@@ -13,9 +13,10 @@ dist-ssr
 *.local
 yarn.lock
 package-lock.json
-.env
+
 
 # Editor directories and files
+.env
 .vscode/*
 !.vscode/extensions.json
 .idea

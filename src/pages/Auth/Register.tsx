@@ -80,7 +80,7 @@ const Register = () => {
   const [jabatanId, setJabatanId] = useState('');
   const [atasanId, setAtasanId] = useState();
   const [jamOperasionalId, setJamOperasionalId] = useState('');
-  const [groupsId, setGroupsId] = useState('');
+  const [groupId, setGroupId] = useState('');
   const [extention, setExtention] = useState('');
   const [quote, setQuote] = useState('');
 
@@ -128,20 +128,20 @@ const Register = () => {
     (state : any) => state.atasansReducer
   )
 
-  const {isAuthError, isAuthSuccess, isAuthLoading, messageAuth} = useSelector(
+  const {isAuthError, isMeAuthSuccess, isAuthSuccess, isAuthLoading, messageAuth} = useSelector(
     (state : any) => state.authReducer
   );
 
   const NotificationRegister = useRef<NotificationElement>();
 
   useEffect(()=>{
-    if(isAuthSuccess && messageAuth){
+    if(isMeAuthSuccess && messageAuth){
       setMsg(messageAuth.msg);
       NotificationRegister.current?.showToast();
       navigate('/login');
       dispatch(resetAuth());
     }
-  },[isAuthSuccess, messageAuth]);
+  },[isMeAuthSuccess, messageAuth]);
 
   useEffect(()=>{
     if(isAuthError && messageAuth){
@@ -198,6 +198,44 @@ const Register = () => {
 
   const submitRegister = (e : any) => {
     e.preventDefault();
+    console.log(
+      absenId ,'x'
+      ,nik ,'x'
+      ,name ,'x'
+      ,email ,'x'
+      ,password,'x'
+      ,ganderId,'x'
+      ,tempatLahir,'x'
+      ,tanggalLahir,'x'
+      ,statusPerkawinanId,'x'
+      ,jumlahAnak,'x'
+      ,namaIbu,'x'
+      ,pendidikanId,'x'
+      ,namaSekolah,'x'
+      ,jurusanSekolah,'x'
+      ,tahunLulus,'x'
+      ,ipk,'x'
+      ,nomorHp,'x'
+      ,nomorKtp,'x'
+      ,alamatKtp,'x'
+      ,alamatDomisili,'x'
+      ,bankId,'x'
+      ,nomorRekening,'x'
+      ,nomorNpwp,'x'
+      ,nomorBpjsKesehatan,'x'
+      ,nomorBpjsKetenagakerjaan,'x'
+      ,contactEmergencyId,'x'
+      ,emergencyNumber,'x'
+      ,emergencyAddress,'x'
+      ,nomorSim,'x'
+      ,golonganDarahId,'x'
+      ,penempatanId,'x'
+      ,jabatanId,'x'
+      ,jamOperasionalId,'x'
+      ,groupId,'x'
+      ,extention,'x'
+      ,quote,'x'
+    );
     if((
       absenId 
       && nik 
@@ -232,7 +270,7 @@ const Register = () => {
       && penempatanId
       && jabatanId
       && jamOperasionalId
-      && groupsId
+      && groupId
       && extention
       && quote
       ) === '') return infoError();
@@ -272,7 +310,7 @@ const Register = () => {
       jabatanId,
       atasanId,
       jamOperasionalId,
-      groupsId,
+      groupId,
       extention,
       quote
       }));
@@ -395,8 +433,8 @@ const Register = () => {
               setAtasanId={setAtasanId}
               jamOperasionalId={jamOperasionalId}
               setJamOperasionalId={setJamOperasionalId}
-              groupsId={groupsId}
-              setGroupsId={setGroupsId}
+              groupId={groupId}
+              setGroupId={setGroupId}
               extention={extention}
               setExtention={setExtention}
               quote={quote}

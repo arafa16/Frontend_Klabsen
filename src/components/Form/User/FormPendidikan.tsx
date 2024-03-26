@@ -57,7 +57,7 @@ const FormPendidikan = (props : any) => {
                 <FormInput
                 formInputSize="sm"
                 id="tahunLulus"
-                type="text"
+                type="number"
                 placeholder=""
                 name='tahunLulus'
                 value={tahunLulus}
