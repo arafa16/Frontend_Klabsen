@@ -145,7 +145,7 @@ const DasboardUser = () => {
 
   return (
     <div className="grid grid-cols-12 gap-6">
-      {/* <div className="col-span-12 2xl:col-span-9">
+      <div className="col-span-12 2xl:col-span-9">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 mt-4 sm:col-span-6 lg:col-span-3 sm:row-start-4 md:row-start-3 lg:row-start-auto">
             <UserProfile 
@@ -196,7 +196,7 @@ const DasboardUser = () => {
               </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
