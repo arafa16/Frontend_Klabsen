@@ -16,8 +16,8 @@ const FormEditJamOperasional = (props : any) => {
         changeDataSetting,
         deleteDataSetting,
         tipeAbsenSelect,
-        tipeAbsenId,
-        setTipeAbsenId
+        // tipeAbsenId,
+        // setTipeAbsenId
     } = props;
     const navigate = useNavigate();
 
@@ -80,7 +80,7 @@ const FormEditJamOperasional = (props : any) => {
                             onChange={(e)=>setKeterangan(e.target.value)}
                         />
                     </div>
-                    <div className="col-span-12 intro-y sm:col-span-6">
+                    {/* <div className="col-span-12 intro-y sm:col-span-6">
                         <FormLabel htmlFor="input-wizard-1">Tipe Absen {tipeAbsenId}</FormLabel>
                         <FormSelect
                             formSelectSize="sm"
@@ -94,7 +94,7 @@ const FormEditJamOperasional = (props : any) => {
                                 <option key={key} value={tipeAbsen && tipeAbsen.id}>{tipeAbsen && tipeAbsen.name}</option>
                             ))}
                         </FormSelect>
-                    </div>
+                    </div> */}
                     <div className="col-span-12 intro-y sm:col-span-6">
                         <FormLabel htmlFor="input-wizard-1">Is Active ?</FormLabel>
                         <FormSelect

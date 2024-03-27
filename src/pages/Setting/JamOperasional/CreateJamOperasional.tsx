@@ -13,7 +13,6 @@ const CreateJamOperasional = () => {
     const [keterangan, setKeterangan] = useState('');
     const [code, setCode] = useState('');
     const [isActive, setIsActive] = useState('');
-    const [tipeAbsenId, setTipeAbsenId] = useState('');
     const [tipeAbsenSelect, setTipeAbsenSelect] = useState([]);
 
     const dispatch = useDispatch();
@@ -47,7 +46,7 @@ const CreateJamOperasional = () => {
     const createDataSetting = (e : any) => {
         e.preventDefault();
         dispatch(createJamOperasionals({
-            uuid, name, jamMasuk, jamPulang, keterangan, code, tipeAbsenId, isActive
+            uuid, name, jamMasuk, jamPulang, keterangan, code, isActive
         }));
     }
 
@@ -72,8 +71,6 @@ const CreateJamOperasional = () => {
                 linkBack={'/jamOperasional'}
                 createDataSetting={createDataSetting}
                 tipeAbsenSelect={tipeAbsenSelect}
-                tipeAbsenId={tipeAbsenId}
-                setTipeAbsenId={setTipeAbsenId}
             />
         </div>
     </div>

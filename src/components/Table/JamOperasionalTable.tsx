@@ -102,15 +102,6 @@ const JamOperasionalTable = (props : any) => {
                                     {data && data.code}
                                 </span>
                             </div>
-                            {/* <div className="w-24 truncate sm:w-48">
-                                <span
-                                    className={clsx([
-                                    "ml-3 truncate"
-                                    ])}
-                                    >
-                                    {data.tipe_absen && data.tipe_absen.name}
-                                </span>
-                            </div> */}
                             <div
                                 className={clsx([
                                 "pl-10 ml-auto whitespace-nowrap"

@@ -72,7 +72,6 @@ export const createJamOperasionals: any = createAsyncThunk("createJamOperasional
             jamPulang: jamOperasionals.jamPulang,
             keterangan: jamOperasionals.keterangan,
             code: jamOperasionals.code,
-            tipeAbsenId:jamOperasionals.tipeAbsenId,
             isActive: jamOperasionals.isActive
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
@@ -96,7 +95,6 @@ export const updateJamOperasionals: any = createAsyncThunk("updateJamOperasional
             jamPulang: jamOperasionals.jamPulang,
             keterangan: jamOperasionals.keterangan,
             code: jamOperasionals.code,
-            tipeAbsenId:jamOperasionals.tipeAbsenId,
             isActive: jamOperasionals.isActive
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 

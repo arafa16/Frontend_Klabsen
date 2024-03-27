@@ -13,7 +13,7 @@ const EditJamOperasional = () => {
     const [keterangan, setKeterangan] = useState('');
     const [code, setCode] = useState('');
     const [isActive, setIsActive] = useState('');
-    const [tipeAbsenId, setTipeAbsenId] = useState('');
+    // const [tipeAbsenId, setTipeAbsenId] = useState('');
     const [tipeAbsenSelect, setTipeAbsenSelect] = useState([]);
 
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const EditJamOperasional = () => {
             setJamPulang(jamOperasionals && jamOperasionals.jamPulang);
             setKeterangan(jamOperasionals && jamOperasionals.keterangan);
             setCode(jamOperasionals && jamOperasionals.code);
-            setTipeAbsenId(jamOperasionals && jamOperasionals.tipeAbsenId)
+            // setTipeAbsenId(jamOperasionals && jamOperasionals.tipeAbsenId)
             setIsActive(jamOperasionals && jamOperasionals.isActive ? '1' : '0');
             dispatch(resetJamOperasionals());
         }
@@ -67,7 +67,7 @@ const EditJamOperasional = () => {
     const changeDataSetting = (e : any) => {
         e.preventDefault();
         dispatch(updateJamOperasionals({
-            uuid, name, jamMasuk, jamPulang, keterangan, code, tipeAbsenId, isActive
+            uuid, name, jamMasuk, jamPulang, keterangan, code, isActive
         }));
     }
 
@@ -96,8 +96,8 @@ const EditJamOperasional = () => {
                 changeDataSetting={changeDataSetting}
                 deleteDataSetting={deleteDataSetting}
                 tipeAbsenSelect={tipeAbsenSelect}
-                tipeAbsenId={tipeAbsenId}
-                setTipeAbsenId={setTipeAbsenId}
+                // tipeAbsenId={tipeAbsenId}
+                // setTipeAbsenId={setTipeAbsenId}
             />
         </div>
     )
