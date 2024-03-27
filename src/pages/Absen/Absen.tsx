@@ -140,7 +140,7 @@ const Absen = () => {
     //absen by web
     const clickAbsen = (codeTipeAbsen :any) => {
         const dateNow = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
-        // alert(codeTipeAbsen);
+        alert(dateNow);
         dispatch(createInOutsByAbsenWeb({
             userId:dataUser.uuid,
             tanggalMulai:dateNow,
