@@ -20,11 +20,13 @@ const Calendar = (props : any) => {
 
   const inputAbsen = (datas : any) => {
     datas.map((data : any)=>{
+        const dateAbsenMulai = new Date(data.tanggalMulai);
+        const dateAbsenSelesai = new Date(data.tanggalSelesai);
         const newData : any = {
           id:data.uuid,
-          title:dayjs(data.tanggalMulai).format('HH:mm:ss')+' '+data.tipe_absen.name,
-          start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
-          end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
+          title:dayjs(dateAbsenMulai).format('HH:mm:ss')+' '+data.tipe_absen.name,
+          start:dayjs(dateAbsenMulai).format('YYYY-MM-DD'),
+          end:dayjs(dateAbsenSelesai).format('YYYY-MM-DD'),
           color:data.pelanggaran.code == 2 ? '#ff3c00' : '',
           className:'text-xs w-full px-0',
           groupId:'absen'
