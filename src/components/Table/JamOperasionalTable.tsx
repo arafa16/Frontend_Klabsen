@@ -63,7 +63,7 @@ const JamOperasionalTable = (props : any) => {
                                     "ml-3 truncate"
                                     ])}
                                     >
-                                    {data.name}
+                                    {data && data.name}
                                 </div>
                             </div>
                             <div className="w-24 truncate sm:w-48">
@@ -72,7 +72,7 @@ const JamOperasionalTable = (props : any) => {
                                     "ml-3 truncate"
                                     ])}
                                     >
-                                    {data.jamMasuk}
+                                    {data && data.jamMasuk}
                                 </span>
                             </div>
                             <div className="w-24 truncate sm:w-48">
@@ -81,7 +81,7 @@ const JamOperasionalTable = (props : any) => {
                                     "ml-3 truncate"
                                     ])}
                                     >
-                                    {data.jamPulang}
+                                    {data && data.jamPulang}
                                 </span>
                             </div>
                             <div className="w-24 truncate sm:w-48">
@@ -90,7 +90,7 @@ const JamOperasionalTable = (props : any) => {
                                     "ml-3 truncate"
                                     ])}
                                     >
-                                    {data.keterangan}
+                                    {data && data.keterangan}
                                 </span>
                             </div>
                             <div className="w-24 truncate sm:w-48">
@@ -99,10 +99,10 @@ const JamOperasionalTable = (props : any) => {
                                     "ml-3 truncate"
                                     ])}
                                     >
-                                    {data.code}
+                                    {data && data.code}
                                 </span>
                             </div>
-                            <div className="w-24 truncate sm:w-48">
+                            {/* <div className="w-24 truncate sm:w-48">
                                 <span
                                     className={clsx([
                                     "ml-3 truncate"
@@ -110,7 +110,7 @@ const JamOperasionalTable = (props : any) => {
                                     >
                                     {data.tipe_absen && data.tipe_absen.name}
                                 </span>
-                            </div>
+                            </div> */}
                             <div
                                 className={clsx([
                                 "pl-10 ml-auto whitespace-nowrap"
