@@ -5,9 +5,10 @@ import { getTipeNotificationsTable, resetTipeNotifications } from '../../../stor
 
 const TipeNotification = () => {
     const dispatch = useDispatch();
-    const [datas, setDatas] = useState([]);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+    const [allPage, setAllPage] = useState(0);
+    const [datas, setDatas] = useState([]);
 
     const {tipeNotifications, isTipeNotificationsSuccess} = useSelector(
         (state : any) => state.tipeNotificationsReducer
@@ -17,14 +18,35 @@ const TipeNotification = () => {
         dispatch(getTipeNotificationsTable({
             limit, page
         }));
-    },[]);
+    },[limit, page]);
 
     useEffect(()=>{
         if(isTipeNotificationsSuccess && tipeNotifications){
             setDatas(tipeNotifications);
+            countData(tipeNotifications.count);
             dispatch(resetTipeNotifications());
         }
-    },[tipeNotifications, isTipeNotificationsSuccess])
+    },[tipeNotifications, isTipeNotificationsSuccess]);
+
+    //table
+    const countData = (allData : any) =>{
+        const count = allData / limit;
+        setAllPage(Math.ceil(count))
+    }
+
+    const nextPage = () => {
+        if(page < allPage){
+            const count = page + 1;
+            setPage(count);
+        }
+    }
+
+    const prevPage = () => {
+        if(page > 1){
+            const count = page - 1;
+            setPage(count);
+        }
+    }
 
     return (
         <div>
@@ -32,6 +54,10 @@ const TipeNotification = () => {
                 datas={datas}
                 linkView="/editTipeNotification"
                 linkCreate="/createTipeNotification"
+                nextPage={nextPage}
+                prevPage={prevPage}
+                page={page}
+                allPage={allPage}
             />
         </div>
     )

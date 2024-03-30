@@ -22,7 +22,7 @@ const Calendar = (props : any) => {
     datas.map((data : any)=>{
         const newData : any = {
           id:data.uuid,
-          title:dayjs(data.tanggalMulai).format('HH:mm:ss')+' '+data.tipe_absen.name,
+          title:dayjs(data.tanggalMulai).locale('zh-cn').format('HH:mm:ss')+' '+data.tipe_absen.name,
           start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
           color:data.pelanggaran.code == 2 ? '#ff3c00' : '',

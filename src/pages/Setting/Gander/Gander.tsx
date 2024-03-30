@@ -5,9 +5,10 @@ import { getGandersTable, resetGanders } from '../../../stores/features/ganderSl
 
 const Gander = () => {
     const dispatch = useDispatch();
-    const [datas, setDatas] = useState([]);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+    const [allPage, setAllPage] = useState(0);
+    const [datas, setDatas] = useState([]);
 
     const {ganders, isGandersSuccess} = useSelector(
         (state : any) => state.ganderReducer
@@ -17,14 +18,35 @@ const Gander = () => {
         dispatch(getGandersTable({
             limit, page
         }));
-    },[]);
+    },[limit, page]);
 
     useEffect(()=>{
         if(isGandersSuccess && ganders){
             setDatas(ganders);
+            countData(ganders.count);
             dispatch(resetGanders());
         }
-    },[ganders, isGandersSuccess])
+    },[ganders, isGandersSuccess]);
+
+    //table
+    const countData = (allData : any) =>{
+        const count = allData / limit;
+        setAllPage(Math.ceil(count))
+    }
+
+    const nextPage = () => {
+        if(page < allPage){
+            const count = page + 1;
+            setPage(count);
+        }
+    }
+
+    const prevPage = () => {
+        if(page > 1){
+            const count = page - 1;
+            setPage(count);
+        }
+    }
 
     return (
         <div>
@@ -32,6 +54,10 @@ const Gander = () => {
                 datas={datas}
                 linkView="/editGander"
                 linkCreate="/createGander"
+                nextPage={nextPage}
+                prevPage={prevPage}
+                page={page}
+                allPage={allPage}
             />
         </div>
     )

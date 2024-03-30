@@ -5,9 +5,10 @@ import { getTipePendapatansTable, resetTipePendapatans } from '../../../stores/f
 
 const TipePendapatan = () => {
     const dispatch = useDispatch();
-    const [datas, setDatas] = useState([]);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+    const [allPage, setAllPage] = useState(0);
+    const [datas, setDatas] = useState([]);
 
     const {tipePendapatans, isTipePendapatansSuccess} = useSelector(
         (state : any) => state.tipePendapatansReducer
@@ -17,14 +18,35 @@ const TipePendapatan = () => {
         dispatch(getTipePendapatansTable({
             limit, page
         }));
-    },[]);
+    },[limit, page]);
 
     useEffect(()=>{
         if(isTipePendapatansSuccess && tipePendapatans){
             setDatas(tipePendapatans);
+            countData(tipePendapatans.count);
             dispatch(resetTipePendapatans());
         }
-    },[tipePendapatans, isTipePendapatansSuccess])
+    },[tipePendapatans, isTipePendapatansSuccess]);
+
+    //table
+    const countData = (allData : any) =>{
+        const count = allData / limit;
+        setAllPage(Math.ceil(count))
+    }
+
+    const nextPage = () => {
+        if(page < allPage){
+            const count = page + 1;
+            setPage(count);
+        }
+    }
+
+    const prevPage = () => {
+        if(page > 1){
+            const count = page - 1;
+            setPage(count);
+        }
+    }
 
     return (
         <div>
@@ -32,6 +54,10 @@ const TipePendapatan = () => {
                 datas={datas}
                 linkView="/editTipePendapatan"
                 linkCreate="/createTipePendapatan"
+                nextPage={nextPage}
+                prevPage={prevPage}
+                page={page}
+                allPage={allPage}
             />
         </div>
     )

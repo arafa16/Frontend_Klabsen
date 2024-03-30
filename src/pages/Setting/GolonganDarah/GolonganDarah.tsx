@@ -5,9 +5,10 @@ import { getGolonganDarahsTable, resetGolonganDarahs } from '../../../stores/fea
 
 const GolonganDarah = () => {
     const dispatch = useDispatch();
-    const [datas, setDatas] = useState([]);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+    const [allPage, setAllPage] = useState(0);
+    const [datas, setDatas] = useState([]);
 
     const {golonganDarahs, isGolonganDarahsSuccess} = useSelector(
         (state : any) => state.golonganDarahsReducer
@@ -17,14 +18,35 @@ const GolonganDarah = () => {
         dispatch(getGolonganDarahsTable({
             limit, page
         }));
-    },[]);
+    },[limit, page]);
 
     useEffect(()=>{
         if(isGolonganDarahsSuccess && golonganDarahs){
             setDatas(golonganDarahs);
+            countData(golonganDarahs.count);
             dispatch(resetGolonganDarahs());
         }
-    },[golonganDarahs, isGolonganDarahsSuccess])
+    },[golonganDarahs, isGolonganDarahsSuccess]);
+
+    //table
+    const countData = (allData : any) =>{
+        const count = allData / limit;
+        setAllPage(Math.ceil(count))
+    }
+
+    const nextPage = () => {
+        if(page < allPage){
+            const count = page + 1;
+            setPage(count);
+        }
+    }
+
+    const prevPage = () => {
+        if(page > 1){
+            const count = page - 1;
+            setPage(count);
+        }
+    }
 
   return (
         <div>
@@ -32,6 +54,10 @@ const GolonganDarah = () => {
                 datas={datas}
                 linkView="/editGolonganDarah"
                 linkCreate="/createGolonganDarah"
+                nextPage={nextPage}
+                prevPage={prevPage}
+                page={page}
+                allPage={allPage}
             />
         </div>
   )

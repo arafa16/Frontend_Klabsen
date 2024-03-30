@@ -6,9 +6,10 @@ import { getTipeEventsTable, resetTipeEvents } from '../../../stores/features/ti
 
 const TipeEvent = () => {
     const dispatch = useDispatch();
-    const [datas, setDatas] = useState([]);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+    const [allPage, setAllPage] = useState(0);
+    const [datas, setDatas] = useState([]);
 
     const {tipeEvents, isTipeEventsSuccess} = useSelector(
         (state : any) => state.tipeEventsReducer
@@ -18,14 +19,35 @@ const TipeEvent = () => {
         dispatch(getTipeEventsTable({
             limit, page
         }));
-    },[]);
+    },[limit, page]);
 
     useEffect(()=>{
         if(isTipeEventsSuccess && tipeEvents){
             setDatas(tipeEvents);
+            countData(tipeEvents.count);
             dispatch(resetTipeEvents());
         }
     },[tipeEvents, isTipeEventsSuccess])
+
+    //table
+    const countData = (allData : any) =>{
+        const count = allData / limit;
+        setAllPage(Math.ceil(count))
+    }
+
+    const nextPage = () => {
+        if(page < allPage){
+            const count = page + 1;
+            setPage(count);
+        }
+    }
+
+    const prevPage = () => {
+        if(page > 1){
+            const count = page - 1;
+            setPage(count);
+        }
+    }
 
     return (
         <div>
@@ -33,6 +55,10 @@ const TipeEvent = () => {
                 datas={datas}
                 linkView="/editTipeEvent"
                 linkCreate="/createTipeEvent"
+                nextPage={nextPage}
+                prevPage={prevPage}
+                page={page}
+                allPage={allPage}
             />
         </div>
     )
