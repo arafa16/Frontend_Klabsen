@@ -64,7 +64,7 @@ const UserProfile = () => {
             title={`Profile`}
           />
           {/* <ExperienceUser /> */}
-          <SkillUser />
+          {/* <SkillUser /> */}
         </div>
         {/* END: Profile Content */}
         {/* BEGIN: Profile Side Menu */}
@@ -72,7 +72,7 @@ const UserProfile = () => {
           {/* <EducationUser 
             users={users}
           /> */}
-          <FriendsUser />
+          {/* <FriendsUser /> */}
         </div>
         {/* END: Profile Side Menu */}
       </div>
