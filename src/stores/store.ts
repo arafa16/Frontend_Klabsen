@@ -32,6 +32,7 @@ import periodeKerjasSlice from "./features/periodeKerjasSlice";
 import tipeEventsSlice from "./features/tipeEventSlice";
 import eventsSlice from "./features/eventsSlice";
 import perhitunganSlice from "./features/perhitunganSlice";
+import mesinAbsensSlice from "./features/mesinAbsensSlice";
 
 export const store = configureStore({
   reducer: {
@@ -67,7 +68,8 @@ export const store = configureStore({
     periodeKerjasReducer : periodeKerjasSlice,
     tipeEventsReducer : tipeEventsSlice,
     eventsReducer : eventsSlice,
-    perhitunganReducer : perhitunganSlice
+    perhitunganReducer : perhitunganSlice,
+    mesinAbsensReducer: mesinAbsensSlice
   },
 });
 

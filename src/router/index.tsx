@@ -90,6 +90,9 @@ import EventPage from "../pages/EventsPage/EventPage";
 import EditEvent from "../pages/EventsPage/EditEvent";
 import CreateEvent from "../pages/EventsPage/CreateEvent";
 import PerhitunganAbsen from "../pages/PerhitunganAbsen/PerhitunganAbsen";
+import MesinAbsen from "../pages/Setting/MesinAbsen/MesinAbsen";
+import EditMesinAbsen from "../pages/Setting/MesinAbsen/EditMesinAbsen";
+import CreateMesinAbsen from "../pages/Setting/MesinAbsen/CreateMesinAbsen";
 
 function Router() {
   const routes = [
@@ -459,6 +462,19 @@ function Router() {
         {
           path:"/perhitunganAbsen",
           element: <PerhitunganAbsen />
+        },
+        //mesin absen
+        {
+          path:"/mesinAbsen",
+          element: <MesinAbsen />
+        },
+        {
+          path:"/createMesinAbsen",
+          element: <CreateMesinAbsen />
+        },
+        {
+          path:"/editMesinAbsen/:id",
+          element: <EditMesinAbsen />
         }
       ],
     },

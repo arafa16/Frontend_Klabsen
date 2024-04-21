@@ -224,6 +224,12 @@ const initialState: SideMenuState = {
           title: "Periode Kerja",
           code: 'setting',
         },
+        {
+          icon: "Watch",
+          pathname: "/mesinAbsen",
+          title: "Mesin Absen",
+          code: 'setting',
+        },
       ],
     }
   ],
