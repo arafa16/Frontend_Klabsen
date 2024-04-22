@@ -10,6 +10,7 @@ import contactsSlice from "./features/contactsSlice";
 import golonganDarahSlice from "./features/golonganDarahSlice";
 import penempatansSlice from "./features/penempatansSlice";
 import jabatansSlice from "./features/jabatansSlice";
+import jamOperasionalGroupsSlice from "./features/jamOperasionalGroupsSlice";
 import jamOperasionalsSlice from "./features/jamOperasionalsSlice";
 import groupsSlice from "./features/groupsSlice";
 import atasansSlice from "./features/atasansSlice";
@@ -48,6 +49,7 @@ export const store = configureStore({
     penempatansReducer : penempatansSlice,
     jabatansReducer : jabatansSlice, 
     jamOperasionalsReducer : jamOperasionalsSlice,
+    jamOperasionalGroupsReducer : jamOperasionalGroupsSlice,
     groupsReducer : groupsSlice,
     atasansReducer : atasansSlice,
     authReducer : authSlice,

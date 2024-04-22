@@ -7,13 +7,13 @@ const FormDataOperasionalKantor = (props : any) => {
         penempatanId, setPenempatanId,
         jabatanId, setJabatanId,
         atasanId, setAtasanId,
-        jamOperasionalId, setJamOperasionalId,
+        jamOperasionalGroupId, setJamOperasionalGroupId,
         groupId, setGroupId,
         extention, setExtention,
         quote, setQuote,
         penempatans,
         jabatans,
-        jamOperasionals,
+        jamOperasionalGroups,
         groups,
         atasans
     } = props;
@@ -65,16 +65,16 @@ const FormDataOperasionalKantor = (props : any) => {
                 </FormSelect>
             </div>
             <div className="col-span-12 intro-y sm:col-span-4">
-                <FormLabel htmlFor="input-wizard-1">Jam Operasional *</FormLabel>
+                <FormLabel htmlFor="input-wizard-1">Jam Operasional Group *</FormLabel>
                 <FormSelect
                     formSelectSize="sm"
                     aria-label=".form-select-sm example"
                     name='jamOperasionalId'
-                    value={jamOperasionalId}
-                    onChange={(e)=>setJamOperasionalId(e.target.value)}
+                    value={jamOperasionalGroupId}
+                    onChange={(e)=>setJamOperasionalGroupId(e.target.value)}
                     >
                         <option></option>
-                        {jamOperasionals && jamOperasionals.map((data : any, index : any)=>(
+                        {jamOperasionalGroups && jamOperasionalGroups.map((data : any, index : any)=>(
                             <option key={index} value={data.id}>{data.name}</option>
                         ))}
                 </FormSelect>

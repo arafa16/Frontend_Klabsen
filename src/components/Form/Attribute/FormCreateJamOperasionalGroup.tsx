@@ -4,18 +4,14 @@ import { FormLabel, FormSelect, FormInput } from '../../../base-components/Form'
 import Button from '../../../base-components/Button';
 import { useNavigate } from 'react-router-dom';
 
-const FormCreateJamOperasional = (props : any) => {
+const FormCreateJamOperasionalGroup = (props : any) => {
     const {
         name, setName,
-        jamMasuk, setJamMasuk,
-        jamPulang, setJamPulang,
         keterangan, setKeterangan,
         code, setCode, 
         isActive, setIsActive, 
         linkBack,
-        jamOperasionalGroupId, setJamOperasionalGroupId,
-        jamOperasionalGroupSelect,
-        createDataSetting
+        createDataSetting,
     } = props;
     const navigate = useNavigate();
 
@@ -24,7 +20,7 @@ const FormCreateJamOperasional = (props : any) => {
             <form onSubmit={createDataSetting}>
                 <div className={`grid grid-cols-12 gap-4 mt-5 gap-y-5`}>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="name">Name</FormLabel>
+                        <FormLabel htmlFor="input-wizard-1">Name</FormLabel>
                         <FormInput
                             formInputSize="sm"
                             id="name"
@@ -35,29 +31,7 @@ const FormCreateJamOperasional = (props : any) => {
                         />
                     </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="jamMasuk">Jam Masuk</FormLabel>
-                        <FormInput
-                            formInputSize="sm"
-                            id="jamMasuk"
-                            type="time"
-                            name='jamMasuk'
-                            value={jamMasuk}
-                            onChange={(e)=>setJamMasuk(e.target.value)}
-                        />
-                    </div>
-                    <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="jamPulang">Jam Pulang</FormLabel>
-                        <FormInput
-                            formInputSize="sm"
-                            id="jamPulang"
-                            type="time"
-                            name='jamPulang'
-                            value={jamPulang}
-                            onChange={(e)=>setJamPulang(e.target.value)}
-                        />
-                    </div>
-                    <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="code">Code</FormLabel>
+                        <FormLabel htmlFor="input-wizard-1">Code</FormLabel>
                         <FormInput
                             formInputSize="sm"
                             id="code"
@@ -68,7 +42,7 @@ const FormCreateJamOperasional = (props : any) => {
                         />
                     </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="keterangan">Keterangan</FormLabel>
+                        <FormLabel htmlFor="input-wizard-1">Keterangan</FormLabel>
                         <FormInput
                             formInputSize="sm"
                             id="keterangan"
@@ -79,27 +53,10 @@ const FormCreateJamOperasional = (props : any) => {
                         />
                     </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="jamOperasionalGroupId">Jam Operasional Group</FormLabel>
+                        <FormLabel htmlFor="input-wizard-1">Is Active ?</FormLabel>
                         <FormSelect
                             formSelectSize="sm"
                             aria-label=".form-select-sm example"
-                            id="jamOperasionalGroupId"
-                            name='jamOperasionalGroupId'
-                            value={jamOperasionalGroupId}
-                            onChange={(e)=>setJamOperasionalGroupId(e.target.value)}
-                            >
-                            <option></option>
-                            {jamOperasionalGroupSelect.map((data :any, index:any)=>(
-                                <option key={index} value={data.uuid}>{data.name}</option>
-                            ))}
-                        </FormSelect>
-                    </div>
-                    <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="isActive">Is Active ?</FormLabel>
-                        <FormSelect
-                            formSelectSize="sm"
-                            aria-label=".form-select-sm example"
-                            id="isActive"
                             name='isActive'
                             value={isActive}
                             onChange={(e)=>setIsActive(e.target.value)}
@@ -139,4 +96,4 @@ const FormCreateJamOperasional = (props : any) => {
     )
 }
 
-export default FormCreateJamOperasional
+export default FormCreateJamOperasionalGroup

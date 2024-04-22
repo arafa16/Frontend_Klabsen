@@ -13,11 +13,10 @@ const FormEditJamOperasional = (props : any) => {
         code, setCode,
         isActive, setIsActive,
         linkBack,
+        jamOperasionalGroupId, setJamOperasionalGroupId,
+        jamOperasionalGroupSelect,
         changeDataSetting,
         deleteDataSetting,
-        tipeAbsenSelect,
-        // tipeAbsenId,
-        // setTipeAbsenId
     } = props;
     const navigate = useNavigate();
 
@@ -80,21 +79,22 @@ const FormEditJamOperasional = (props : any) => {
                             onChange={(e)=>setKeterangan(e.target.value)}
                         />
                     </div>
-                    {/* <div className="col-span-12 intro-y sm:col-span-6">
-                        <FormLabel htmlFor="input-wizard-1">Tipe Absen {tipeAbsenId}</FormLabel>
+                    <div className="col-span-12 intro-y sm:col-span-6">
+                        <FormLabel htmlFor="jamOperasionalGroupId">Jam Operasional Group</FormLabel>
                         <FormSelect
                             formSelectSize="sm"
                             aria-label=".form-select-sm example"
-                            name='tipeAbsenId'
-                            value={tipeAbsenId}
-                            onChange={(e)=>setTipeAbsenId(e.target.value)}
+                            id="jamOperasionalGroupId"
+                            name='jamOperasionalGroupId'
+                            value={jamOperasionalGroupId}
+                            onChange={(e)=>setJamOperasionalGroupId(e.target.value)}
                             >
-                            <option value={''}></option>
-                            {tipeAbsenSelect.map((tipeAbsen : any, key : any)=>(
-                                <option key={key} value={tipeAbsen && tipeAbsen.id}>{tipeAbsen && tipeAbsen.name}</option>
+                            <option></option>
+                            {jamOperasionalGroupSelect.map((data :any, index:any)=>(
+                                <option key={index} value={data.uuid}>{data.name}</option>
                             ))}
                         </FormSelect>
-                    </div> */}
+                    </div>
                     <div className="col-span-12 intro-y sm:col-span-6">
                         <FormLabel htmlFor="input-wizard-1">Is Active ?</FormLabel>
                         <FormSelect

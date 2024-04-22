@@ -220,6 +220,12 @@ const initialState: SideMenuState = {
         },
         {
           icon: "Watch",
+          pathname: "/jamOperasionalGroup",
+          title: "Jam Operasional Group",
+          code: 'setting',
+        },
+        {
+          icon: "Watch",
           pathname: "/periodeKerja",
           title: "Periode Kerja",
           code: 'setting',

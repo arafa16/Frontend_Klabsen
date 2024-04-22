@@ -18,7 +18,7 @@ import { getContacts } from "../../stores/features/contactsSlice";
 import { getGolonganDarahs } from "../../stores/features/golonganDarahSlice";
 import { getPenempatans } from "../../stores/features/penempatansSlice";
 import { getJabatans } from "../../stores/features/jabatansSlice";
-import { getJamOperasionals } from "../../stores/features/jamOperasionalsSlice";
+import { getJamOperasionalGroups } from "../../stores/features/jamOperasionalGroupsSlice";
 import { getGroups } from "../../stores/features/groupsSlice";
 import { getAtasans } from "../../stores/features/atasansSlice";
 import { getStatus } from "../../stores/features/statusSlice";
@@ -80,7 +80,7 @@ const UpdateEmploye = () => {
   const [penempatanId, setPenempatanId] = useState('');
   const [jabatanId, setJabatanId] = useState('');
   const [atasanId, setAtasanId] = useState();
-  const [jamOperasionalId, setJamOperasionalId] = useState('');
+  const [jamOperasionalGroupId, setJamOperasionalGroupId] = useState('');
   const [groupId, setGroupId] = useState('');
   const [extention, setExtention] = useState('');
   const [quote, setQuote] = useState('');
@@ -122,8 +122,8 @@ const UpdateEmploye = () => {
     (state : any) => state.jabatansReducer
   );
 
-  const {jamOperasionals} = useSelector(
-    (state : any) => state.jamOperasionalsReducer
+  const {jamOperasionalGroups} = useSelector(
+    (state : any) => state.jamOperasionalGroupsReducer
   );
 
   const {groups} = useSelector(
@@ -147,7 +147,7 @@ const UpdateEmploye = () => {
     dispatch(getGolonganDarahs());
     dispatch(getPenempatans());
     dispatch(getJabatans());
-    dispatch(getJamOperasionals());
+    dispatch(getJamOperasionalGroups());
     dispatch(getGroups());
     dispatch(getAtasans());
     dispatch(getStatus());
@@ -232,7 +232,7 @@ const UpdateEmploye = () => {
     setPenempatanId(data && data.penempatanId);
     setJabatanId(data && data.jabatanId);
     setAtasanId(data && data.atasanId);
-    setJamOperasionalId(data && data.jamOperasionalId);
+    setJamOperasionalGroupId(data && data.jamOperasionalGroupId);
     setGroupId(data && data.groupId);
     setExtention(data && data.extention);
     setQuote(data && data.quote);
@@ -301,7 +301,7 @@ const UpdateEmploye = () => {
       && golonganDarahId
       && penempatanId
       && jabatanId
-      && jamOperasionalId
+      && jamOperasionalGroupId
       && groupId
       && extention
       && quote
@@ -343,7 +343,7 @@ const UpdateEmploye = () => {
       penempatanId,
       jabatanId,
       atasanId,
-      jamOperasionalId,
+      jamOperasionalGroupId,
       groupId,
       extention,
       quote,
@@ -474,8 +474,8 @@ const UpdateEmploye = () => {
             setJabatanId={setJabatanId}
             atasanId={atasanId}
             setAtasanId={setAtasanId}
-            jamOperasionalId={jamOperasionalId}
-            setJamOperasionalId={setJamOperasionalId}
+            jamOperasionalGroupId={jamOperasionalGroupId}
+            setJamOperasionalGroupId={setJamOperasionalGroupId}
             groupId={groupId}
             setGroupId={setGroupId}
             extention={extention}
@@ -485,7 +485,7 @@ const UpdateEmploye = () => {
             //select data
             penempatans={penempatans}
             jabatans={jabatans}
-            jamOperasionals={jamOperasionals}
+            jamOperasionalGroups={jamOperasionalGroups}
             groups={groups}
             atasans={atasans}
           />

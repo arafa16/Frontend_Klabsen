@@ -93,6 +93,9 @@ import PerhitunganAbsen from "../pages/PerhitunganAbsen/PerhitunganAbsen";
 import MesinAbsen from "../pages/Setting/MesinAbsen/MesinAbsen";
 import EditMesinAbsen from "../pages/Setting/MesinAbsen/EditMesinAbsen";
 import CreateMesinAbsen from "../pages/Setting/MesinAbsen/CreateMesinAbsen";
+import JamOperasionalGroup from "../pages/Setting/JamOperasionalGroup/JamOperasionalGroup";
+import CreateJamOperasionalGroup from "../pages/Setting/JamOperasionalGroup/CreateJamOperasionalGroup";
+import EditJamOperasionalGroup from "../pages/Setting/JamOperasionalGroup/EditJamOperasionalGroup";
 
 function Router() {
   const routes = [
@@ -330,6 +333,19 @@ function Router() {
         {
           path: "/editJamOperasional/:uuid",
           element: <EditJamOperasional />
+        },
+        //Jam Operasional
+        {
+          path: "/jamOperasionalGroup",
+          element: <JamOperasionalGroup />
+        },
+        {
+          path: "/createJamOperasionalGroup",
+          element: <CreateJamOperasionalGroup />
+        },
+        {
+          path: "/editJamOperasionalGroup/:uuid",
+          element: <EditJamOperasionalGroup />
         },
         //employe
         {

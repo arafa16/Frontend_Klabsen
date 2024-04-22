@@ -315,10 +315,10 @@ const DataUser = (props : any) => {
                             </div>
                             <div>
                                 <div className="font-medium whitespace-nowrap">
-                                    Jam Operasional
+                                    Jam Operasional Group
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users.jam_operasional && users.jam_operasional.name}
+                                    {users.jam_operasional_group && users.jam_operasional_group.name}
                                 </div>
                             </div>
                             <div>

@@ -3,7 +3,7 @@ import FormCreateJamOperasional from '../../../components/Form/Attribute/FormCre
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { resetJamOperasionals, createJamOperasionals } from '../../../stores/features/jamOperasionalsSlice';
-import { getTipeAbsens, resetTipeAbsens } from '../../../stores/features/tipeAbsenSlice';
+import { resetJamOperasionalGroups, createJamOperasionalGroups, getJamOperasionalGroups } from '../../../stores/features/jamOperasionalGroupsSlice';
 
 const CreateJamOperasional = () => {
     const {uuid} = useParams();
@@ -11,9 +11,10 @@ const CreateJamOperasional = () => {
     const [jamMasuk, setJamMasuk] = useState('');
     const [jamPulang, setJamPulang] = useState('');
     const [keterangan, setKeterangan] = useState('');
+    const [jamOperasionalGroupId, setJamOperasionalGroupId] = useState('');
+    const [jamOperasionalGroupSelect, setJamOperasionalGroupSelect] = useState([]);
     const [code, setCode] = useState('');
     const [isActive, setIsActive] = useState('');
-    const [tipeAbsenSelect, setTipeAbsenSelect] = useState([]);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,9 +23,19 @@ const CreateJamOperasional = () => {
         (state : any) => state.jamOperasionalsReducer
     )
 
-    const {tipeAbsens, isTipeAbsensSuccess} = useSelector(
-        (state : any) => state.tipeAbsensReducer
+    const {jamOperasionalGroups, isJamOperasionalGroupsSuccess, messageJamOperasionalGroups} = useSelector(
+        (state : any) => state.jamOperasionalGroupsReducer
     )
+
+    useEffect(()=>{
+        if(jamOperasionalGroups && isJamOperasionalGroupsSuccess){
+            setJamOperasionalGroupSelect(jamOperasionalGroups);
+        }
+    },[jamOperasionalGroups, isJamOperasionalGroupsSuccess])
+
+    useEffect(()=>{
+        dispatch(getJamOperasionalGroups());
+    },[])
 
     useEffect(()=>{
         if(isJamOperasionalsSuccess && messageJamOperasionals){
@@ -33,24 +44,12 @@ const CreateJamOperasional = () => {
         }
     },[isJamOperasionalsSuccess, messageJamOperasionals])
 
-    useEffect(()=>{
-        if(tipeAbsens && isTipeAbsensSuccess){
-            setTipeAbsenSelect(tipeAbsens)
-        }
-    },[tipeAbsens, isTipeAbsensSuccess]);
-
-    useEffect(()=>{
-        dispatch(getTipeAbsens());
-    },[]);
-
     const createDataSetting = (e : any) => {
         e.preventDefault();
         dispatch(createJamOperasionals({
-            uuid, name, jamMasuk, jamPulang, keterangan, code, isActive
+            uuid, name, jamMasuk, jamPulang, keterangan, jamOperasionalGroupId, code, isActive
         }));
     }
-
-
 
   return (
     <div className='w-full'>
@@ -64,13 +63,15 @@ const CreateJamOperasional = () => {
                 setJamPulang={setJamPulang}
                 keterangan={keterangan}
                 setKeterangan={setKeterangan}
+                jamOperasionalGroupId={jamOperasionalGroupId}
+                setJamOperasionalGroupId={setJamOperasionalGroupId}
+                jamOperasionalGroupSelect={jamOperasionalGroupSelect}
                 code={code}
                 setCode={setCode}
                 isActive={isActive}
                 setIsActive={setIsActive}
                 linkBack={'/jamOperasional'}
                 createDataSetting={createDataSetting}
-                tipeAbsenSelect={tipeAbsenSelect}
             />
         </div>
     </div>

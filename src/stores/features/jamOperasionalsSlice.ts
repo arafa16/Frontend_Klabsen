@@ -71,6 +71,7 @@ export const createJamOperasionals: any = createAsyncThunk("createJamOperasional
             jamMasuk: jamOperasionals.jamMasuk,
             jamPulang: jamOperasionals.jamPulang,
             keterangan: jamOperasionals.keterangan,
+            jamOperasionalGroupId: jamOperasionals.jamOperasionalGroupId,
             code: jamOperasionals.code,
             isActive: jamOperasionals.isActive
         },{
@@ -94,6 +95,7 @@ export const updateJamOperasionals: any = createAsyncThunk("updateJamOperasional
             jamMasuk: jamOperasionals.jamMasuk,
             jamPulang: jamOperasionals.jamPulang,
             keterangan: jamOperasionals.keterangan,
+            jamOperasionalGroupId: jamOperasionals.jamOperasionalGroupId,
             code: jamOperasionals.code,
             isActive: jamOperasionals.isActive
         },{

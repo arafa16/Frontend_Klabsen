@@ -12,6 +12,8 @@ const JamOperasionalTable = (props : any) => {
     const {datas, linkView, linkCreate, nextPage, prevPage, page, allPage} = props;
     const navigate = useNavigate();
 
+    console.log(datas,'datas');
+
     return (
         <>
         <div className="grid grid-cols-12 mt-5 box">
@@ -56,7 +58,7 @@ const JamOperasionalTable = (props : any) => {
                             ])}
                         >
                         <div className="flex px-5 py-3">
-                            <div className="flex items-center flex-none mr-5 w-48">
+                            <div className="flex items-center flex-none mr-5 w-72">
                                 <div className='w-16'>
                                     {index+1}
                                 </div>
@@ -93,6 +95,15 @@ const JamOperasionalTable = (props : any) => {
                                     ])}
                                     >
                                     {data && data.keterangan}
+                                </span>
+                            </div>
+                            <div className="w-24 truncate sm:w-48">
+                                <span
+                                    className={clsx([
+                                    "ml-3 truncate"
+                                    ])}
+                                    >
+                                    {data.jam_operasional_group && data.jam_operasional_group.name}
                                 </span>
                             </div>
                             <div className="w-24 truncate sm:w-48">

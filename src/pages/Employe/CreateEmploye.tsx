@@ -18,7 +18,7 @@ import { getContacts } from "../../stores/features/contactsSlice";
 import { getGolonganDarahs } from "../../stores/features/golonganDarahSlice";
 import { getPenempatans } from "../../stores/features/penempatansSlice";
 import { getJabatans } from "../../stores/features/jabatansSlice";
-import { getJamOperasionals } from "../../stores/features/jamOperasionalsSlice";
+import { getJamOperasionalGroups } from "../../stores/features/jamOperasionalGroupsSlice";
 import { getGroups } from "../../stores/features/groupsSlice";
 import { getAtasans } from "../../stores/features/atasansSlice";
 import { getStatus } from "../../stores/features/statusSlice";
@@ -79,7 +79,7 @@ const CreateEmploye = () => {
   const [penempatanId, setPenempatanId] = useState('');
   const [jabatanId, setJabatanId] = useState('');
   const [atasanId, setAtasanId] = useState();
-  const [jamOperasionalId, setJamOperasionalId] = useState('');
+  const [jamOperasionalGroupId, setJamOperasionalGroupId] = useState('');
   const [groupsId, setGroupsId] = useState('');
   const [extention, setExtention] = useState('');
   const [quote, setQuote] = useState('');
@@ -121,8 +121,8 @@ const CreateEmploye = () => {
     (state : any) => state.jabatansReducer
   );
 
-  const {jamOperasionals} = useSelector(
-    (state : any) => state.jamOperasionalsReducer
+  const {jamOperasionalGroups} = useSelector(
+    (state : any) => state.jamOperasionalGroupsReducer
   );
 
   const {groups} = useSelector(
@@ -146,7 +146,7 @@ const CreateEmploye = () => {
     dispatch(getGolonganDarahs());
     dispatch(getPenempatans());
     dispatch(getJabatans());
-    dispatch(getJamOperasionals());
+    dispatch(getJamOperasionalGroups());
     dispatch(getGroups());
     dispatch(getAtasans());
     dispatch(getStatus());
@@ -227,7 +227,7 @@ const CreateEmploye = () => {
       && golonganDarahId
       && penempatanId
       && jabatanId
-      && jamOperasionalId
+      && jamOperasionalGroupId
       && groupsId
       && extention
       && quote
@@ -269,7 +269,7 @@ const CreateEmploye = () => {
       penempatanId,
       jabatanId,
       atasanId,
-      jamOperasionalId,
+      jamOperasionalGroupId,
       groupsId,
       extention,
       quote,
@@ -402,8 +402,8 @@ const CreateEmploye = () => {
             setJabatanId={setJabatanId}
             atasanId={atasanId}
             setAtasanId={setAtasanId}
-            jamOperasionalId={jamOperasionalId}
-            setJamOperasionalId={setJamOperasionalId}
+            jamOperasionalGroupId={jamOperasionalGroupId}
+            setJamOperasionalGroupId={setJamOperasionalGroupId}
             groupsId={groupsId}
             setGroupsId={setGroupsId}
             extention={extention}
@@ -413,7 +413,7 @@ const CreateEmploye = () => {
             //select data
             penempatans={penempatans}
             jabatans={jabatans}
-            jamOperasionals={jamOperasionals}
+            jamOperasionalGroups={jamOperasionalGroups}
             groups={groups}
             atasans={atasans}
           />
