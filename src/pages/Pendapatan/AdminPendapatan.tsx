@@ -88,7 +88,6 @@ const viewSlip = (data : any) => {
       </Notification>
       <div className='grid grid-cols-12 grid-rows-2 mt-5'>
         <div className='col-start-1 col-span-6 row-span-2'>
-          
           <FormUploadPendapatan 
             getPendapatans={getPendapatans}
             fromUpload={fromUpload}

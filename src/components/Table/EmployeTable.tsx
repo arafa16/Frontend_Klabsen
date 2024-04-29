@@ -9,7 +9,7 @@ const EmployeTable = (props : any) => {
   
   return (
     <>
-      <div className="grid grid-cols-12 mt-5 box">
+      <div className="grid grid-cols-12 box">
           {/* BEGIN: Inbox Content */}
           <div className="col-span-12 xl:col-span-12 2xl:col-span-12">
               <div className="flex flex-col-reverse px-5 py-4 border-b sm:flex-row text-slate-500 border-slate-200/60">

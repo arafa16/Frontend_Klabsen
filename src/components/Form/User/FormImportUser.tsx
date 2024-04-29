@@ -1,36 +1,48 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import { FormInput, FormLabel } from '../../../base-components/Form'
 import Button from '../../../base-components/Button'
 import axios from 'axios';
 
-const FormUploadPendapatan = (props : any) => {
-    const {getPendapatans, fromUpload, NotificationRegister, setMsg, setFormUpload} = props;
+const FormImportUser = (props:any) => {
+    const {showForm, setShowForm, reloadData} = props;
+
     const [data, setData] = useState<any>([]);
 
     console.log(data, 'data');
 
-    const submitPendapatan = async(e : any) => {
+    // Ref object to reference the input element
+    const inputFile = useRef<any>(null);
+ 
+    // Function to reset the input element
+    const handleReset = () => {
+        if (inputFile.current) {
+            inputFile.current.value = "";
+            inputFile.current.type = "text";
+            inputFile.current.type = "file";
+        }
+    };
+
+    const submitUser = async(e : any) => {
         e.preventDefault();
         try {
             const formData = new FormData();
 
             formData.append('file', data);
 
-            await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/pendapatans/import`, formData);
+            await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/users/import`, formData);
             // setViewModal(false);
-            getPendapatans();
+            setShowForm(false);
+            handleReset();
             setData([]);
-            NotificationRegister.current?.showToast();
-            setMsg('Upload Success');
-            setFormUpload(false);
+            reloadData();
         } catch (error) {
             console.log(error);
         }
     }
 
     return (
-        <div className={`box ${fromUpload ? '' : 'hidden'}`}>
-            <form onSubmit={submitPendapatan}>
+        <div className={`box ${!showForm ? 'hidden' : ''}`}>
+            <form onSubmit={submitUser}>
                 <div className="flex w-full gap-4 justify-center p-4">
                     <div className="w-3/4">
                         <FormInput
@@ -39,7 +51,8 @@ const FormUploadPendapatan = (props : any) => {
                             type="file"
                             name='file'
                             className='w-full'
-                            value={data ? data[0] : ''}
+                            value={data && data[0]}
+                            ref={inputFile}
                             onChange={(e : any)=>setData(e.target.files[0])}
                         />
                     </div>
@@ -53,8 +66,9 @@ const FormUploadPendapatan = (props : any) => {
                     </div>
                 </div>
             </form>
+            
         </div>
     )
 }
 
-export default FormUploadPendapatan
+export default FormImportUser

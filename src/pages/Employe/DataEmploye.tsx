@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, getUsersTable, resetUsers } from "../../stores/features/usersSlice";
 import GeneralReportEmploye from '../../components/GeneralReport/GeneralReportEmploye';
+import FormImportUser from '../../components/Form/User/FormImportUser';
+import Button from '../../base-components/Button';
 
 const DataEmploye = () => {
   const [datas, setDatas] = useState([]);
@@ -12,6 +14,7 @@ const DataEmploye = () => {
   const [page, setPage] = useState(1);
   const [allPage, setAllPage] = useState(0);
   const [statusCode, setStatusCode] = useState(1);
+  const [showFormImportUser, setShowFormImportUser] = useState(false);
 
   const dispatch = useDispatch()
 
@@ -45,7 +48,11 @@ const DataEmploye = () => {
     }));
   },[page, limit, statusCode])
 
-  
+  const reloadData = () => {
+    dispatch(getUsersTable({
+      limit, page, statusCode
+    }));
+  }
 
   //table
   const countData = (allData : any) =>{
@@ -79,6 +86,24 @@ const DataEmploye = () => {
           datas={datas}
           clickStatus={clickStatus}
         />
+      </div>
+      <div className="col-span-12 xl:col-span-6">
+        <FormImportUser 
+          showForm={showFormImportUser}
+          setShowForm={setShowFormImportUser}
+          reloadData={reloadData}
+        />
+      </div>
+      <div className="col-span-12 xl:col-span-6 content-end mt-4">
+          <div className='flex justify-end'>
+            <Button
+                variant={!showFormImportUser ? "primary" : "danger"}
+                size='sm'
+                onClick={()=>setShowFormImportUser(!showFormImportUser)}
+                >
+                {!showFormImportUser ? 'Show Form Upload User' : 'Close Form Upload User'}
+            </Button>
+          </div>
       </div>
       <div className="col-span-12 xl:col-span-12">
         <EmployeTable 
