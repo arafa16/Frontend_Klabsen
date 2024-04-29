@@ -67,7 +67,7 @@ const MesinAbsensTable = (props : any) => {
                                     {data.name}
                                 </div>
                             </div>
-                            <div className="w-64 truncate sm:w-28">
+                            <div className="w-64 truncate sm:w-64">
                                 <span
                                     className={clsx([
                                     "ml-3 truncate"
