@@ -115,7 +115,7 @@ const CreatePrivilege = (props : any) => {
         <div className={`p-5 box intro-y ${!viewCreatePriviege ? 'hidden' : ''}`}>
         <form onSubmit={sumbitPrivilege}>
             <div className="flex items-center pb-5 mb-5 border-b border-slate-200/60 dark:border-darkmode-400">
-                <div className="text-base font-medium truncate">{userId} {title} </div>
+                <div className="text-base font-medium truncate">{title} </div>
                 <div className='flex gap-2 justify-end w-full'>
                     <Button 
                         type='button'
