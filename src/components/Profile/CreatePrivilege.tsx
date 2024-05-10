@@ -346,6 +346,23 @@ const CreatePrivilege = (props : any) => {
                             </FormSelect>
                         </div>
                     </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Approval All Koreksi Sub
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='approvalAllKoreksiSub'
+                                value={approvalAllKoreksiSub}
+                                onChange={(e : any)=>setApprovalAllKoreksiSub(e.target.value)}
+                                >
+                                <option value={0}>non active</option>
+                                <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
                 </div>
                 <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
