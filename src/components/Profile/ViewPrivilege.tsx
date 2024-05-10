@@ -73,24 +73,6 @@ const ViewPrivilege = (props : any) => {
                     </div>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            Pengajuan Koreksi Sub
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas.privilege && datas.privilege.pengajuanKendalaSub ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Approval Koreksi Sub
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas.privilege && datas.privilege.approvalKoreksiSub ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                </div>
-                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
                             Absen Modal
                         </div>
                         <div className="mt-1 text-sm text-slate-500">
@@ -107,10 +89,80 @@ const ViewPrivilege = (props : any) => {
                     </div>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            ShiftModal
+                            Shift Modal
                         </div>
                         <div className="mt-1 text-sm text-slate-500">
                             {datas.privilege && datas.privilege.shiftModal ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                </div>
+                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Absen Check
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.absenCheck ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Admin Event
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.adminEvent ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Perhitungan Absen
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.perhitunganAbsen ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Pengajuan Koreksi Sub
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.pengajuanKoreksiSub ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Approval Koreksi Sub
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.approvalKoreksiSub ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Approval All Koreksi Sub
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.approvalAllKoreksiSub ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                </div>
+                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Employees
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.employees ? 'Yes' : 'No'}
+                        </div>
+                    </div>
+                </div>
+                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10'>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Data Employee
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500">
+                            {datas.privilege && datas.privilege.dataEmployee ? 'Yes' : 'No'}
                         </div>
                     </div>
                 </div>
@@ -141,90 +193,36 @@ const ViewPrivilege = (props : any) => {
                             {datas.privilege && datas.privilege.pendapatanLainSub ? 'Yes' : 'No'}
                         </div>
                     </div>
-                </div>
-                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            Admin	
+                            Pendapatan Admin Sub
                         </div>
                         <div className="mt-1 text-sm text-slate-500">
-                            {datas.privilege && datas.privilege.admin ? 'Yes' : 'No'}
+                            {datas.privilege && datas.privilege.pendapatanAdminSub ? 'Yes' : 'No'}
                         </div>
                     </div>
                 </div>
                 <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            User Sub	
+                            Attribute	
                         </div>
                         <div className="mt-1 text-sm text-slate-500">
-                            {datas.privilege && datas.privilege.userSub ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Event Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas.privilege && datas.privilege.eventSub ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Koreksi Admin Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas.privilege && datas.privilege.koreksiAdminSub ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Perhitungan Nilai Sub
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas.privilege && datas.privilege.perhitunganNilaiSub ? 'Yes' : 'No'}
+                            {datas.privilege && datas.privilege.attribute ? 'Yes' : 'No'}
                         </div>
                     </div>
                 </div>
-                {/* <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Etiket	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas && datas.isActive ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                </div> */}
-                {/* <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Pengajuan Kendala Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas && datas.isActive ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Perbaikan Kendala Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas && datas.isActive ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                </div> */}
                 <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            Setting	
+                            setting	
                         </div>
                         <div className="mt-1 text-sm text-slate-500">
                             {datas.privilege && datas.privilege.setting ? 'Yes' : 'No'}
                         </div>
                     </div>
                 </div>
-                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
+                {/* <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
                             isActive	
@@ -233,7 +231,7 @@ const ViewPrivilege = (props : any) => {
                             {datas && datas.isActive ? 'Yes' : 'No'}
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

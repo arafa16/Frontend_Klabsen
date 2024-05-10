@@ -165,7 +165,7 @@ const AbsenReport = (props:any) => {
                         <div className="flex items-center mt-4">
                             <div className="w-2 h-2 mr-3 border rounded-full bg-danger/50 border-danger/50"></div>
                             <span className="truncate">Masuk</span>
-                            <span className="ml-auto">{dataAllInNormal} kali</span>
+                            <span className="ml-auto">{dataAllInPelangaran} kali</span>
                         </div>
                         <div className="flex items-center mt-4">
                             <div className="w-2 h-2 mr-3 border rounded-full bg-danger/50 border-danger/60"></div>

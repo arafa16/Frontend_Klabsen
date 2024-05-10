@@ -147,12 +147,12 @@ const DasboardUser = () => {
     <div className="grid grid-cols-12 gap-6">
       <div className="col-span-12 2xl:col-span-9">
         <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-12 mt-4 sm:col-span-6 lg:col-span-3 sm:row-start-4 md:row-start-3 lg:row-start-auto">
+          <div className="col-span-12 mt-4 sm:col-span-6 lg:col-span-4 sm:row-start-4 md:row-start-3 lg:row-start-auto">
             <UserProfile 
               dataUser={dataUser}
             />
           </div>
-          <div className="col-span-12 mt-4 sm:col-span-6 lg:col-span-9 sm:row-start-4 md:row-start-3 lg:row-start-auto">
+          <div className="col-span-12 mt-4 sm:col-span-6 lg:col-span-8 sm:row-start-4 md:row-start-3 lg:row-start-auto">
             <EventShow 
               dataEvents={dataEvents}
               page={page}

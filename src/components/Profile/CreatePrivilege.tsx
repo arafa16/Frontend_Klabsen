@@ -11,29 +11,29 @@ const CreatePrivilege = (props : any) => {
     const {title, changeEditPrivilege, datas, viewCreatePriviege} = props;
     const {id} = useParams();
 
-    const [dataPrivilege, setDataPrivilege] = useState([]);
+    const [userId, setUserId] = useState(0);
     const [dashboard, setDashboard] = useState(0);
     const [editUserSub, setEditUserSub] = useState(0);
     const [absen, setAbsen] = useState(0);
     const [kalendarSub, setKalendarSub] = useState(0);
-    const [pengajuanKoreksiSub, setPengajuanKoreksiSub] = useState(0);
-    const [approvalKoreksiSub, setApprovalKoreksiSub] = useState(0);
     const [absenModal, setAbsenModal] = useState(0);
     const [wfhModal, setWfhModal] = useState(0);
     const [shiftModal, setShiftModal] = useState(0);
+    const [absenCheck, setAbsenCheck] = useState(0);
+    const [adminEvent, setAdminEvent] = useState(0);
+    const [perhitunganAbsen, setPerhitunganAbsen] = useState(0);
+    const [pengajuanKoreksiSub, setPengajuanKoreksiSub] = useState(0);
+    const [approvalKoreksiSub, setApprovalKoreksiSub] = useState(0);
+    const [approvalAllKoreksiSub, setApprovalAllKoreksiSub] = useState(0);
+    const [employees, setEmployees] = useState(0);
+    const [dataEmployee, setDataEmployee] = useState(0);
     const [slipGaji, setSlipGaji] = useState(0);
     const [pendapatanSub, setPendapatanSub] = useState(0);
     const [pendapatanLainSub, setPendapatanLainSub] = useState(0);
     const [pendapatanAdminSub, setPendapatanAdminSub] = useState(0);
-    const [admin, setAdmin] = useState(0);
-    const [userSub, setUserSub] = useState(0);
-    const [eventSub, setEventSub] = useState(0);
-    const [koreksiAdminSub, setKoreksiAdminSub] = useState(0);
-    const [perhitunganNilaiSub, setPerhitunganNilaiSub] = useState(0);
-    const [etiket, setEtiket] = useState(0);
-    const [pengajuanKendalaSub, setPengajuanKendalaSub] = useState(0);
+    const [attribute, setAttribute] = useState(0);
     const [setting, setSetting] = useState(0);
-    const [userId, setUserId] = useState(0);
+    
     const [idPrivilege, setIdPrivilege] = useState(null);
 
     const dispatch = useDispatch();
@@ -49,20 +49,22 @@ const CreatePrivilege = (props : any) => {
             setEditUserSub(datas.privilege && datas.privilege.editUserSub ? 1 : 0);
             setAbsen(datas.privilege && datas.privilege.absen ? 1 : 0);
             setKalendarSub(datas.privilege && datas.privilege.kalendarSub ? 1 : 0);
-            setPengajuanKoreksiSub(datas.privilege && datas.privilege.pengajuanKoreksiSub ? 1 : 0);
-            setApprovalKoreksiSub(datas.privilege && datas.privilege.approvalKoreksiSub ? 1 : 0);
             setAbsenModal(datas.privilege && datas.privilege.absenModal ? 1 : 0);
             setWfhModal(datas.privilege && datas.privilege.wfhModal ? 1 : 0);
             setShiftModal(datas.privilege && datas.privilege.shiftModal ? 1 : 0);
+            setAbsenCheck(datas.privilege && datas.privilege.absenCheck ? 1 : 0);
+            setAdminEvent(datas.privilege && datas.privilege.adminEvent ? 1 : 0);
+            setPerhitunganAbsen(datas.privilege && datas.privilege.perhitunganAbsen ? 1 : 0);
+            setPengajuanKoreksiSub(datas.privilege && datas.privilege.pengajuanKoreksiSub ? 1 : 0);
+            setApprovalKoreksiSub(datas.privilege && datas.privilege.approvalKoreksiSub ? 1 : 0);
+            setApprovalAllKoreksiSub(datas.privilege && datas.privilege.approvalAllKoreksiSub ? 1 : 0);
+            setEmployees(datas.privilege && datas.privilege.employees ? 1 : 0);
+            setDataEmployee(datas.privilege && datas.privilege.dataEmployee ? 1 : 0);
             setSlipGaji(datas.privilege && datas.privilege.slipGaji ? 1 : 0);
             setPendapatanSub(datas.privilege && datas.privilege.pendapatanSub ? 1 : 0);
             setPendapatanLainSub(datas.privilege && datas.privilege.pendapatanLainSub ? 1 : 0);
             setPendapatanAdminSub(datas.privilege && datas.privilege.pendapatanAdminSub ? 1 : 0);
-            setAdmin(datas.privilege && datas.privilege.admin ? 1 : 0);
-            setUserSub(datas.privilege && datas.privilege.userSub ? 1 : 0);
-            setEventSub(datas.privilege && datas.privilege.eventSub ? 1 : 0);
-            setKoreksiAdminSub(datas.privilege && datas.privilege.koreksiAdminSub ? 1 : 0);
-            setPerhitunganNilaiSub(datas.privilege && datas.privilege.perhitunganNilaiSub ? 1 : 0);
+            setAttribute(datas.privilege && datas.privilege.attribute ? 1 : 0);
             setSetting(datas.privilege && datas.privilege.setting ? 1 : 0);
             setIdPrivilege(datas.privilege && datas.privilege.uuid);
         }
@@ -81,27 +83,27 @@ const CreatePrivilege = (props : any) => {
         e.preventDefault();
         try {
             dispatch(createPrivileges({
-                userId,
+                userId, 
                 dashboard, 
                 editUserSub, 
                 absen, 
-                kalendarSub, 
-                pengajuanKoreksiSub, 
-                approvalKoreksiSub,
+                kalendarSub,
                 absenModal,
                 wfhModal,
                 shiftModal,
+                absenCheck,
+                adminEvent,
+                perhitunganAbsen,
+                pengajuanKoreksiSub, 
+                approvalKoreksiSub,
+                approvalAllKoreksiSub,
+                employees,
+                dataEmployee,
                 slipGaji,
                 pendapatanSub,
                 pendapatanLainSub,
                 pendapatanAdminSub,
-                admin,
-                userSub,
-                eventSub,
-                koreksiAdminSub,
-                perhitunganNilaiSub,
-                etiket,
-                pengajuanKendalaSub,
+                attribute,
                 setting
             }));
         } catch (error) {
@@ -208,6 +210,110 @@ const CreatePrivilege = (props : any) => {
                     </div>
                     <div>
                         <div className="font-medium whitespace-nowrap">
+                            Absen Modal
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='absenModal'
+                                value={absenModal}
+                                onChange={(e : any)=>setAbsenModal(e.target.value)}
+                                >
+                                <option value={0}>non active</option>
+                                <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Wfh Modal
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='wfhModal'
+                                value={wfhModal}
+                                onChange={(e : any)=>setWfhModal(e.target.value)}
+                                >
+                                <option value={0}>non active</option>
+                                <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Shift Modal
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='shiftModal'
+                                value={shiftModal}
+                                onChange={(e : any)=>setShiftModal(e.target.value)}
+                                >
+                                <option value={0}>non active</option>
+                                <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
+                </div>
+                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Absen Check
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='absenCheck'
+                                value={absenCheck}
+                                onChange={(e : any)=>setAbsenCheck(e.target.value)}
+                                >
+                                <option value={0}>non active</option>
+                                <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Admin Event
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='adminEvent'
+                                value={adminEvent}
+                                onChange={(e : any)=>setAdminEvent(e.target.value)}
+                                >
+                                <option value={0}>non active</option>
+                                <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                            Perhitungan Absen
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='perhitunganAbsen'
+                                value={perhitunganAbsen}
+                                onChange={(e : any)=>setPerhitunganAbsen(e.target.value)}
+                                >
+                                <option value={0}>non active</option>
+                                <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
                             Pengajuan Koreksi Sub
                         </div>
                         <div className="mt-1 text-sm text-slate-500 pr-6">
@@ -244,49 +350,34 @@ const CreatePrivilege = (props : any) => {
                 <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            Absen Modal
+                            Employees
                         </div>
                         <div className="mt-1 text-sm text-slate-500 pr-6">
                             <FormSelect
                                 formSelectSize="sm"
                                 aria-label=".form-select-sm example"
-                                name='absenModal'
-                                value={absenModal}
-                                onChange={(e : any)=>setAbsenModal(e.target.value)}
+                                name='employees'
+                                value={employees}
+                                onChange={(e : any)=>setEmployees(e.target.value)}
                                 >
                                 <option value={0}>non active</option>
                                 <option value={1}>active</option>
                             </FormSelect>
                         </div>
                     </div>
+                </div>
+                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            Wfh Modal
+                            Data Employee
                         </div>
                         <div className="mt-1 text-sm text-slate-500 pr-6">
                             <FormSelect
                                 formSelectSize="sm"
                                 aria-label=".form-select-sm example"
-                                name='wfhModal'
-                                value={wfhModal}
-                                onChange={(e : any)=>setWfhModal(e.target.value)}
-                                >
-                                <option value={0}>non active</option>
-                                <option value={1}>active</option>
-                            </FormSelect>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            ShiftModal
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500 pr-6">
-                            <FormSelect
-                                formSelectSize="sm"
-                                aria-label=".form-select-sm example"
-                                name='shiftModal'
-                                value={shiftModal}
-                                onChange={(e : any)=>setShiftModal(e.target.value)}
+                                name='dataEmployee'
+                                value={dataEmployee}
+                                onChange={(e : any)=>setDataEmployee(e.target.value)}
                                 >
                                 <option value={0}>non active</option>
                                 <option value={1}>active</option>
@@ -369,15 +460,15 @@ const CreatePrivilege = (props : any) => {
                 <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            Admin	
+                            Attribute	
                         </div>
                         <div className="mt-1 text-sm text-slate-500 pr-6">
                             <FormSelect
                                 formSelectSize="sm"
                                 aria-label=".form-select-sm example"
-                                name='admin'
-                                value={admin}
-                                onChange={(e : any)=>setAdmin(e.target.value)}
+                                name='attribute'
+                                value={attribute}
+                                onChange={(e : any)=>setAttribute(e.target.value)}
                                 >
                                 <option value={0}>non active</option>
                                 <option value={1}>active</option>
@@ -385,104 +476,6 @@ const CreatePrivilege = (props : any) => {
                         </div>
                     </div>
                 </div>
-                <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            User Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500 pr-6">
-                            <FormSelect
-                                formSelectSize="sm"
-                                aria-label=".form-select-sm example"
-                                name='userSub'
-                                value={userSub}
-                                onChange={(e : any)=>setUserSub(e.target.value)}
-                                >
-                                <option value={0}>non active</option>
-                                <option value={1}>active</option>
-                            </FormSelect>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Event Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500 pr-6">
-                            <FormSelect
-                                formSelectSize="sm"
-                                aria-label=".form-select-sm example"
-                                name='eventSub'
-                                value={eventSub}
-                                onChange={(e : any)=>setEventSub(e.target.value)}
-                                >
-                                <option value={0}>non active</option>
-                                <option value={1}>active</option>
-                            </FormSelect>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Koreksi Admin Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500 pr-6">
-                            <FormSelect
-                                formSelectSize="sm"
-                                aria-label=".form-select-sm example"
-                                name='koreksiAdminSub'
-                                value={koreksiAdminSub}
-                                onChange={(e : any)=>setKoreksiAdminSub(e.target.value)}
-                                >
-                                <option value={0}>non active</option>
-                                <option value={1}>active</option>
-                            </FormSelect>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Perhitungan Nilai Sub
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500 pr-6">
-                            <FormSelect
-                                formSelectSize="sm"
-                                aria-label=".form-select-sm example"
-                                name='perhitunganNilaiSub'
-                                value={perhitunganNilaiSub}
-                                onChange={(e : any)=>setPerhitunganNilaiSub(e.target.value)}
-                                >
-                                <option value={0}>non active</option>
-                                <option value={1}>active</option>
-                            </FormSelect>
-                        </div>
-                    </div>
-                </div>
-                {/* <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Etiket	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas && datas.isActive ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                </div> */}
-                {/* <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Pengajuan Kendala Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas && datas.isActive ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            Perbaikan Kendala Sub	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas && datas.isActive ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                </div> */}
                 <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
                     <div>
                         <div className="font-medium whitespace-nowrap">
@@ -502,16 +495,6 @@ const CreatePrivilege = (props : any) => {
                         </div>
                     </div>
                 </div>
-                {/* <div className='grid grid-cols-2 md:grid-cols-2 gap-y-10 mt-10 border-b border-slate-200/60'>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
-                            isActive	
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500">
-                            {datas && datas.isActive ? 'Yes' : 'No'}
-                        </div>
-                    </div>
-                </div> */}
             </div>
         </form>
         </div>
