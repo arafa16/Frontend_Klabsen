@@ -49,7 +49,7 @@ export const LoginUser: any = createAsyncThunk("auth/LoginUser", async(auth : va
 });
 
 export const SendEmailForgot : any = createAsyncThunk("auth/SendEmailForgot", async(auth : any, thunkAPI) => {
-    
+    console.log('error');
     try {
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/resetByEmail', {
             email: auth.email
@@ -57,10 +57,13 @@ export const SendEmailForgot : any = createAsyncThunk("auth/SendEmailForgot", as
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
 
+        console.log(response, 'error try');
+
         return response.data;
     } catch (error: any) {
         if(error.response){
-            const message = error.response.data.msg;
+            console.log(error.response, 'error response');
+            const message = `${error.response.statusText}`;
             return thunkAPI.rejectWithValue(message);
         }
     }
@@ -88,11 +91,12 @@ export const ResetPasswordByToken : any = createAsyncThunk("auth/ResetPasswordBy
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
 
-        console.log(response.data, 'response');
+        console.log(response, 'error');
 
         return response.data.msg;
     } catch (error: any) {
         if(error.response){
+            console.log(error, 'error');
             const message = error.response.data.msg;
             return thunkAPI.rejectWithValue(message);
         }

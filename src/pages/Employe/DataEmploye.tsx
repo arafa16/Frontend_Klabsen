@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react'
 import EmployeTable from '../../components/Table/EmployeTable'
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, getUsersTable, resetUsers } from "../../stores/features/usersSlice";
+import { getUsers, getUsersTable, resetUsers, downloadUsers } from "../../stores/features/usersSlice";
 import GeneralReportEmploye from '../../components/GeneralReport/GeneralReportEmploye';
 import FormImportUser from '../../components/Form/User/FormImportUser';
 import Button from '../../base-components/Button';
+import axios from 'axios';
 
 const DataEmploye = () => {
   const [datas, setDatas] = useState([]);
@@ -79,6 +80,14 @@ const DataEmploye = () => {
     setPage(1);
   }
 
+  const downloadUser = async() => {
+    alert(statusCode);
+    dispatch(downloadUsers({
+      code:statusCode,
+      name:'donwload.xlsx'
+    }));
+}
+
   return (
     <div className="grid grid-cols-12 gap-5 mt-5">
       <div className="col-span-12 xl:col-span-12">
@@ -96,13 +105,24 @@ const DataEmploye = () => {
       </div>
       <div className="col-span-12 xl:col-span-6 content-end mt-4">
           <div className='flex justify-end'>
-            <Button
-                variant={!showFormImportUser ? "primary" : "danger"}
-                size='sm'
-                onClick={()=>setShowFormImportUser(!showFormImportUser)}
-                >
-                {!showFormImportUser ? 'Show Form Upload User' : 'Close Form Upload User'}
-            </Button>
+            <div className='mx-2'>
+              <Button
+                  variant={!showFormImportUser ? "primary" : "danger"}
+                  size='sm'
+                  onClick={()=>setShowFormImportUser(!showFormImportUser)}
+                  >
+                  {!showFormImportUser ? 'Show Form Upload User' : 'Close Form Upload User'}
+              </Button>
+            </div>
+            <div>
+              <Button
+                  variant={"primary"}
+                  size='sm'
+                  onClick={()=>downloadUser()}
+                  >
+                  Download User
+              </Button>
+            </div>
           </div>
       </div>
       <div className="col-span-12 xl:col-span-12">

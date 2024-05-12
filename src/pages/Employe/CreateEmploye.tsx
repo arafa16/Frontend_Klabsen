@@ -79,6 +79,7 @@ const CreateEmploye = () => {
   const [penempatanId, setPenempatanId] = useState('');
   const [jabatanId, setJabatanId] = useState('');
   const [atasanId, setAtasanId] = useState();
+  const [isAtasan, setIsAtasan] = useState('');
   const [jamOperasionalGroupId, setJamOperasionalGroupId] = useState('');
   const [groupsId, setGroupsId] = useState('');
   const [extention, setExtention] = useState('');
@@ -232,6 +233,7 @@ const CreateEmploye = () => {
       && extention
       && quote
       && statusId
+      && isAtasan
       && isActive
       ) === '') return infoError();
 
@@ -274,6 +276,7 @@ const CreateEmploye = () => {
       extention,
       quote,
       statusId,
+      isAtasan,
       isActive
       }));
   }
@@ -402,6 +405,8 @@ const CreateEmploye = () => {
             setJabatanId={setJabatanId}
             atasanId={atasanId}
             setAtasanId={setAtasanId}
+            isAtasan={isAtasan}
+            setIsAtasan={setIsAtasan}
             jamOperasionalGroupId={jamOperasionalGroupId}
             setJamOperasionalGroupId={setJamOperasionalGroupId}
             groupsId={groupsId}

@@ -80,6 +80,7 @@ const UpdateEmploye = () => {
   const [penempatanId, setPenempatanId] = useState('');
   const [jabatanId, setJabatanId] = useState('');
   const [atasanId, setAtasanId] = useState();
+  const [isAtasan, setIsAtasan] = useState('');
   const [jamOperasionalGroupId, setJamOperasionalGroupId] = useState('');
   const [groupId, setGroupId] = useState('');
   const [extention, setExtention] = useState('');
@@ -232,6 +233,7 @@ const UpdateEmploye = () => {
     setPenempatanId(data && data.penempatanId);
     setJabatanId(data && data.jabatanId);
     setAtasanId(data && data.atasanId);
+    setIsAtasan(data && data.isAtasan ? '1' : '0');
     setJamOperasionalGroupId(data && data.jamOperasionalGroupId);
     setGroupId(data && data.groupId);
     setExtention(data && data.extention);
@@ -306,6 +308,7 @@ const UpdateEmploye = () => {
       && extention
       && quote
       && statusId
+      && isAtasan
       && isActive)
        === (null || '')) return infoError();
 
@@ -348,6 +351,7 @@ const UpdateEmploye = () => {
       extention,
       quote,
       statusId,
+      isAtasan,
       isActive
       }));
   }
@@ -474,6 +478,8 @@ const UpdateEmploye = () => {
             setJabatanId={setJabatanId}
             atasanId={atasanId}
             setAtasanId={setAtasanId}
+            isAtasan={isAtasan}
+            setIsAtasan={setIsAtasan}
             jamOperasionalGroupId={jamOperasionalGroupId}
             setJamOperasionalGroupId={setJamOperasionalGroupId}
             groupId={groupId}

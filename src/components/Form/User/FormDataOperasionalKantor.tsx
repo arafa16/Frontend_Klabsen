@@ -7,6 +7,7 @@ const FormDataOperasionalKantor = (props : any) => {
         penempatanId, setPenempatanId,
         jabatanId, setJabatanId,
         atasanId, setAtasanId,
+        isAtasan, setIsAtasan,
         jamOperasionalGroupId, setJamOperasionalGroupId,
         groupId, setGroupId,
         extention, setExtention,
@@ -62,6 +63,20 @@ const FormDataOperasionalKantor = (props : any) => {
                         {atasans && atasans.map((data : any, index : any)=>(
                             <option key={index} value={data.id}>{data.name}</option>
                         ))}
+                </FormSelect>
+            </div>
+            <div className="col-span-12 intro-y sm:col-span-4">
+                <FormLabel htmlFor="input-wizard-1">is Atasan ?</FormLabel>
+                <FormSelect
+                    formSelectSize="sm"
+                    aria-label=".form-select-sm example"
+                    name='isAtasan'
+                    value={isAtasan}
+                    onChange={(e)=>setIsAtasan(e.target.value)}
+                    >
+                    <option></option>
+                    <option value='0'>No</option>
+                    <option value='1'>Yes</option>
                 </FormSelect>
             </div>
             <div className="col-span-12 intro-y sm:col-span-4">

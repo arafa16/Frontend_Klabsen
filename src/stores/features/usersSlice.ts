@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
+import fileDownload from "js-file-download";
 
 interface variabel {
     users: any;
@@ -130,6 +131,7 @@ export const CreateUser  : any = createAsyncThunk("users/CreateUser", async(user
             groupId:users.groupsId,
             quote:users.quote,
             statusId:users.statusId,
+            isAtasan:users.isAtasan,
             isActive:users.isActive
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
@@ -184,6 +186,7 @@ export const UpdateUser  : any = createAsyncThunk("users/UpdateUser", async(user
             groupId:users.groupId,
             quote:users.quote,
             statusId:users.statusId,
+            isAtasan:users.isAtasan,
             isActive:users.isActive
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
@@ -228,6 +231,23 @@ export const deleteUser : any = createAsyncThunk("users/deleteUser", async(users
         }
     }
 });
+
+export const downloadUsers : any = createAsyncThunk("downloadUsers", async(status : any, thunkAPI) => {
+    try {
+        return axios({
+            url:`${import.meta.env.VITE_REACT_APP_API_URL}/usersExport/${status.code}`,
+            responseType: 'blob',
+            method: 'GET'
+        }).then((response)=>{
+            fileDownload(response.data, status.name);
+        });
+    } catch (error : any) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+})
 
 export const usersSlice = createSlice({
     name: "users",

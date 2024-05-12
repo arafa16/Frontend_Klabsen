@@ -310,7 +310,15 @@ const DataUser = (props : any) => {
                                     Atasan
                                 </div>
                                 <div className="mt-1 text-sm text-slate-500">
-                                    {users.atasan && users.atasan[0] ? users.atasan[0].name : 'belum di setting'}
+                                    {users.atasan && users.atasan.name}
+                                </div>
+                            </div>
+                            <div>
+                                <div className="font-medium whitespace-nowrap">
+                                    Is Atasan ?
+                                </div>
+                                <div className="mt-1 text-sm text-slate-500">
+                                    {users && users.isAtasan ? 'yes' : 'no'}
                                 </div>
                             </div>
                             <div>
