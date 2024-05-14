@@ -81,10 +81,9 @@ const DataEmploye = () => {
   }
 
   const downloadUser = async() => {
-    alert(statusCode);
     dispatch(downloadUsers({
       code:statusCode,
-      name:'donwload.xlsx'
+      name:'donwload_user.xlsx'
     }));
 }
 
