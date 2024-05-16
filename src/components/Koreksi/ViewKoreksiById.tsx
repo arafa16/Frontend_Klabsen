@@ -75,7 +75,7 @@ const ViewKoreksiById = (props : any) => {
                         Approver
                     </div>
                     <div className="mt-1 text-sm text-slate-500">
-                    {datas.user && datas.user.atasan[0].name}
+                    {datas.user && datas.user.atasan ? datas.user.atasan.name : 'approver not found'}
                     </div>
                 </div>
             </div>
