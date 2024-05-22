@@ -96,6 +96,7 @@ import CreateMesinAbsen from "../pages/Setting/MesinAbsen/CreateMesinAbsen";
 import JamOperasionalGroup from "../pages/Setting/JamOperasionalGroup/JamOperasionalGroup";
 import CreateJamOperasionalGroup from "../pages/Setting/JamOperasionalGroup/CreateJamOperasionalGroup";
 import EditJamOperasionalGroup from "../pages/Setting/JamOperasionalGroup/EditJamOperasionalGroup";
+import DataKoreksiAll from "../pages/Koreksi/DataKoreksiAll";
 
 function Router() {
   const routes = [
@@ -386,6 +387,10 @@ function Router() {
           element: <AbsenViewCalendar />
         },
         //koreksi
+        {
+          path: "/dataKoreksiAll",
+          element: <DataKoreksiAll />
+        },
         {
           path: "/dataKoreksi",
           element: <DataKoreksi />

@@ -5,6 +5,8 @@ import KoreksiTable from '../../components/Table/KoreksiTable';
 import KoreksiTableUser from '../../components/Table/KoreksiTableUser';
 import GeneralReport from '../../components/GeneralReport/GeneralReportKoreksi';
 import { useParams } from 'react-router-dom';
+import { getMe } from '../../stores/features/meSlice';
+
 
 const DataKoreksiByCode = () => {
     const {code} = useParams();
@@ -32,6 +34,10 @@ const DataKoreksiByCode = () => {
             setId(meData.uuid);
         }
     },[meData, isMeDataSuccess]);
+
+    useEffect(()=>{
+        dispatch(getMe());
+    },[]);
 
     useEffect(()=>{
         if(koreksisTable && isKoreksisSuccess){

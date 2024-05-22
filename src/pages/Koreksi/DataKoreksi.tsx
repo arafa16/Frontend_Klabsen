@@ -32,6 +32,10 @@ const DataKoreksi = () => {
     },[meData, isMeDataSuccess]);
 
     useEffect(()=>{
+        dispatch(getMe());
+    },[]);
+
+    useEffect(()=>{
         if(koreksisTable && isKoreksisSuccess){
             setDataTables(koreksisTable);
             countData(koreksisTable.count);
