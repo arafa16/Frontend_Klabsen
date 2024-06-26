@@ -36,7 +36,7 @@ const Calendar = (props : any) => {
         else{
           const newData : any = {
             id:data.uuid,
-            title:data.tipe_absen.name,
+            title:dayjs(data.tanggalMulai).locale('zh-cn').format('HH')+' '+data.tipe_absen.name,
             start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
             end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
             color:data.pelanggaran.code == 2 ? '#ff3c00' : '',
