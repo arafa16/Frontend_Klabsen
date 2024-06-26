@@ -25,15 +25,30 @@ const CalendarAdmin = (props : any) => {
 
   const inputAbsen = (datas : any) => {
     datas.map((data : any)=>{
+      if(data.tipe_absen.code !== 11){
         const newData : any = {
           id:data.uuid,
-          title:dayjs(data.tanggalMulai).format('HH:mm:ss')+' '+data.tipe_absen.name,
+          title:dayjs(data.tanggalMulai).locale('zh-cn').format('HH:mm:ss')+' '+data.tipe_absen.name,
           start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
-          color:data.pelanggaran.code == 2 ? 'red' : '',
+          color:data.pelanggaran.code == 2 ? '#ff3c00' : '',
           className:'text-xs w-full px-0',
+          groupId:'absen'
         } 
         setEvents((events: any)  => [...events, newData])
+      }
+      else{
+        const newData : any = {
+          id:data.uuid,
+          title:data.tipe_absen.name,
+          start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
+          end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
+          color:data.pelanggaran.code == 2 ? '#ff3c00' : '',
+          className:'text-xs w-full px-0',
+          groupId:'absen'
+        } 
+        setEvents((events: any)  => [...events, newData])
+      }
     })
   }
   
