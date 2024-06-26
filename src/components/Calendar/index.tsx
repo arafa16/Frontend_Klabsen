@@ -21,7 +21,7 @@ const Calendar = (props : any) => {
   const inputAbsen = (datas : any) => {
     datas.map((data : any)=>{
 
-        if(data.tipe_absen.code !== 11){
+        if(data.tipe_absen.code !== '11'){
           const newData : any = {
             id:data.uuid,
             title:dayjs(data.tanggalMulai).locale('zh-cn').format('HH:mm:ss')+' '+data.tipe_absen.name,

@@ -25,7 +25,7 @@ const CalendarAdmin = (props : any) => {
 
   const inputAbsen = (datas : any) => {
     datas.map((data : any)=>{
-      if(data.tipe_absen.code !== 11){
+      if(data.tipe_absen.code !== '11'){
         const newData : any = {
           id:data.uuid,
           title:dayjs(data.tanggalMulai).locale('zh-cn').format('HH:mm:ss')+' '+data.tipe_absen.name,
@@ -40,7 +40,7 @@ const CalendarAdmin = (props : any) => {
       else{
         const newData : any = {
           id:data.uuid,
-          title:data.tipe_absen.name,
+          title:dayjs(data.tanggalMulai).locale('zh-cn').format('HH')+' '+data.tipe_absen.name,
           start:dayjs(data.tanggalMulai).format('YYYY-MM-DD'),
           end:dayjs(data.tanggalSelesai).format('YYYY-MM-DD'),
           color:data.pelanggaran.code == 2 ? '#ff3c00' : '',
