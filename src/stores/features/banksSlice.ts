@@ -86,6 +86,7 @@ export const updateBanks : any = createAsyncThunk("updateBanks", async(banks : a
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
+        
         return response.data;
     } catch (error : any) {
         if(error.response){

@@ -36,7 +36,7 @@ const FormImportUser = (props:any) => {
             setData([]);
             reloadData();
         } catch (error : any) {
-            console.log(error.response.status, error.response.data.msg, 'error');
+            console.log(error , error.response.status, error.response.data.msg, 'error');
             alert(error.response.status + ' ' + error.response.data.msg);
         }
     }
