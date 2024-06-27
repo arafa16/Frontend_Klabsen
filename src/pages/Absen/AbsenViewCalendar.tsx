@@ -145,6 +145,7 @@ const AbsenViewCalendar = () => {
           <div className="p-2 box">
             <FormImportInOut 
               reloadInOut={reloadInOut}
+              uuid={uuid}
             />
           </div>
         </div>

@@ -2,9 +2,11 @@ import React, {useEffect, useState, useRef} from 'react'
 import { FormInput, FormLabel } from '../../../base-components/Form'
 import Button from '../../../base-components/Button'
 import axios from 'axios';
+import LoadingIcon from '../../../base-components/LoadingIcon';
 
 const FormImportInOut = (props:any) => {
-    const {reloadInOut} = props;
+    const {reloadInOut, uuid} = props;
+    const [loading, setLoading] = useState(false);
 
     const [data, setData] = useState<any>([]);
 
@@ -25,18 +27,24 @@ const FormImportInOut = (props:any) => {
     const submitInOut = async(e : any) => {
         e.preventDefault();
         try {
+
+            setLoading(true);
+
             const formData = new FormData();
 
             formData.append('file', data);
 
-            const response :any = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/dataInOut/import`, formData);
+            const response :any = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/dataInOut/import/${uuid}`, formData);
             handleReset();
             setData([]);
             reloadInOut();
             console.log(response.data.msg , 'response');
+            setLoading(false);
             alert(response.data.msg);
         } catch (error : any) {
             console.log({error});
+            setLoading(false);
+            alert('error');
         }
     }
 
@@ -57,11 +65,16 @@ const FormImportInOut = (props:any) => {
                         />
                     </div>
                     <div className="w-1/4">
+                    
                         <Button 
                             variant="primary" 
                             className="w-full"
                             >
-                            Upload
+                            {loading ?
+                                <LoadingIcon icon="tail-spin" color='white' className="w-4 h-4" />
+                                :
+                                "Upload"
+                            }
                         </Button>
                     </div>
                 </div>
