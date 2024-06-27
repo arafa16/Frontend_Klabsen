@@ -8,6 +8,7 @@ import { getPages, resetPages } from '../../stores/features/pageSlice';
 import SlideOverEditDate from '../../components/SlideOver/SlideOverEditDate';
 import SlideOverEditEvent from '../../components/SlideOver/SlideOverEditEvent';
 import { getEvents, resetEvents } from '../../stores/features/eventsSlice';
+import FormImportInOut from '../../components/Form/InOut/FormImportInOut';
 
 const AbsenViewCalendar = () => {
   const { uuid } = useParams();
@@ -51,6 +52,11 @@ const AbsenViewCalendar = () => {
     dispatch(getInOutsByUser({uuid}));
     dispatch(getUserById({id:uuid}));
   },[uuid]);
+
+  const reloadInOut = ()=>{
+    dispatch(getInOutsByUser({uuid}));
+    dispatch(getUserById({id:uuid}));
+  }
 
   const clickDate = (info : any) => {
     setDataInfo(info);
@@ -131,6 +137,14 @@ const AbsenViewCalendar = () => {
               clickDate={clickDate}
               clickEvent={clickEvent}
               dataEventInternal = {dataEventInternal}
+            />
+          </div>
+        </div>
+        <div className="col-span-12 xl:col-span-4 2xl:col-span-3">
+          
+          <div className="p-2 box">
+            <FormImportInOut 
+              reloadInOut={reloadInOut}
             />
           </div>
         </div>
