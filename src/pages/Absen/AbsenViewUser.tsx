@@ -80,6 +80,8 @@ const AbsenViewUser = () => {
       </div>
       <div className="col-span-12 xl:col-span-12">
         <EmployeForAbsenTable
+          limit={limit}
+          setLimit={setLimit}
           datas={dataTable}
           linkCreate='/createEmploye'
           linkView='/absenViewCalendar'

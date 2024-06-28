@@ -2,9 +2,10 @@ import React from 'react'
 import Lucide from '../../base-components/Lucide'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
+import { FormInput } from '../../base-components/Form'
 
 const EmployeForAbsenTable = (props : any) => {
-  const {datas, linkView, linkCreate, page, allPage, prevPage, nextPage} = props;
+  const {datas, limit, setLimit, linkView, linkCreate, page, allPage, prevPage, nextPage} = props;
   const navigate = useNavigate();
   
   return (
@@ -14,6 +15,16 @@ const EmployeForAbsenTable = (props : any) => {
           <div className="col-span-12 xl:col-span-12 2xl:col-span-12">
               <div className="flex flex-col-reverse px-5 py-4 border-b sm:flex-row text-slate-500 border-slate-200/60">
                 <div className="flex items-center justify-end sm:ml-auto">
+                  <div>
+                    <FormInput
+                      type="text"
+                      className="block px-1 py-0 mt-0 w-10 mx-4 text-center"
+                      placeholder="0"
+                      name='limit'
+                      value={limit}
+                      onChange={(e)=>setLimit(e.target.value)}
+                    />
+                  </div>
                   <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
                   <div className="flex items-center justify-center w-5 h-5 ml-5" >
                     <Lucide 
