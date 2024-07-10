@@ -29,7 +29,7 @@ const ResetPassword = (props : any) => {
             setMsg(messageUsers.msg)
             NotificationResetPassword.current?.showToast();
             dispatch(resetUsers());
-            
+            setPassword('');
         }
     },[isUsersSuccess, messageUsers]);
 
