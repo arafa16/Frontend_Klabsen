@@ -75,7 +75,7 @@ const EmployeForAbsenTable = (props : any) => {
                       <div className="flex px-5 py-3">
                           <div className="flex items-center flex-none mr-5 w-72">
                             <div className='w-16'>
-                              {index+1}
+                              {index+1+((page-1)*limit)}
                             </div>
                             <div
                               className={clsx([
