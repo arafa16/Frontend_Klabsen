@@ -29,8 +29,18 @@ const ResetPassword = (props : any) => {
             setMsg(messageUsers.msg)
             NotificationResetPassword.current?.showToast();
             dispatch(resetUsers());
+            
         }
     },[isUsersSuccess, messageUsers]);
+
+    useEffect(()=>{
+        if(isUsersError && messageUsers){
+            setMsg(messageUsers.msg)
+            NotificationResetPassword.current?.showToast();
+            dispatch(resetUsers());
+            setPassword('');
+        }
+    },[isUsersError, messageUsers]);
 
     const resetPassword = (e : any) => {
         e.preventDefault();
@@ -49,9 +59,9 @@ const ResetPassword = (props : any) => {
                 options={{
                     duration: 3000,
                 }}
-                className="flex flex-col sm:flex-row"
+                className="flex flex-col sm:flex-row text-red-500"
                 >
-                <div className="font-medium normal-case">
+                <div className="font-medium normal-case ">
                     {msg}
                 </div>
             </Notification>
