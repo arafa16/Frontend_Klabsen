@@ -128,6 +128,8 @@ const DataEmploye = () => {
       <div className="col-span-12 xl:col-span-12">
         <EmployeTable 
           datas={dataTable}
+          limit={limit}
+          setLimit={setLimit}
           linkCreate='/createEmploye'
           linkView='/viewEmploye'
           page={page}

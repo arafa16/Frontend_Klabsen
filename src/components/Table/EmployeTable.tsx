@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import { FormInput } from '../../base-components/Form';
 
 const EmployeTable = (props : any) => {
-  const {datas, linkView, linkCreate, page, allPage, prevPage, nextPage, search, setSearch} = props;
+  const {datas, limit, setLimit, linkView, linkCreate, page, allPage, prevPage, nextPage, search, setSearch} = props;
   const navigate = useNavigate();
   
   return (
@@ -25,6 +25,17 @@ const EmployeTable = (props : any) => {
                   />
                 </div>
                 <div className="flex items-center justify-end sm:ml-auto">
+                  <div className='flex items-center mx-4'>
+                    <FormInput
+                      type="text"
+                      className="block px-1 py-0 mt-0 w-10 mx-2 text-center text-xs"
+                      placeholder="0"
+                      name='limit'
+                      value={datas.count === 0 ? 0 : (limit > datas.count ? datas.count : limit)}
+                      onChange={(e)=>setLimit(e.target.value)}
+                    /> 
+                    <p className=' text-center text-xs'>/ {datas.count}</p>
+                  </div>
                   <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
                   <div
                       className="flex items-center justify-center w-5 h-5 ml-5"
