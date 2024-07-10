@@ -2,9 +2,10 @@ import React from 'react'
 import Lucide from '../../base-components/Lucide'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
+import { FormInput } from '../../base-components/Form';
 
 const EmployeTable = (props : any) => {
-  const {datas, linkView, linkCreate, page, allPage, prevPage, nextPage} = props;
+  const {datas, linkView, linkCreate, page, allPage, prevPage, nextPage, search, setSearch} = props;
   const navigate = useNavigate();
   
   return (
@@ -13,6 +14,16 @@ const EmployeTable = (props : any) => {
           {/* BEGIN: Inbox Content */}
           <div className="col-span-12 xl:col-span-12 2xl:col-span-12">
               <div className="flex flex-col-reverse px-5 py-4 border-b sm:flex-row text-slate-500 border-slate-200/60">
+                <div className='flex items-center mx-4'>
+                  <FormInput
+                    type="text"
+                    className="block px-1 py-2 mt-0 mx-2 text-xs"
+                    placeholder="search by name"
+                    name='search'
+                    value={search}
+                    onChange={(e)=>setSearch(e.target.value)}
+                  />
+                </div>
                 <div className="flex items-center justify-end sm:ml-auto">
                   <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
                   <div

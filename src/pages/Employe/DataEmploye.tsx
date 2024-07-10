@@ -16,6 +16,7 @@ const DataEmploye = () => {
   const [allPage, setAllPage] = useState(0);
   const [statusCode, setStatusCode] = useState(1);
   const [showFormImportUser, setShowFormImportUser] = useState(false);
+  const [search, setSearch] = useState('');
 
   const dispatch = useDispatch()
 
@@ -45,9 +46,9 @@ const DataEmploye = () => {
 
   useEffect(()=>{
     dispatch(getUsersTable({
-      limit, page, statusCode
+      limit, page, statusCode, search
     }));
-  },[page, limit, statusCode])
+  },[page, limit, statusCode, search])
 
   const reloadData = () => {
     dispatch(getUsersTable({
@@ -133,6 +134,8 @@ const DataEmploye = () => {
           allPage={allPage}
           nextPage={nextPage}
           prevPage={prevPage}
+          search={search}
+          setSearch={setSearch}
         />
       </div>
     </div>
