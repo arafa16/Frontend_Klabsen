@@ -24,6 +24,8 @@ const ResetPassword = (props : any) => {
         (state : any) => state.usersReducer
     )
 
+    console.log(isUsersError, 'is error');
+
     useEffect(()=>{
         if(isUsersSuccess && messageUsers){
             setMsg(messageUsers.msg)
@@ -37,13 +39,14 @@ const ResetPassword = (props : any) => {
         if(isUsersError && messageUsers){
             setMsg(messageUsers.msg)
             NotificationResetPassword.current?.showToast();
-            dispatch(resetUsers());
             setPassword('');
+            
         }
     },[isUsersError, messageUsers]);
 
     const resetPassword = (e : any) => {
         e.preventDefault();
+        dispatch(resetUsers());
         dispatch(changePassword({
             password, id
         }));
@@ -59,9 +62,9 @@ const ResetPassword = (props : any) => {
                 options={{
                     duration: 3000,
                 }}
-                className="flex flex-col sm:flex-row text-red-500"
+                className="flex flex-col sm:flex-row"
                 >
-                <div className="font-medium normal-case ">
+                <div className={`font-medium normal-case ${isUsersError ? 'text-red-500' : ''}`}>
                     {msg}
                 </div>
             </Notification>
