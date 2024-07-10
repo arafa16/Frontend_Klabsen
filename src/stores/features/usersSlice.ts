@@ -61,7 +61,7 @@ export const getUserById : any = createAsyncThunk("users/getUserById", async(use
 
 export const getUsersTable : any = createAsyncThunk("users/getUsersTable", async(users : any, thunkAPI) => {
     try {
-        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/users/${users.limit}&${users.page}&${users.statusCode}`,{
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/users/${users.limit}&${users.page}&${users.statusCode}&${users.search}`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         

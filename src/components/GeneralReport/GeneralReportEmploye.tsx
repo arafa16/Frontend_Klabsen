@@ -10,8 +10,6 @@ const GeneralReportEmploye = (props : any) => {
   const [dataNonActive, setDataNonActive] = useState([]);
   const [dataAll, setDataAll] = useState([]);
 
-  console.log(datas.rows, 'datas');
-
   useEffect(()=>{
     const pendaftar = datas.rows && datas.rows.filter((data : any)=>data.status.code == 1);
     const active = datas.rows && datas.rows.filter((data : any)=>data.status.code == 2);

@@ -12,6 +12,7 @@ const AbsenViewUser = () => {
   const [page, setPage] = useState(1);
   const [allPage, setAllPage] = useState(0);
   const [statusCode, setStatusCode] = useState(1);
+  const [search, setSearch] = useState('');
 
   const dispatch = useDispatch();
 
@@ -27,10 +28,12 @@ const AbsenViewUser = () => {
     }
   },[usersTable, isUsersSuccess])
 
+  console.log(users, 'users');
+
   useEffect(()=>{
     if(isUsersSuccess && users){
       setDatas(users);
-      console.log(users, 'users');
+      
       dispatch(resetUsers());
     }
   },[users, isUsersSuccess])
@@ -41,9 +44,9 @@ const AbsenViewUser = () => {
 
   useEffect(()=>{
     dispatch(getUsersTable({
-      limit, page, statusCode
+      limit, page, statusCode, search
     }));
-  },[page, limit, statusCode])
+  },[page, limit, statusCode, search])
 
   //table
   const countData = (allData : any) =>{
@@ -89,6 +92,8 @@ const AbsenViewUser = () => {
           allPage={allPage}
           nextPage={nextPage}
           prevPage={prevPage}
+          search={search}
+          setSearch={setSearch}
         />
       </div>
     </div>
